@@ -10,18 +10,6 @@ namespace Degree_Planner {
         public static void Main(string[] args) {
             IWebHost host = CreateWebHostBuilder(args).Build();
 
-            //Create the database on the local SQL server
-            using(var scope = host.Services.CreateScope()) {
-                var services = scope.ServiceProvider;
-                try {
-                    var degreePlannerContext = services.GetRequiredService<DegreePlannerContext>();
-                    degreePlannerContext.Database.EnsureCreated();
-                } catch(Exception e) {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(e, "An error occurred creating the database.");
-                }
-            }
-
             //Run the web site
             host.Run();
         }

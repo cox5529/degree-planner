@@ -29,7 +29,7 @@ namespace Degree_Planner {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DegreePlannerContext degreePlannerContext) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             if(env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
@@ -37,8 +37,15 @@ namespace Degree_Planner {
                 app.UseHsts();
             }
 
+
             //Update the database to match the DB model
-            degreePlannerContext.Database.Migrate();
+            using(var serviceScope = app.ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
+            .CreateScope()) {
+                using(var context = serviceScope.ServiceProvider.GetService<DegreePlannerContext>()) {
+                    context.Database.Migrate();
+                }
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
