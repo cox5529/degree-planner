@@ -42,14 +42,14 @@ namespace Degree_Planner.Models {
 
     [Table("degree_plans")]
     public class DegreePlan {
-        public long DegreePlanID { get; set; }
+        public int DegreePlanID { get; set; }
         public virtual ICollection<Semester> Semesters { get; set; }
     }
 
     [Table("semesters")]
     public class Semester {
-        public long SemesterID { get; set; }
-        public long DegreePlanID { get; set; }
+        public int SemesterID { get; set; }
+        public int DegreePlanID { get; set; }
         public int Index { get; set; }
 
         public virtual ICollection<SemesterCourseLink> SemesterCourseLinks { get; set; }
@@ -62,11 +62,11 @@ namespace Degree_Planner.Models {
 
     [Table("users")]
     public class User {
-        public long UserID { get; set; }
+        public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public long DegreePlanID { get; set; }
+        public int? DegreePlanID { get; set; }
 
         public ICollection<UserDegreeLink> UserDegreeLinks { get; set; }
         public ICollection<CourseUserLink> CourseUserLinks { get; set; }
@@ -81,7 +81,7 @@ namespace Degree_Planner.Models {
 
     [Table("degrees")]
     public class Degree {
-        public long DegreeID { get; set; }
+        public int DegreeID { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<UserDegreeLink> UserDegreeLinks { get; set; }
@@ -93,12 +93,12 @@ namespace Degree_Planner.Models {
 
     [Table("degree_elements")]
     public class DegreeElement {
-        public long DegreeElementID { get; set; }
+        public int DegreeElementID { get; set; }
         public int Hours { get; set; }
         public bool CanOverlap { get; set; }
 
-        public long CourseGroupID { get; set; }
-        public long DegreeID { get; set; }
+        public int CourseGroupID { get; set; }
+        public int DegreeID { get; set; }
 
         public virtual CourseGroup Members { get; set; }
         public virtual Degree Degree { get; set; }
@@ -106,7 +106,7 @@ namespace Degree_Planner.Models {
 
     [Table("course_groups")]
     public class CourseGroup {
-        public long CourseGroupID { get; set; }
+        public int CourseGroupID { get; set; }
 
         public virtual ICollection<CourseCourseGroupLink> CourseCourseGroupLinks { get; set; }
         public virtual ICollection<DegreeElement> DegreeElements { get; set; }
@@ -117,7 +117,7 @@ namespace Degree_Planner.Models {
 
     [Table("courses")]
     public class Course {
-        public long CourseID { get; set; }
+        public int CourseID { get; set; }
         public string Name { get; set; }
         public string Department { get; set; }
         public string CatalogNumber { get; set; }
@@ -144,10 +144,10 @@ namespace Degree_Planner.Models {
 
     [Table("users_x_degrees")]
     public class UserDegreeLink {
-        public long UserDegreeLinkID { get; set; }
+        public int UserDegreeLinkID { get; set; }
         
-        public long DegreeID { get; set; }
-        public long UserID { get; set; }
+        public int DegreeID { get; set; }
+        public int UserID { get; set; }
         
         public virtual Degree Degree { get; set; }
         public virtual User User { get; set; }
@@ -155,10 +155,10 @@ namespace Degree_Planner.Models {
 
     [Table("courses_x_users")]
     public class CourseUserLink {
-        public long CourseUserLinkID { get; set; }
+        public int CourseUserLinkID { get; set; }
 
-        public long CourseID { get; set; }
-        public long UserID { get; set; }
+        public int CourseID { get; set; }
+        public int UserID { get; set; }
 
         public virtual Course Course { get; set; }
         public virtual User User { get; set; }
@@ -166,10 +166,10 @@ namespace Degree_Planner.Models {
 
     [Table("semesters_x_courses")]
     public class SemesterCourseLink {
-        public long SemesterCourseLinkID { get; set; }
+        public int SemesterCourseLinkID { get; set; }
 
-        public long SemesterID { get; set; }
-        public long CourseID { get; set; }
+        public int SemesterID { get; set; }
+        public int CourseID { get; set; }
 
         public virtual Semester Semester { get; set; }
         public virtual Course Course { get; set; }
@@ -177,10 +177,10 @@ namespace Degree_Planner.Models {
 
     [Table("prerequisites")]
     public class PrerequisiteLink {
-        public long PrerequisiteLinkID { get; set; }
+        public int PrerequisiteLinkID { get; set; }
 
-        public long CourseID { get; set; }
-        public long PrerequisiteID { get; set; }
+        public int CourseID { get; set; }
+        public int PrerequisiteID { get; set; }
 
         [ForeignKey("CourseID")]
         public virtual Course Course { get; set; }
@@ -190,10 +190,10 @@ namespace Degree_Planner.Models {
 
     [Table("courses_x_course_groups")]
     public class CourseCourseGroupLink {
-        public long CourseCourseGroupLinkID { get; set; }
+        public int CourseCourseGroupLinkID { get; set; }
 
-        public long CourseID { get; set; }
-        public long CourseGroupID { get; set; }
+        public int CourseID { get; set; }
+        public int CourseGroupID { get; set; }
 
         public virtual Course Course { get; set; }
         public virtual CourseGroup CourseGroup { get; set; }

@@ -1,9 +1,10 @@
 ﻿@using Degree_Planner.Models.ViewModels
 @{
-    ViewData["Title"] = "Degree Planner";
+    ViewData["Title"] = "Create account";
 }
-@model UserLoginVm
-<h1>Degree Planner</h1>
+@model CreateAccountVm
+
+<h1>Create account</h1>
 @using(Html.BeginForm(FormMethod.Post)) {
     @Html.AntiForgeryToken()
     @Html.LabelFor(m => m.Username)
@@ -19,9 +20,13 @@
     <br />
     @Html.ValidationMessageFor(m => m.Password)
     <br />
-    <input type="submit" />
-    @Html.ActionLink("Create account", "CreateAccount")
-    @if(!string.IsNullOrEmpty(Model.Message)) {
-        <p>@Model.Message</p>
-    }
+    <br />
+    @Html.LabelFor(m => m.ConfirmPassword)
+    <br />
+    @Html.PasswordFor(m => m.ConfirmPassword)
+    <br />
+    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    <br />
+    <br />
+    <input type="submit" value="Create" />
 }

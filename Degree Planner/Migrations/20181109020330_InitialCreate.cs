@@ -11,7 +11,7 @@ namespace DegreePlanner.Migrations
                 name: "course_groups",
                 columns: table => new
                 {
-                    CourseGroupID = table.Column<long>(nullable: false)
+                    CourseGroupID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
@@ -23,7 +23,7 @@ namespace DegreePlanner.Migrations
                 name: "courses",
                 columns: table => new
                 {
-                    CourseID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Department = table.Column<string>(nullable: true),
@@ -38,7 +38,7 @@ namespace DegreePlanner.Migrations
                 name: "degree_plans",
                 columns: table => new
                 {
-                    DegreePlanID = table.Column<long>(nullable: false)
+                    DegreePlanID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace DegreePlanner.Migrations
                 name: "degrees",
                 columns: table => new
                 {
-                    DegreeID = table.Column<long>(nullable: false)
+                    DegreeID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -63,10 +63,10 @@ namespace DegreePlanner.Migrations
                 name: "courses_x_course_groups",
                 columns: table => new
                 {
-                    CourseCourseGroupLinkID = table.Column<long>(nullable: false)
+                    CourseCourseGroupLinkID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CourseID = table.Column<long>(nullable: false),
-                    CourseGroupID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false),
+                    CourseGroupID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,10 +89,10 @@ namespace DegreePlanner.Migrations
                 name: "prerequisites",
                 columns: table => new
                 {
-                    PrerequisiteLinkID = table.Column<long>(nullable: false)
+                    PrerequisiteLinkID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CourseID = table.Column<long>(nullable: false),
-                    PrerequisiteID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false),
+                    PrerequisiteID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,9 +115,9 @@ namespace DegreePlanner.Migrations
                 name: "semesters",
                 columns: table => new
                 {
-                    SemesterID = table.Column<long>(nullable: false)
+                    SemesterID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DegreePlanID = table.Column<long>(nullable: false),
+                    DegreePlanID = table.Column<int>(nullable: false),
                     Index = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -135,11 +135,11 @@ namespace DegreePlanner.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    UserID = table.Column<long>(nullable: false)
+                    UserID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    DegreePlanID = table.Column<long>(nullable: false)
+                    DegreePlanID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,19 +149,19 @@ namespace DegreePlanner.Migrations
                         column: x => x.DegreePlanID,
                         principalTable: "degree_plans",
                         principalColumn: "DegreePlanID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "degree_elements",
                 columns: table => new
                 {
-                    DegreeElementID = table.Column<long>(nullable: false)
+                    DegreeElementID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Hours = table.Column<int>(nullable: false),
                     CanOverlap = table.Column<bool>(nullable: false),
-                    CourseGroupID = table.Column<long>(nullable: false),
-                    DegreeID = table.Column<long>(nullable: false)
+                    CourseGroupID = table.Column<int>(nullable: false),
+                    DegreeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -184,10 +184,10 @@ namespace DegreePlanner.Migrations
                 name: "semesters_x_courses",
                 columns: table => new
                 {
-                    SemesterCourseLinkID = table.Column<long>(nullable: false)
+                    SemesterCourseLinkID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    SemesterID = table.Column<long>(nullable: false),
-                    CourseID = table.Column<long>(nullable: false)
+                    SemesterID = table.Column<int>(nullable: false),
+                    CourseID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,10 +210,10 @@ namespace DegreePlanner.Migrations
                 name: "courses_x_users",
                 columns: table => new
                 {
-                    CourseUserLinkID = table.Column<long>(nullable: false)
+                    CourseUserLinkID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CourseID = table.Column<long>(nullable: false),
-                    UserID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,10 +236,10 @@ namespace DegreePlanner.Migrations
                 name: "users_x_degrees",
                 columns: table => new
                 {
-                    UserDegreeLinkID = table.Column<long>(nullable: false)
+                    UserDegreeLinkID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DegreeID = table.Column<long>(nullable: false),
-                    UserID = table.Column<long>(nullable: false)
+                    DegreeID = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
