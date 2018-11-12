@@ -1,0 +1,23 @@
+﻿@using Degree_Planner.Models.ViewModels
+@{
+    ViewData["Title"] = "Upload degree csv";
+}
+@model FileUploadVm
+
+<h2>Upload degree CSV</h2>
+@using(Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(m => m.Name)
+    <br />
+    @Html.TextBoxFor(m => m.Name)
+    <br />
+    @Html.ValidationMessageFor(m => m.Name)
+    <br /><br />
+    @Html.LabelFor(m => m.File)
+    <br />
+    @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control-file" } })
+    <br />
+    @Html.ValidationMessageFor(m => m.File)
+    <br/><br/>
+    <input type="submit" />
+}

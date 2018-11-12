@@ -1,0 +1,17 @@
+﻿@using Degree_Planner.Models.ViewModels
+@{
+    ViewData["Title"] = "Upload course group";
+}
+@model FileUploadVm
+
+<h2>Upload course group</h2>
+@using(Html.BeginForm(FormMethod.Post, new { enctype="multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(m => m.File)
+    <br />
+    @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control-file" } })
+    <br />
+    @Html.ValidationMessageFor(m => m.File)
+    <br /><br />
+    <input type="submit" />
+}

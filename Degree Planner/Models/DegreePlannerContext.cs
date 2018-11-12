@@ -65,6 +65,7 @@ namespace Degree_Planner.Models {
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool IsAdmin { get; set; }
 
         public int? DegreePlanID { get; set; }
 
@@ -107,6 +108,7 @@ namespace Degree_Planner.Models {
     [Table("course_groups")]
     public class CourseGroup {
         public int CourseGroupID { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<CourseCourseGroupLink> CourseCourseGroupLinks { get; set; }
         public virtual ICollection<DegreeElement> DegreeElements { get; set; }

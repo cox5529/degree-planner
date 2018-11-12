@@ -3,14 +3,16 @@ using System;
 using Degree_Planner.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DegreePlanner.Migrations
 {
     [DbContext(typeof(DegreePlannerContext))]
-    partial class DegreePlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20181112162747_Admin")]
+    partial class Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +57,6 @@ namespace DegreePlanner.Migrations
                 {
                     b.Property<int>("CourseGroupID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
 
                     b.HasKey("CourseGroupID");
 

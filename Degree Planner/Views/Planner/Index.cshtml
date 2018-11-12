@@ -6,3 +6,8 @@
 
 <h2>Currently logged in as @Model.Username</h2>
 
+@if(Model.IsAdmin) {
+    @Html.ActionLink("Upload degree csv", "UploadDegree", "Planner")
+    <br />
+    @Html.ActionLink("Upload course group csv", "UploadCourseGroup", "Planner")
+}
