@@ -42,6 +42,10 @@ namespace Degree_Planner.Controllers {
                 return RedirectToAction("Index", "Planner");
             }
 
+            if(!ModelState.IsValid) {
+                return View(vm);
+            }
+
             Degree degree = new Degree {
                 Name = vm.Name,
                 Requirements = new List<DegreeElement>()
@@ -120,6 +124,10 @@ namespace Degree_Planner.Controllers {
                 return RedirectToAction("Index", "Planner");
             }
 
+            if(!ModelState.IsValid) {
+                return View(vm);
+            }
+
             using(var context = new DegreePlannerContext())
             using(var stream = vm.File.OpenReadStream())
             using(var reader = new StreamReader(stream)) {
@@ -154,6 +162,88 @@ namespace Degree_Planner.Controllers {
                 context.SaveChanges();
             }
 
+            return RedirectToAction("Index", "Planner");
+        }
+
+        public IActionResult UploadCourseList() {
+            if(!Authenticate()) {
+                return RedirectToAction("Index", "Home");
+            }
+            User user = GetCurrentlyLoggedInUser();
+            if(!user.IsAdmin) {
+                return RedirectToAction("Index", "Planner");
+            }
+
+            return View(new FileUploadVm());
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult UploadCourseList(FileUploadVm vm) {
+            if(!Authenticate()) {
+                return RedirectToAction("Index", "Home");
+            }
+            User user = GetCurrentlyLoggedInUser();
+            if(!user.IsAdmin) {
+                return RedirectToAction("Index", "Planner");
+            }
+
+            if(!ModelState.IsValid) {
+                return View(vm);
+            }
+
+            using(var context = new DegreePlannerContext())
+            using(var stream = vm.File.OpenReadStream())
+            using(var reader = new StreamReader(stream)) {
+                string line;
+                while((line = reader.ReadLine()) != null) {
+                    string[] data = line.Split(',');
+
+                    string department = data[0].Substring(0, 4);
+                    string catalogNumber = data[0].Substring(4);
+
+                    Course course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalogNumber);
+                    bool exists = (course == null);
+                    if(!exists) {
+                        course = new Course() {
+                            Department = department,
+                            CatalogNumber = catalogNumber,
+                            PrerequisiteLinks = new List<PrerequisiteLink>()
+                        };
+                    }
+                    course.Name = data[1];
+
+                    for(int i = 2; i < data.Length; i++) {
+                        string prereqDepartment = data[i].Substring(0, 4);
+                        string prereqCatalog = data[i].Substring(4);
+
+                        Course prereq = context.Courses.FirstOrDefault(c => c.Department == prereqDepartment && c.CatalogNumber == prereqCatalog);
+                        if(prereq != null) {
+                            prereq = new Course() {
+                                Department = prereqDepartment,
+                                CatalogNumber = prereqCatalog
+                            };
+                            context.Courses.Add(prereq);
+                        }
+
+                        if(!course.Prerequisites.Any(p => p.Department == prereqDepartment && p.CatalogNumber == prereqCatalog)) {
+                            PrerequisiteLink link = new PrerequisiteLink() {
+                                Prerequisite = prereq,
+                                Course = course
+                            };
+
+                            course.PrerequisiteLinks.Add(link);
+                        }
+                    }
+
+                    if(!exists) {
+                        context.Courses.Add(course);
+                    } else {
+                        context.Courses.Update(course);
+                    }
+                }
+
+                context.SaveChanges();
+            }
             return RedirectToAction("Index", "Planner");
         }
 

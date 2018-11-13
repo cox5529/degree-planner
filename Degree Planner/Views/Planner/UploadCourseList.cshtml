@@ -1,11 +1,11 @@
 ﻿@using Degree_Planner.Models.ViewModels
 @{
-    ViewData["Title"] = "Upload course group";
+    ViewData["Title"] = "Upload course list csv";
 }
 @model FileUploadVm
 
-<h2>Upload course group</h2>
-@using(Html.BeginForm(FormMethod.Post, new { enctype="multipart/form-data" })) {
+<h2>Upload course list csv</h2>
+@using(Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.AntiForgeryToken()
     @Html.LabelFor(m => m.File)
     <br />
@@ -31,19 +31,19 @@
     <tbody>
         <tr>
             <td>1</td>
-            <td>Course group name</td>
-            <td>string</td>
-            <td></td>
-            <td>CSCE Requirements</td>
-            <td>Must be unique across all records</td>
-        </tr>
-        <tr>
-            <td>2 ... n</td>
-            <td>Course Identifier</td>
+            <td>Course identifier</td>
             <td>string</td>
             <td>[4 character department ID][4-5 character catalog number]</td>
             <td>CSCE3613H, MATH3103, CSCE491VH</td>
-            <td>Must be unique across all records</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2 ... n</td>
+            <td>Prerequisite course for course in first column</td>
+            <td>string</td>
+            <td>[4 character department ID][4-5 character catalog number]</td>
+            <td>CSCE3613H, MATH3103, CSCE491VH</td>
+            <td>Should not be duplicated in a single row</td>
         </tr>
     </tbody>
 </table>

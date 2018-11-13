@@ -18,6 +18,78 @@
     @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control-file" } })
     <br />
     @Html.ValidationMessageFor(m => m.File)
-    <br/><br/>
+    <br /><br />
     <input type="submit" />
 }
+<h3>Format</h3>
+<p>Every row in the CSV file must be of one of the following formats:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Column number</th>
+            <th>Column data</th>
+            <th>Datatype</th>
+            <th>Format</th>
+            <th>Example(s)</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Hour count</td>
+            <td>int</td>
+            <td></td>
+            <td>6, 10, 13</td>
+            <td>Number of hours needed from this group to complete degree</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Course group</td>
+            <td>string</td>
+            <td>Name of an existing course group</td>
+            <td>CSCE Requirements</td>
+            <td>Must match an existing course group name</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>Column number</th>
+            <th>Column data</th>
+            <th>Datatype</th>
+            <th>Format</th>
+            <th>Example(s)</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Hour count</td>
+            <td>int</td>
+            <td></td>
+            <td>6, 10, 13</td>
+            <td>Number of hours needed from this group to complete degree</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Course group</td>
+            <td>string</td>
+            <td>Name of an existing course group</td>
+            <td>CSCE Requirements</td>
+            <td>May match an existing course group name</td>
+        </tr>
+        <tr>
+            <td>3 ... n</td>
+            <td>Course identifier</td>
+            <td>string</td>
+            <td>[4 character department ID][4-5 character catalog number]</td>
+            <td>CSCE3613H, MATH3103, CSCE491VH</td>
+            <td>Names of courses belonging to this course group</td>
+        </tr>
+    </tbody>
+</table>
+<p>Note: this format will create a new course group if and only if an existing course group with the given name could not be found</p>
