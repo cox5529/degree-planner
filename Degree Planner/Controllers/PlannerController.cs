@@ -56,39 +56,38 @@ namespace Degree_Planner.Controllers {
                     DegreeElement element = new DegreeElement();
                     element.Hours = int.Parse(data[0]);
                     string courseGroupName = data[1];
+                    CourseGroup courseGroup = context.CourseGroups.FirstOrDefault(cg => cg.Name == courseGroupName);
                     if(data.Length == 2) {
-                        CourseGroup courseGroup = context.CourseGroups.FirstOrDefault(cg => cg.Name == courseGroupName);
                         if(courseGroup == null) {
                             courseGroup = new CourseGroup() {
                                 Name = courseGroupName
                             };
                         }
-
-                        element.Members = courseGroup;
                     } else {
-                        CourseGroup courseGroup = new CourseGroup() {
-                            Name = courseGroupName,
-                            CourseCourseGroupLinks = new List<CourseCourseGroupLink>()
-                        };
-                        for(int i = 2; i < data.Length; i++) {
-                            CourseCourseGroupLink link = new CourseCourseGroupLink();
-                            string department = data[i].Substring(0, 4);
-                            string number = data[i].Substring(4);
-                            Course course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == number);
+                        if(courseGroup == null) {
+                            courseGroup = new CourseGroup() {
+                                Name = courseGroupName,
+                                CourseCourseGroupLinks = new List<CourseCourseGroupLink>()
+                            };
 
-                            if(course == null) {
-                                course = new Course() {
-                                    Department = department,
-                                    CatalogNumber = number
-                                };
+                            for(int i = 2; i < data.Length; i++) {
+                                CourseCourseGroupLink link = new CourseCourseGroupLink();
+                                string department = data[i].Substring(0, 4);
+                                string number = data[i].Substring(4);
+                                Course course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == number);
+
+                                if(course == null) {
+                                    course = new Course() {
+                                        Department = department,
+                                        CatalogNumber = number
+                                    };
+                                }
+                                link.Course = course;
+                                courseGroup.CourseCourseGroupLinks.Add(link);
                             }
-                            link.Course = course;
-
-                            courseGroup.CourseCourseGroupLinks.Add(link);
                         }
-
-                        element.Members = courseGroup;
                     }
+                    element.Members = courseGroup;
                     degree.Requirements.Add(element);
                 }
 
