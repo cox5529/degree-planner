@@ -10,3 +10,6 @@ If dependencies don't automatically import, download the following packages from
 * Microsoft.NETCore.App - 2.1.5
 * MySql.Data.EntityFrameworkCore - 8.0.13
 * Pomelo.EntityFrameworkCore.MySql - 2.1.2
+
+# Database info
+To update the database go to [this website](https://home.bscox.com/phpmyadmin) and login using the user name "degree_planner" with password "degree_planner". Be sure to select 35.225.29.217 as the current server.
