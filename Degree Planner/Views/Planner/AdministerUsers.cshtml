@@ -1,0 +1,45 @@
+﻿@using Degree_Planner.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Administration";
+}
+@model IList<User>
+
+<h2>Administration</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Is admin?</th>
+            <th>Toggle admin</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(User user in Model) {
+            <tr id="user-@user.UserID">
+                <td>@user.Username</td>
+                <td id="is-admin-@user.UserID">@user.IsAdmin.ToString().ToLower()</td>
+                <td><a href="javascript:toggleAdmin(@user.UserID, @user.IsAdmin.ToString().ToLower())">Toggle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function toggleAdmin(userID, isAdmin) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ToggleAdmin", "Planner")",
+            timeout: 10000,
+            data: { userID: userID, isAdmin: !isAdmin },
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                    var tr = $("#user-" + userID);
+                    tr.find("td#is-admin-" + userID).html("" + !isAdmin);
+                    tr.find("td a").attr("href", "javascript:toggleAdmin(" + userID + ", " + !isAdmin + ")");
+                }
+            }
+        });
+    }
+</script>

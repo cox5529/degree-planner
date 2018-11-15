@@ -1,0 +1,75 @@
+﻿@using Degree_Planner.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Upload courses taken";
+}
+@model Course
+
+<h2>Upload courses taken</h2>
+
+@using(Html.BeginForm("AddCourseTaken", "Planner", FormMethod.Post, new { id = "add-course-form" })) {
+    @Html.LabelFor(m => m.Department)
+    <br />
+    @Html.TextBoxFor(m => m.Department)
+    <br /><br />
+    @Html.LabelFor(m => m.CatalogNumber)
+    <br />
+    @Html.TextBoxFor(m => m.CatalogNumber)
+    <br /><br />
+    <input type="submit" />
+}
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Catalog number</th>
+        </tr>
+    </thead>
+    <tbody id="course-data">
+
+    </tbody>
+</table>
+
+<script>
+
+    $(document).ready(function () {
+        fetchCourses();
+
+        $("#add-course-form").submit(function () {
+            var formData = $("#add-course-form").serializeArray();
+            console.log(formData);
+
+            $.ajax({
+                type: "POST",
+                timeout: 10000,
+                url: "@Url.Action("AddCourseTaken", "Planner")",
+                data: { department: formData[0].value, catalog: formData[1].value },
+                success: function (data) {
+                    updateCourseTable(data);
+                }
+            });
+
+            return false;
+        });
+    });
+
+    function fetchCourses() {
+        $.ajax({
+            type: "POST",
+            timeout: 10000,
+            url: "@Url.Action("GetCoursesTaken", "Planner")",
+            success: function (data) {
+                updateCourseTable(data);
+            }
+        });
+    }
+
+    function updateCourseTable(data) {
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+            var elem = data[i];
+            html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td></tr>";
+        }
+        $("#course-data").html(html);
+    }
+</script>

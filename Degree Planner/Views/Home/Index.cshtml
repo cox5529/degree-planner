@@ -1,5 +1,6 @@
 ﻿@using Degree_Planner.Models.ViewModels
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Degree Planner";
 }
 @model UserLoginVm
@@ -19,7 +20,7 @@
     <br />
     @Html.ValidationMessageFor(m => m.Password)
     <br />
-    <input type="submit" />
+    <input type="submit" value="Login" />
     @Html.ActionLink("Create account", "CreateAccount")
     @if(!string.IsNullOrEmpty(Model.Message)) {
         <p>@Model.Message</p>

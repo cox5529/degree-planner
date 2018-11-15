@@ -1,5 +1,6 @@
 ﻿@using Degree_Planner.Models
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
 @model User
@@ -7,9 +8,15 @@
 <h2>Currently logged in as @Model.Username</h2>
 
 @if(Model.IsAdmin) {
+    <h4>You are an admin</h4>
     @Html.ActionLink("Upload degree csv", "UploadDegree", "Planner")
     <br />
     @Html.ActionLink("Upload course group csv", "UploadCourseGroup", "Planner")
     <br />
     @Html.ActionLink("Upload prerequisite csv", "UploadCourseList", "Planner")
+    <br />
+    @Html.ActionLink("Administration", "AdministerUsers", "Planner")
+} else {
+    <h4>You are a student</h4>
+    @Html.ActionLink("Add courses taken", "UploadCoursesTaken", "Planner")
 }
