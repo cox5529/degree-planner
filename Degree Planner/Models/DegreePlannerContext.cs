@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Degree_Planner.Models {
     public class DegreePlannerContext : DbContext {
@@ -24,19 +25,21 @@ namespace Degree_Planner.Models {
         public DegreePlannerContext(DbContextOptions<DegreePlannerContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseMySql(ConnectionStrings.PRODUCTION);
+            optionsBuilder.UseMySql(ConnectionStrings.LOCAL);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<PrerequisiteLink>()
-                .HasOne(pl => pl.Course)
-                .WithMany(c => c.PostrequisiteLinks)
-                .HasForeignKey(pl => pl.CourseID);
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<PrerequisiteLink>()
-                .HasOne(pl => pl.Prerequisite)
-                .WithMany(c => c.PrerequisiteLinks)
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.PrerequisiteLinks)
+                .WithOne(pl => pl.Prerequisite)
                 .HasForeignKey(pl => pl.PrerequisiteID);
+
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.PostrequisiteLinks)
+                .WithOne(pl => pl.Course)
+                .HasForeignKey(pl => pl.CourseID);
         }
     }
 
@@ -100,8 +103,9 @@ namespace Degree_Planner.Models {
 
         public int CourseGroupID { get; set; }
         public int DegreeID { get; set; }
-
+        
         public virtual CourseGroup Members { get; set; }
+        [JsonIgnore]
         public virtual Degree Degree { get; set; }
     }
 
@@ -110,7 +114,9 @@ namespace Degree_Planner.Models {
         public int CourseGroupID { get; set; }
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<CourseCourseGroupLink> CourseCourseGroupLinks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DegreeElement> DegreeElements { get; set; }
 
         [NotMapped]
@@ -120,25 +126,31 @@ namespace Degree_Planner.Models {
     [Table("courses")]
     public class Course {
         public int CourseID { get; set; }
+        public int Hours { get; set; }
         public string Name { get; set; }
         public string Department { get; set; }
         public string CatalogNumber { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<PrerequisiteLink> PrerequisiteLinks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PrerequisiteLink> PostrequisiteLinks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<CourseCourseGroupLink> CourseCourseGroupLinks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<SemesterCourseLink> SemesterCourseLinks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<CourseUserLink> CourseUserLinks { get; set; }
 
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public virtual IEnumerable<User> Users => CourseUserLinks.Select(cul => cul.User);
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public virtual IEnumerable<Semester> Semesters => SemesterCourseLinks.Select(scl => scl.Semester);
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public virtual IEnumerable<CourseGroup> CourseGroups => CourseCourseGroupLinks.Select(ccgl => ccgl.CourseGroup);
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public virtual IEnumerable<Course> Prerequisites => PrerequisiteLinks.Where(pl => pl.CourseID == CourseID).Select(pl => pl.Prerequisite);
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public virtual IEnumerable<Course> Postrequisites => PrerequisiteLinks.Where(pl => pl.PrerequisiteID == CourseID).Select(pl => pl.Course);
     }
 
@@ -184,9 +196,7 @@ namespace Degree_Planner.Models {
         public int CourseID { get; set; }
         public int PrerequisiteID { get; set; }
 
-        [ForeignKey("CourseID")]
         public virtual Course Course { get; set; }
-        [ForeignKey("PrerequisiteID")]
         public virtual Course Prerequisite { get; set; }
     }
 

@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewData["Title"] = "Select courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IList<Degree_Planner.Models.ViewModels.SelectCoursesVm>
+
+<h2>Select courses</h2>
+@foreach (var degreeElement in Model)
+{
+    Html.RenderPartial("_SelectCoursesPartial", degreeElement);
+}
+
+@section scripts {
+    <script>
+        var courseOptions = @Html.Raw(Json.Serialize(Model));
+        var selectionTableData = [];
+        var takenTableData = [];
+        var hourRequirements = [];
+
+        $(function() {
+            console.log(courseOptions);
+
+            for (var i = 0; i < courseOptions.length; i++) {
+                var vm = courseOptions[i];
+                selectionTableData.push([]);
+                takenTableData.push([]);
+                hourRequirements.push(vm.degreeElement.hours);
+                vm.idPrefix = i;
+
+                populateAll(vm.idPrefix, vm.degreeElement, vm.coursesTaken);
+            }
+        });
+
+        function populateAll(modelId, data, taken) {
+            console.log(data);
+
+            selectionTableData[modelId] = [];
+            takenTableData[modelId] = [];
+            for (var i = 0; i < data.members.courses.length; i++) {
+                var course = data.members.courses[i];
+                selectionTableData[modelId].push(course);
+            }
+
+            for (var i = 0; i < taken.length; i++) {
+                var course = null;
+                var found = false;
+                console.log(taken);
+                for (var j = 0; j < selectionTableData[modelId].length; j++) {
+                    course = selectionTableData[modelId][j];
+                    if (course.courseID === taken[i]) {
+                        found = true;
+                        selectionTableData[modelId].splice(j, 1);
+                        break;
+                    }
+                }
+
+                if (found) {
+                    takenTableData[modelId].push({
+                        taken: true,
+                        course: course
+                    });
+                    console.log(course);
+                }
+            }
+
+            updateHours(modelId);
+            populateSelectionTable(modelId);
+            populateTakenTable(modelId);
+        }
+
+        function populateTakenTable(modelId) {
+            var html = "";
+            for (var i = 0; i < takenTableData[modelId].length; i++) {
+                var data = takenTableData[modelId][i];
+                var course = data.course;
+                html += "<tr>";
+                html += "<td>" + course.name + "</td>";
+                html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
+                if (!data.taken) {
+                    html += "<td><button onclick='removeCourse(" +
+                        modelId +
+                        ", " +
+                        course.courseID +
+                        ")'>Remove</button></td>";
+                } else {
+                    html += "<td></td>";
+                }
+                html += "</tr>";
+            }
+            $("#" + modelId + "-selected-courses").html(html);
+        }
+
+        function populateSelectionTable(modelId) {
+            var html = "";
+            for (var i = 0; i < selectionTableData[modelId].length; i++) {
+                var course = selectionTableData[modelId][i];
+
+                if (!course.catalogNumber.endsWith("E")) {
+                    html += "<tr>";
+                    html += "<td>" + course.name + "</td>";
+                    html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
+                    html += "<td><button onclick='addCourse(" +
+                        modelId +
+                        ", " +
+                        course.courseID +
+                        ")'>Add</button></td>";
+                    html += "</tr>";
+                } else {
+                    html += "<tr>";
+                    if (course.department === "UARK") {
+                        html += "<td>Any elective</td>";
+                    } else {
+                        html += "<td>" + course.department + " elective</td>";
+                    }
+                    if (course.catalogNumber === "000E") {
+                        html += "<td></td>";
+                    } else {
+                        html += "<td>numbered greater than " + course.catalogNumber.substring(0, 3) + "0</td>";
+                    }
+                    html += "<td></td></tr>";
+                }
+            }
+            $("#" + modelId + "-course-options").html(html);
+        }
+
+        function addCourse(modelId, courseId) {
+            var course;
+            var found = -1;
+            for (var i = 0; i < selectionTableData[modelId].length; i++) {
+                course = selectionTableData[modelId][i];
+                if (course.courseID === courseId) {
+                    found = i;
+                    break;
+                }
+            }
+            if (found !== -1) {
+                selectionTableData[modelId].splice(found, 1);
+                takenTableData[modelId].push({
+                    taken: false,
+                    course: course
+                });
+
+                updateHours(modelId);
+            }
+
+
+            populateTakenTable(modelId);
+            populateSelectionTable(modelId);
+        }
+
+        function removeCourse(modelId, courseId) {
+            var course;
+            var found = -1;
+            for (var i = 0; i < takenTableData[modelId].length; i++) {
+                course = takenTableData[modelId][i].course;
+                if (course.courseID === courseId) {
+                    found = i;
+                    break;
+                }
+            }
+            if (found !== -1) {
+                takenTableData[modelId].splice(found, 1);
+                selectionTableData[modelId].push(course);
+
+                updateHours(modelId);
+            }
+
+
+            populateTakenTable(modelId);
+            populateSelectionTable(modelId);
+        }
+
+        function updateHours(modelId) {
+            var hourCount = 0;
+            for (var i = 0; i < takenTableData[modelId].length; i++) {
+                hourCount += takenTableData[modelId][i].course.hours;
+            }
+            var remainingHours = hourRequirements[modelId] - hourCount;
+            console.log(remainingHours);
+            if (remainingHours < 0) remainingHours = 0;
+
+            $("#" + modelId + "-hours-remaining").html(remainingHours + "");
+        }
+
+    </script>
+}

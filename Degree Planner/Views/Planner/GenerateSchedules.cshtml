@@ -1,0 +1,18 @@
+﻿@using Degree_Planner.Models.ViewModels
+@using Degree_Planner.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Generate Schedules";
+}
+@model GenerateDegreeVm
+
+<h2>Generate Schedules</h2>
+@using(Html.BeginForm(FormMethod.Post, new { id = "generate-form" })) {
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(m => m.DegreeID)
+    <br />
+    @Html.DropDownListFor(m => m.DegreeID, Model.Options, "-- Select one --", new { })
+    <br />
+    <br />
+    <input type="submit" />
+}

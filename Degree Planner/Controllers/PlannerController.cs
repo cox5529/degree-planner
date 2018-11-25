@@ -2,6 +2,7 @@
 using Degree_Planner.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ namespace Degree_Planner.Controllers {
             if(!Authenticate()) {
                 return RedirectToAction("Index", "Home");
             }
+
             // Otherwise, display a page
             User user = GetCurrentlyLoggedInUser();
             return View(user);
@@ -28,12 +30,90 @@ namespace Degree_Planner.Controllers {
             return View(new Course());
         }
 
+        public IActionResult GenerateSchedules() {
+            if(!Authenticate()) {
+                return Json("");
+            }
+
+            User user = GetCurrentlyLoggedInUser();
+
+            GenerateDegreeVm vm = new GenerateDegreeVm();
+            using(var context = new DegreePlannerContext()) {
+                vm.Options = context.Degrees
+                    .Select(d => new SelectListItem() {
+                        Text = d.Name,
+                        Value = d.DegreeID + ""
+                    }).ToList();
+                vm.User = user;
+            }
+
+            return View(vm);
+        }
+
+        public IActionResult SelectCourses(int degreeId) {
+            if(!Authenticate()) {
+                return RedirectToAction("Index", "Home");
+            }
+            User user = GetCurrentlyLoggedInUser();
+
+            IList<SelectCoursesVm> vm;
+            using(var context = new DegreePlannerContext()) {
+                var degree = context.Degrees
+                    .Include(d => d.Requirements)
+                    .ThenInclude(de => de.Members)
+                    .ThenInclude(cg => cg.CourseCourseGroupLinks)
+                    .ThenInclude(ccgl => ccgl.Course)
+                    .ThenInclude(c => c.CourseUserLinks)
+                    .FirstOrDefault(d => d.DegreeID == degreeId);
+
+                if(degree == null) {
+                    return RedirectToAction("Index", "Planner");
+                }
+
+                vm = degree.Requirements
+                    .Where(de => de.Members.Courses.Sum(c => c.Hours) != de.Hours)
+                    .Select(de => new SelectCoursesVm() {
+                        CoursesTaken = de.Members.Courses
+                            .Where(c => c.CourseUserLinks.Any(cul => cul.UserID == user.UserID))
+                            .Select(c => c.CourseID)
+                            .ToList(),
+                        DegreeElement = de
+                    })
+                    .ToList();
+
+                int prefix = 0;
+                foreach (var list in vm) {
+                    list.IdPrefix = prefix;
+                    prefix++;
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult GenerateSchedules(GenerateDegreeVm vm) {
+            if(!Authenticate()) {
+                return Json("");
+            }
+            User user = GetCurrentlyLoggedInUser();
+
+            if(ModelState.IsValid) {
+                return RedirectToAction("SelectCourses", "Planner", new {degreeId = vm.DegreeID});
+            }
+            return View(vm);
+        }
+
         [HttpPost]
         public JsonResult AddCourseTaken(string department, string catalog) {
             if(!Authenticate()) {
                 return Json("");
             }
             User user = GetCurrentlyLoggedInUser();
+
+            if(string.IsNullOrEmpty(department) || string.IsNullOrEmpty(catalog)) {
+                return Json("false");
+            }
 
             using(var context = new DegreePlannerContext()) {
                 bool? hasCourseAlready = context.Users
@@ -43,16 +123,20 @@ namespace Degree_Planner.Controllers {
                     ?.Courses
                     .Any(c => c.Department == department && c.CatalogNumber == catalog);
 
-                if(hasCourseAlready != null && !hasCourseAlready.Value) {
-                    Course course = CreateOrFetchCourse(context, department, catalog, out bool generated);
+                if(hasCourseAlready == null || hasCourseAlready.Value)
+                    return GetCoursesTaken();
+                var course = CreateOrFetchCourse(context, department, catalog, out var generated);
 
-                    CourseUserLink link = new CourseUserLink() {
+                if(!generated) {
+                    var link = new CourseUserLink() {
                         User = user,
                         Course = course
                     };
 
                     context.CourseUserLinks.Add(link);
                     context.SaveChanges();
+                } else {
+                    return Json("false");
                 }
             }
 
@@ -250,32 +334,36 @@ namespace Degree_Planner.Controllers {
                     string department = data[0].Substring(0, 4);
                     string catalogNumber = data[0].Substring(4);
 
-                    Course course = CreateOrFetchCourse(context, department, catalogNumber, out bool gen);
-                    if(gen) {
-                        course.PrerequisiteLinks = new List<PrerequisiteLink>();
+                    Course course = CreateOrFetchCourse(context, department, catalogNumber, out bool gen, true);
+                    int start = 1;
+                    string name = data[1];
+                    if(name.Length < 5 || !char.IsDigit(name[4])) {
+                        start = 2;
+                        course.Name = name;
                     }
-                    course.Name = data[1];
 
-                    for(int i = 2; i < data.Length; i++) {
+                    for(int i = start; i < data.Length; i++) {
                         string prereqDepartment = data[i].Substring(0, 4);
                         string prereqCatalog = data[i].Substring(4);
 
-                        Course prereq = CreateOrFetchCourse(context, prereqDepartment, prereqCatalog, out bool genPrereq);
-                        if(gen) {
-                            prereq = new Course() {
-                                Department = prereqDepartment,
-                                CatalogNumber = prereqCatalog
-                            };
-                            context.Courses.Add(prereq);
-                        }
-
-                        if(!course.Prerequisites.Any(p => p.Department == prereqDepartment && p.CatalogNumber == prereqCatalog)) {
+                        Course prereq = CreateOrFetchCourse(context, prereqDepartment, prereqCatalog, out bool genPrereq, true);
+                        if(genPrereq || gen) {
                             PrerequisiteLink link = new PrerequisiteLink() {
                                 Prerequisite = prereq,
                                 Course = course
                             };
 
-                            course.PrerequisiteLinks.Add(link);
+                            context.PrerequisiteLinks.Add(link);
+                            if(genPrereq) {
+                                context.Courses.Add(prereq);
+                            }
+                        } else if(!context.PrerequisiteLinks.Any(p => p.CourseID == course.CourseID && p.PrerequisiteID == prereq.CourseID)) {
+                            PrerequisiteLink link = new PrerequisiteLink() {
+                                Prerequisite = prereq,
+                                Course = course
+                            };
+
+                            context.PrerequisiteLinks.Add(link);
                         }
                     }
 
@@ -326,16 +414,38 @@ namespace Degree_Planner.Controllers {
             }
         }
 
-        private Course CreateOrFetchCourse(DegreePlannerContext context, string department, string catalog, out bool generated) {
-            Course course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalog);
+        private Course CreateOrFetchCourse(DegreePlannerContext context, string department, string catalog, out bool generated, bool includePrerequisite = false) {
+            if(string.IsNullOrEmpty(department) || string.IsNullOrEmpty(catalog)) {
+                generated = false;
+                return null;
+            }
+
+            department = department.ToUpper();
+            catalog = catalog.ToUpper();
+            Course course;
+
+            if(includePrerequisite) {
+                course = context.Courses
+                    .Include(c => c.PrerequisiteLinks)
+                    .FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalog);
+            } else {
+                course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalog);
+            }
             generated = course == null;
             if(course != null) {
                 return course;
             }
 
+            bool variable = !int.TryParse(catalog[3] + "", out int hours);
+            if (variable) {
+                hours = -1;
+            }
+
             return new Course() {
                 Department = department,
-                CatalogNumber = catalog
+                CatalogNumber = catalog,
+                PrerequisiteLinks = new List<PrerequisiteLink>(),
+                Hours = hours
             };
         }
 

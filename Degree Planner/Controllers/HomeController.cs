@@ -48,6 +48,11 @@ namespace Degree_Planner.Controllers {
                 };
 
                 using(var context = new DegreePlannerContext()) {
+                    if(context.Users.Any(u => u.Username == vm.Username)) {
+                        ModelState.AddModelError("Username", "Username already exists");
+                        return View(vm);
+                    }
+
                     context.Users.Add(user);
                     context.SaveChanges();
 

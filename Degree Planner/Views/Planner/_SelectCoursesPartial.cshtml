@@ -1,0 +1,67 @@
+﻿@using System.Linq;
+@{
+    ViewData["Title"] = "Select courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Degree_Planner.Models.ViewModels.SelectCoursesVm
+
+<h2>Select courses for group @Model.DegreeElement.Members.Name</h2>
+<p>Hours remaining: <span id="@Model.IdPrefix-hours-remaining">@Model.DegreeElement.Hours</span></p>
+
+<h4>Course options</h4>
+@if (Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Course name</th>
+            <th>Course catalog number</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="@Model.IdPrefix-course-options">
+
+        </tbody>
+    </table>
+}
+@if (Model.DegreeElement.Members.Courses.Any(c => c.CatalogNumber.EndsWith("E"))) {
+    <form id="@Model.IdPrefix-elective-form">
+        <label for="@Model.IdPrefix-form-department">Course department</label>
+        <br />
+        <input id="@Model.IdPrefix-form-department" type="text" />
+        <br />
+        <br />
+        <label for="@Model.IdPrefix-form-catalog">Course department</label>
+        <br />
+        <input id="@Model.IdPrefix-form-catalog" type="text" />
+        <br />
+        <br />
+        <input type="submit" value="Add elective" />
+    </form>
+}
+<br/>
+<h4>Selected/Taken courses</h4>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Course name</th>
+        <th>Course catalog number</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="@Model.IdPrefix-selected-courses"></tbody>
+</table>
+<br />
+
+@section Scripts {
+    <script>
+        $(function() {
+            $("#@Model.IdPrefix-elective-form").submit(function(e) {
+                e.preventDefault();
+
+                var data = $(this).serializeArray();
+                var courseIdentifier = data[0].value + data[1].value;
+                addCourse(@Model.IdPrefix, courseIdentifier);
+            });
+        });
+    </script>
+}
