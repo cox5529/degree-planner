@@ -9,8 +9,6 @@ namespace Degree_Planner.Models.ViewModels {
 
         public IList<SelectListItem> Options { get; set; }
 
-        public IList<DegreePlan> Results { get; set; }
-
         [Required]
         public int DegreeID { get; set; }
 

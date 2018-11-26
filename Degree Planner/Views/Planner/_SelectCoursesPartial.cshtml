@@ -8,36 +8,43 @@
 <h2>Select courses for group @Model.DegreeElement.Members.Name</h2>
 <p>Hours remaining: <span id="@Model.IdPrefix-hours-remaining">@Model.DegreeElement.Hours</span></p>
 
-<h4>Course options</h4>
-@if (Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Course name</th>
-            <th>Course catalog number</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody id="@Model.IdPrefix-course-options">
+<div id="@Model.IdPrefix-div-options">
+    <h4>Course options</h4>
+    @if (Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Course name</th>
+                <th>Course catalog number</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="@Model.IdPrefix-course-options">
 
-        </tbody>
-    </table>
-}
-@if (Model.DegreeElement.Members.Courses.Any(c => c.CatalogNumber.EndsWith("E"))) {
-    <form id="@Model.IdPrefix-elective-form">
-        <label for="@Model.IdPrefix-form-department">Course department</label>
-        <br />
-        <input id="@Model.IdPrefix-form-department" type="text" />
-        <br />
-        <br />
-        <label for="@Model.IdPrefix-form-catalog">Course department</label>
-        <br />
-        <input id="@Model.IdPrefix-form-catalog" type="text" />
-        <br />
-        <br />
-        <input type="submit" value="Add elective" />
-    </form>
-}
+            </tbody>
+        </table>
+    }
+    @foreach (var elective in Model.DegreeElement.Members.Courses.Where(c => c.CatalogNumber.EndsWith("E"))) {
+        <form id="@Model.IdPrefix-elective-form">
+            <label for="@Model.IdPrefix-form-department">Course department</label>
+            <br />
+            @if(elective.Department != "UARK") {
+                <input id="@Model.IdPrefix-form-department" name="department" value="@elective.Department" type="text" disabled required />
+            } else {
+                <input id="@Model.IdPrefix-form-department" name="department" type="text" required />
+            }
+            <br />
+            <br />
+            <label for="@Model.IdPrefix-form-catalog">Course catalog number</label>
+            <br />
+            <input id="@Model.IdPrefix-form-catalog" name="catalog-number" type="text" required />
+            <br />
+            <br />
+            <input type="submit" value="Add elective" />
+        </form>
+        break;
+    }
+</div>
 <br/>
 <h4>Selected/Taken courses</h4>
 <table class="table">
@@ -59,8 +66,37 @@
                 e.preventDefault();
 
                 var data = $(this).serializeArray();
-                var courseIdentifier = data[0].value + data[1].value;
-                addCourse(@Model.IdPrefix, courseIdentifier);
+                console.log(data);
+
+                var department;
+                var catalogNumber;
+                if (data.length === 1) {
+                    department = $("#@Model.IdPrefix-form-department").val();
+                    catalogNumber = data[0].value;
+                } else {
+                    department = data[0].value;
+                    catalogNumber = data[1].value;
+                }
+
+                var hours = 0;
+                if (!isNaN(catalogNumber.charAt(3))) {
+                    hours = parseInt(catalogNumber.charAt(3));
+                } else {
+                    hours = 3;
+                }
+
+                var courseIdentifier = {
+                    department: department,
+                    catalogNumber: catalogNumber,
+                    courseID: -1,
+                    hours: hours
+                };
+                addCourse(@Model.IdPrefix, courseIdentifier, false);
+
+                if (data.length !== 1) {
+                    $("#@Model.IdPrefix-form-department").val("");
+                }
+                $("#@Model.IdPrefix-form-catalog").val("");
             });
         });
     </script>

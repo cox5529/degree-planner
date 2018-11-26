@@ -33,13 +33,13 @@ namespace Degree_Planner.Models {
 
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.PrerequisiteLinks)
-                .WithOne(pl => pl.Prerequisite)
-                .HasForeignKey(pl => pl.PrerequisiteID);
+                .WithOne(pl => pl.Course)
+                .HasForeignKey(pl => pl.CourseID);
 
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.PostrequisiteLinks)
-                .WithOne(pl => pl.Course)
-                .HasForeignKey(pl => pl.CourseID);
+                .WithOne(pl => pl.Prerequisite)
+                .HasForeignKey(pl => pl.PrerequisiteID);
         }
     }
 
@@ -151,7 +151,7 @@ namespace Degree_Planner.Models {
         [NotMapped, JsonIgnore]
         public virtual IEnumerable<Course> Prerequisites => PrerequisiteLinks.Where(pl => pl.CourseID == CourseID).Select(pl => pl.Prerequisite);
         [NotMapped, JsonIgnore]
-        public virtual IEnumerable<Course> Postrequisites => PrerequisiteLinks.Where(pl => pl.PrerequisiteID == CourseID).Select(pl => pl.Course);
+        public virtual IEnumerable<Course> Postrequisites => PostrequisiteLinks.Where(pl => pl.PrerequisiteID == CourseID).Select(pl => pl.Course);
     }
 
     #region many-to-many links
