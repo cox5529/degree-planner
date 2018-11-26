@@ -25,7 +25,7 @@ namespace Degree_Planner.Models {
         public DegreePlannerContext(DbContextOptions<DegreePlannerContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseMySql(ConnectionStrings.LOCAL);
+            optionsBuilder.UseMySql(ConnectionStrings.PRODUCTION);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
