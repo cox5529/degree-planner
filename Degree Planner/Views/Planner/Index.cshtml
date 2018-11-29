@@ -21,4 +21,8 @@
     @Html.ActionLink("Add courses taken", "UploadCoursesTaken", "Planner")
     <br />
     @Html.ActionLink("Generate degree plans", "GenerateSchedules", "Planner")
+    if (Model.DegreePlan != null) {
+        <br />
+        @Html.ActionLink("View current degree plan", "ViewDegreePlan")
+    }
 }

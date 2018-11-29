@@ -13,10 +13,20 @@
 <h2>Parameters</h2>
 <label for="max-hours">Maximum hours per semester: </label>
 <br />
-<input type="number" name="max-hours" id="max-hours"/>
+<input type="number" name="max-hours" id="max-hours" />
 <br />
 <br />
-<button onclick="generateSchedules()">Generate schedules</button>
+<label for="min-hours">Minimum hours per semester: </label>
+<br />
+<input type="number" name="min-hours" id="min-hours" />
+<br />
+<br />
+<label for="max-semesters">Minimum number of semesters to graduate: </label>
+<br />
+<input type="number" name="max-semesters" id="max-semesters" />
+<br />
+<br />
+<button id="generate-button" onclick="generateSchedules()">Generate schedules</button>
 
 @section scripts {
     <script>
@@ -36,6 +46,13 @@
 
                 populateAll(vm.idPrefix, vm.degreeElement, vm.coursesTaken);
             }
+
+            $("input[type=number]").keyup(function(e) {
+                if (e.keyCode === 13) {
+                    $("#generate-button").click();
+                }
+            });
+
         });
 
         function populateAll(modelId, data, taken) {
@@ -239,24 +256,38 @@
                 var html = $("#" + i + "-hours-remaining").html();
                 if (html !== "0") return;
             }
-            var selectedData = [];
+            var courses = [];
             for (var i = 0; i < courseOptions.length; i++) {
-                var selectedCourses = [];
                 for (var j = 0; j < takenTableData[i].length; j++) {
                     var course = takenTableData[i][j].course;
                     course.CourseUserLinks = [];
-                    selectedCourses.push(course);
+                    courses.push(course);
                 }
-                selectedData.push({
-                    degreeElementID: courseOptions[i].degreeElement.degreeElementID,
-                    courses: selectedCourses
-                });
+            }
+
+            var maxHoursStr = $("#max-hours").val();
+            var minHoursStr = $("#min-hours").val();
+            var minSemestersStr = $("#max-semesters").val();
+
+            if (minHoursStr === "" || maxHoursStr === "" || minSemestersStr === "") {
+                //TODO display error
+                return;
+            }
+
+            var maxHours = parseInt(maxHoursStr);
+            var minHours = parseInt(minHoursStr);
+            var minSemesters = parseInt(minSemestersStr);
+
+            if (maxHours <= 0 || minHours <= 0 || minSemesters < 0 || minHours > maxHours) {
+                return; //TODO display error
             }
 
             var postData = {
                 degreeID: @ViewBag.DegreeId,
-                degreeElements: selectedData,
-                maxHoursPerSemester: $("#max-hours").val()
+                courses: courses,
+                minHoursPerSemester: minHours,
+                maxHoursPerSemester: maxHours,
+                minSemesters: minSemesters
             };
 
             console.log(postData);

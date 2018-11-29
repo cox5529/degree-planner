@@ -46,8 +46,11 @@ namespace Degree_Planner.Models {
     [Table("degree_plans")]
     public class DegreePlan {
         public int DegreePlanID { get; set; }
+	    public int MinHours { get; set; }
+		public int MaxHours { get; set; }
+		public int MinSemesters { get; set; }
 
-        public int UserID { get; set; }
+		public int UserID { get; set; }
         
         public virtual User User { get; set; }
         public virtual ICollection<Semester> Semesters { get; set; }

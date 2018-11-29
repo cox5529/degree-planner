@@ -8,21 +8,30 @@
 <h2>View degree plan for @Model.User.Username</h2>
 @foreach (var semester in Model.OrderedSemesters) {
     <h4>Semester @(semester.Index + 1)</h4>
-    <p>Total hours: @semester.Courses.Sum(c => c.Hours)</p>
+    <p>Total hours: @Math.Max(semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours), Model.MinHours)</p>
     <table>
         <thead>
         <tr>
             <th>Course name</th>
             <th>Course department</th>
             <th>Course catalog number</th>
+            <th>Hours</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var course in semester.Courses) {
             <tr>
-                <td>@course.Name</td>
-                <td>@course.Department</td>
-                <td>@course.CatalogNumber</td>
+                @if (course.Department != "UARK") {
+                    <td>@course.Name</td>
+                    <td>@course.Department</td>
+                    <td>@course.CatalogNumber</td>
+                    <td>@course.Hours</td>
+                } else {
+                    <td>Free elective(s)</td>
+                    <td></td>
+                    <td></td>
+                    <td>@(Model.MinHours - semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours))</td>
+                }
             </tr>
         }
         </tbody>

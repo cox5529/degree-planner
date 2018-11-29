@@ -15,17 +15,9 @@ namespace Degree_Planner.Models.ViewModels
 
         public int MinSemesters { get; set; }
 
-		public IList<DegreePlanDegreeElementVm> DegreeElements { get; set; }
-
-    }
-
-	public class DegreePlanDegreeElementVm {
-
-		public int DegreeElementID { get; set; }
-
 		public IList<CourseData> Courses { get; set; }
 
-	}
+    }
 
 	public class CourseData {
 
@@ -34,36 +26,5 @@ namespace Degree_Planner.Models.ViewModels
 		public string Department { get; set; }
 
 		public string CatalogNumber { get; set; }
-
-		public string Name { get; set; }
-	}
-
-	public class DegreePlanData {
-
-		public IList<SemesterData> Semesters { get; set; }
-
-		public DegreePlanData DeepClone() {
-			DegreePlanData data = new DegreePlanData() {
-				Semesters = new List<SemesterData>()
-			};
-			foreach (var semester in Semesters) {
-				var s = new SemesterData() {
-					CourseIDs = new HashSet<int>()
-				};
-				foreach (var id in semester.CourseIDs) {
-					s.CourseIDs.Add(id);
-				}
-				data.Semesters.Add(s);
-			}
-
-			return data;
-		}
-
-	}
-
-	public class SemesterData {
-
-		public HashSet<int> CourseIDs { get; set; }
-
 	}
 }

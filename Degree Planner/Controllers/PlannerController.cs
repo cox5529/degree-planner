@@ -23,6 +23,9 @@ namespace Degree_Planner.Controllers {
 
 			// Otherwise, display a page
 			var user = GetCurrentlyLoggedInUser();
+			using (var context = new DegreePlannerContext()) {
+				user = context.Users.Include(u => u.DegreePlan).FirstOrDefault(u => u.UserID == user.UserID);
+			}
 			return View(user);
 		}
 
@@ -52,6 +55,27 @@ namespace Degree_Planner.Controllers {
 			return View(vm);
 		}
 
+		public IActionResult ViewDegreePlan() {
+			if(!Authenticate())
+				return RedirectToAction("Index", "Home");
+			User user = GetCurrentlyLoggedInUser();
+
+			using (var context = new DegreePlannerContext()) {
+				var plan = context.DegreePlans
+					.Include(dp => dp.Semesters)
+					.ThenInclude(s => s.SemesterCourseLinks)
+					.ThenInclude(scl => scl.Course)
+					.Include(dp => dp.User)
+					.FirstOrDefault(dp => dp.User.UserID == user.UserID);
+
+				if (plan == null) {
+					return RedirectToAction("Index", "Planner");
+				}
+
+				return View(plan);
+			}
+		}
+
 		[HttpPost]
 		public IActionResult ViewDegreePlan(DegreePlanFormSubmissionVm data) {
 			if(!Authenticate())
@@ -60,25 +84,23 @@ namespace Degree_Planner.Controllers {
 
 			// only doing front end validation for now.
 			//TODO fix later.
-			using (var context = new DegreePlannerContext()) {
+			using(var context = new DegreePlannerContext()) {
 				//Figure out what courses i need to take to graduate
 				IList<Course> coursesTaken = context.Users
 					.Include(u => u.CourseUserLinks)
 					.ThenInclude(cul => cul.Course)
 					.ThenInclude(c => c.PrerequisiteLinks)
-				    .ThenInclude(pl => pl.Prerequisite)
+					.ThenInclude(pl => pl.Prerequisite)
 					.FirstOrDefault(u => u.UserID == user.UserID)
 					?.Courses
 					.ToList();
 
 				IList<Course> coursesToTake = new List<Course>();
-				foreach (var degreeElement in data.DegreeElements) {
-					foreach (var courseData in degreeElement.Courses) {
-						if (coursesTaken.All(c => c.CourseID != courseData.CourseID) && coursesToTake.All(c => c.CourseID != courseData.CourseID)) {
-							var course = CreateOrFetchCourse(context, courseData.Department, courseData.CatalogNumber,
-								out _, true);
-							coursesToTake.Add(course);
-						}
+				foreach(var courseData in data.Courses) {
+					if(coursesTaken.All(c => c.CourseID != courseData.CourseID) && coursesToTake.All(c => c.CourseID != courseData.CourseID)) {
+						var course = CreateOrFetchCourse(context, courseData.Department, courseData.CatalogNumber,
+							out _, true);
+						coursesToTake.Add(course);
 					}
 				}
 
@@ -88,22 +110,22 @@ namespace Degree_Planner.Controllers {
 					.ThenInclude(cg => cg.CourseCourseGroupLinks)
 					.ThenInclude(ccgl => ccgl.Course)
 					.ThenInclude(c => c.PrerequisiteLinks)
-				    .ThenInclude(pl => pl.Prerequisite)
+					.ThenInclude(pl => pl.Prerequisite)
 					.FirstOrDefault(d => d.DegreeID == data.DegreeID)
 					?.Requirements
 					.Where(de => de.Hours == de.Members.Courses.Sum(c => c.Hours))
 					.SelectMany(de => de.Members.Courses);
 
-				foreach (var course in degreeRequiredCourses) {
+				foreach(var course in degreeRequiredCourses) {
 					if(coursesTaken.All(c => c.CourseID != course.CourseID) && coursesToTake.All(c => c.CourseID != course.CourseID)) {
 						coursesToTake.Add(course);
 					}
 				}
 
 				for(var i = 0; i < coursesToTake.Count; i++) {
-					foreach (var prereq in coursesToTake[i].Prerequisites) {
-						if (coursesTaken.All(c => c.CourseID != prereq.CourseID) &&
-						    coursesToTake.All(c => c.CourseID != prereq.CourseID)) {
+					foreach(var prereq in coursesToTake[i].Prerequisites) {
+						if(coursesTaken.All(c => c.CourseID != prereq.CourseID) &&
+							coursesToTake.All(c => c.CourseID != prereq.CourseID)) {
 							coursesToTake.Add(prereq);
 						}
 					}
@@ -112,9 +134,9 @@ namespace Degree_Planner.Controllers {
 				//Build an adjacency matrix
 				int n = coursesToTake.Count;
 				bool[,] matrix = new bool[n, n];
-				for (var i = 0; i < n; i++) {
-					for (var j = 0; j < n; j++) {
-						if (coursesToTake[i].Prerequisites.Any(c => c.CourseID == coursesToTake[j].CourseID)) {
+				for(var i = 0; i < n; i++) {
+					for(var j = 0; j < n; j++) {
+						if(coursesToTake[i].Prerequisites.Any(c => c.CourseID == coursesToTake[j].CourseID)) {
 							matrix[i, j] = true;
 						} else {
 							matrix[i, j] = false; // matrix[i, j] = true IF course j is a prerequisite of course i
@@ -122,201 +144,163 @@ namespace Degree_Planner.Controllers {
 					}
 				}
 
-			    int[] hours = new int[n];
-			    for (int i = 0; i < n; i++) {
-			        hours[i] = coursesToTake[i].Hours;
-			    } 
+				int[] hours = new int[n];
+				for(int i = 0; i < n; i++) {
+					hours[i] = coursesToTake[i].Hours;
+				}
 
 				// Use topological sort to show the minimum semester for a course
 				var planData = GeneratePlan(matrix, hours, data.MaxHoursPerSemester, data.MinHoursPerSemester, data.MinSemesters, n);
-                
-                // convert the graph data to actual courses
-			    DegreePlan plan = new DegreePlan() {
-                    Semesters = new List<Semester>()
-			    };
 
-			    int index = 0;
-			    Course free = context.Courses.FirstOrDefault(c => c.Department == "UARK" && c.CatalogNumber == "000E");
-			    foreach (var semesterData in planData) {
-			        var courses = new List<SemesterCourseLink>();
-			        var semester = new Semester() {
-                        Index = index
-			        };
-			        foreach (int courseData in semesterData) {
-			            if (courseData != -1) {
-			                courses.Add(new SemesterCourseLink() {
-			                    Course = coursesToTake[courseData],
-			                    Semester = semester
-			                });
-                        } else {
-                            courses.Add(new SemesterCourseLink() {
-                                Course = free,
-                                Semester = semester
-                            });
-			            }
-			        }
+				// convert the graph data to actual courses
+				DegreePlan plan = new DegreePlan() {
+					Semesters = new List<Semester>(),
+					MinHours = data.MinHoursPerSemester,
+					MinSemesters = data.MinSemesters,
+					MaxHours = data.MaxHoursPerSemester
+				};
 
-			        index++;
+				int index = 0;
+				Course free = context.Courses.FirstOrDefault(c => c.Department == "UARK" && c.CatalogNumber == "000E");
+				foreach(var semesterData in planData) {
+					var courses = new List<SemesterCourseLink>();
+					var semester = new Semester() {
+						Index = index
+					};
+					foreach(int courseData in semesterData) {
+						if(courseData != -1) {
+							courses.Add(new SemesterCourseLink() {
+								Course = coursesToTake[courseData],
+								Semester = semester
+							});
+						} else {
+							courses.Add(new SemesterCourseLink() {
+								Course = free,
+								Semester = semester
+							});
+						}
+					}
 
-			        semester.SemesterCourseLinks = courses;
-                    plan.Semesters.Add(semester);
-			    }
+					index++;
 
-			    var oldPlan = context.DegreePlans.Where(dp => dp.UserID == user.UserID);
-			    if (oldPlan.Count() != 0) {
-                    context.DegreePlans.RemoveRange(oldPlan);
-			    }
-			    context.SaveChanges();
+					semester.SemesterCourseLinks = courses;
+					plan.Semesters.Add(semester);
+				}
 
-			    plan.UserID = user.UserID;
-			    context.DegreePlans.Add(plan);
-			    context.SaveChanges();
+				var oldPlan = context.DegreePlans.Where(dp => dp.UserID == user.UserID);
+				if(oldPlan.Count() != 0) {
+					context.DegreePlans.RemoveRange(oldPlan);
+				}
+				context.SaveChanges();
 
-			    plan = context.DegreePlans
-			        .Include(dp => dp.Semesters)
-			        .ThenInclude(s => s.SemesterCourseLinks)
-			        .ThenInclude(scl => scl.Course)
-			        .Include(dp => dp.User)
-			        .FirstOrDefault(dp => dp.User.UserID == user.UserID);
+				plan.UserID = user.UserID;
+				context.DegreePlans.Add(plan);
+				context.SaveChanges();
 
-				return View(plan);
+				return RedirectToAction("ViewDegreePlan", "Planner");
 			}
 		}
 
-	    private static IList<IList<int>> GeneratePlan(bool[,] matrix, int[] hours, int maxHoursPerSemester, int minHoursPerSemester, int minSemesters, int n) {
-	        IList<IList<int>> trees = new List<IList<int>>();
-	        int[] colors = new int[n];
-	        for (int i = 0; i < n; i++) {
-	            colors[i] = 0;
-	        }
+		private static IList<IList<int>> GeneratePlan(bool[,] matrix, int[] hours, int maxHoursPerSemester, int minHoursPerSemester, int minSemesters, int n) {
+			int[] levels = BuildLevels(matrix, n);
+			int semesters = levels.Max() + 1;
 
-	        for (int i = 0; i < n; i++) {
-                List<int> currentTree = new List<int>();
-	            if (colors[i] == 0) {
-	                var stack = new Stack<int>();
-                    stack.Push(i);
+			IList<IList<int>> plan = new List<IList<int>>();
+			for(int i = 0; i < semesters; i++) {
+				plan.Add(new List<int>());
+				for(int j = 0; j < n; j++) {
+					if(levels[j] == i) {
+						plan[i].Add(j);
+					}
+				}
+			}
+			// Courses are placed at the earliest semesters they can be taken.
+			// Now, move them so the plan matches the given parameters
+			// You will never be able to move anything to an earlier semester.
+			for(int i = 0; i < plan.Count; i++) {
+				int count = CountHours(plan[i], hours);
+				while(count > maxHoursPerSemester) {
+					// pick a course to move. prefer the one with the shortest postreq chain
+					int shortest = 100;
+					int shortestIndex = 0;
+					for(int j = 0; j < plan[i].Count; j++) {
+						int len = GetLongestTrail(matrix, n, plan[i][j]);
+						if(len < shortest) {
+							shortest = len;
+							shortestIndex = j;
+						}
+					}
 
-	                while (stack.Any()) {
-	                    int u = stack.Peek();
-	                    colors[i] = 1;
-	                    bool exit = false;
-	                    for (int j = 0; j < n; j++) {
-	                        if (matrix[u, j] && colors[j] == 0) {
-                                stack.Push(j);
-	                            exit = true;
-	                            break;
-	                        }
-	                    }
+					MoveTrailBack(plan, matrix, n, i, plan[i][shortestIndex]);
 
-	                    if (!exit) {
-	                        colors[u] = 2;
-	                        stack.Pop();
-                            currentTree.Insert(0, u);
-	                    }
-	                }
-	            }
-                trees.Add(currentTree);
-	        }
+					count = CountHours(plan[i], hours);
+				}
+				if(count < minHoursPerSemester) {
+					// if there aren't enough hours in a semester, add a free slot.
+					plan[i].Add(-1);
+				}
+			}
 
-	        int[] levels = BuildLevels(matrix, n);
-	        int semesters = levels.Max() + 1;
+			return plan;
+		}
 
-            IList<IList<int>> plan = new List<IList<int>>();
-	        for (int i = 0; i < semesters; i++) {
-                plan.Add(new List<int>());
-	            for (int j = 0; j < n; j++) {
-	                if (levels[j] == i) {
-                        plan[i].Add(j);
-	                }
-	            }
-	        }
-            // Courses are placed at the earliest semesters they can be taken.
-            // Now, move them so the plan matches the given parameters
-            // You will never be able to move anything to an earlier semester.
-	        for (int i = 0; i < plan.Count; i++) {
-	            int count = CountHours(plan[i], hours);
-	            while(count > maxHoursPerSemester) {
-                    // pick a course to move. prefer the one with the shortest postreq chain
-	                int longest = 0;
-	                int longestIndex = 0;
-	                for (int j = 0; j < plan[i].Count; j++) {
-	                    int len = GetLongestTrail(matrix, n, plan[i][j]);
-	                    if (len > longest) {
-	                        longest = len;
-	                        longestIndex = j;
-	                    }
-	                }
+		private static void MoveTrailBack(IList<IList<int>> plan, bool[,] matrix, int n, int semester, int course) {
+			plan[semester].Remove(course);
+			if(plan.Count <= semester + 1) {
+				plan.Add(new List<int>());
+			}
+			plan[semester + 1].Add(course);
 
-                    MoveTrailBack(plan, matrix, n, i, longestIndex);
+			// move all of the postrequisites of course back as well
+			for(int i = 0; i < n; i++) {
+				if(matrix[i, course]) {
+					MoveTrailBack(plan, matrix, n, semester + 1, i);
+				}
+			}
+		}
 
-	                count = CountHours(plan[i], hours);
-	            }
-	            if(count < minHoursPerSemester) {
-	                // if there aren't enough hours in a semester, add a free slot.
-	                plan[i].Add(-1);
-	            }
-            }
+		private static int CountHours(IList<int> semester, int[] hours) {
+			int total = 0;
+			foreach(int course in semester) {
+				total += hours[course];
+			}
 
-	        return plan;
-	    }
+			return total;
+		}
 
-	    private static void MoveTrailBack(IList<IList<int>> plan, bool[,] matrix, int n, int semester, int course) {
-	        plan[semester].Remove(course);
-	        if (plan.Count <= semester + 1) {
-                plan.Add(new List<int>());
-	        }
-            plan[semester + 1].Add(course);
+		private static int[] BuildLevels(bool[,] matrix, int n) {
+			int[] r = new int[n];
+			for(int i = 0; i < n; i++) {
+				r[i] = 0;
+			}
 
-            // move all of the postrequisites of course back as well
-	        for (int i = 0; i < n; i++) {
-	            if (matrix[course, i]) {
-	                MoveTrailBack(plan, matrix, n, semester + 1, i);
-                }
-	        }
-	    }
+			Queue<int> nodes = new Queue<int>();
+			for(int i = 0; i < n; i++) {
+				if(GetPrerequisites(matrix, i, n).Count == 0) {
+					nodes.Enqueue(i);
+				}
+			}
 
-	    private static int CountHours(IList<int> semester, int[] hours) {
-	        int total = 0;
-	        foreach (int course in semester) {
-	            total += hours[course];
-	        }
+			while(nodes.Count > 0) {
+				int node = nodes.Dequeue();
 
-	        return total;
-	    }
+				for(int i = 0; i < n; i++) {
+					if(matrix[i, node]) {
+						if(r[node] + 1 > r[i]) {
+							r[i] = r[node] + 1;
+							nodes.Enqueue(i);
+						}
+					}
+				}
+			}
 
-	    private static int[] BuildLevels(bool[,] matrix, int n) {
-	        int[] r = new int[n];
-	        for(int i = 0; i < n; i++) {
-	            r[i] = 0;
-	        }
+			return r;
+		}
 
-	        Queue<int> nodes = new Queue<int>();
-	        for(int i = 0; i < n; i++) {
-	            if(GetPrerequisites(matrix, i, n).Count == 0) {
-	                nodes.Enqueue(i);
-	            }
-	        }
-
-	        while(nodes.Count > 0) {
-	            int node = nodes.Dequeue();
-
-	            for(int i = 0; i < n; i++) {
-	                if(matrix[i, node]) {
-	                    if(r[node] + 1 > r[i]) {
-	                        r[i] = r[node] + 1;
-	                        nodes.Enqueue(i);
-	                    }
-	                }
-	            }
-	        }
-
-	        return r;
-	    }
-
-        private static IList<int> GetPrerequisites(bool[,] matrix, int i, int n) {
+		private static IList<int> GetPrerequisites(bool[,] matrix, int i, int n) {
 			IList<int> prereqs = new List<int>();
-			for (int a = 0; a < n; a++) {
-				if (matrix[i, a]) {
+			for(int a = 0; a < n; a++) {
+				if(matrix[i, a]) {
 					prereqs.Add(a);
 				}
 			}
@@ -352,10 +336,10 @@ namespace Degree_Planner.Controllers {
 		/// <returns></returns>
 		private static int GetLongestPath(bool[,] matrix, int n, int i) {
 			int max = 0;
-			for (int a = 0; a < n; a++) {
-				if (matrix[i, a]) {
+			for(int a = 0; a < n; a++) {
+				if(matrix[i, a]) {
 					int val = GetLongestPath(matrix, n, a);
-					if (val > max) {
+					if(val > max) {
 						max = val;
 					}
 				}
@@ -792,7 +776,7 @@ namespace Degree_Planner.Controllers {
 								Prerequisite = prereq,
 								Course = course
 							};
-                            save = true;
+							save = true;
 							if(genPrereq)
 								context.Courses.Add(prereq);
 							context.PrerequisiteLinks.Add(link);
@@ -803,7 +787,7 @@ namespace Degree_Planner.Controllers {
 							};
 
 							context.PrerequisiteLinks.Add(link);
-						    save = true;
+							save = true;
 						}
 					}
 
@@ -858,7 +842,7 @@ namespace Degree_Planner.Controllers {
 			if(includePrerequisite) {
 				course = context.Courses
 					.Include(c => c.PrerequisiteLinks)
-				    .ThenInclude(pl => pl.Prerequisite)
+					.ThenInclude(pl => pl.Prerequisite)
 					.FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalog);
 			} else {
 				course = context.Courses.FirstOrDefault(c => c.Department == department && c.CatalogNumber == catalog);
