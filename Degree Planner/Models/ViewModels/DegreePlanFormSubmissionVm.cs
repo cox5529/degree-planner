@@ -9,7 +9,11 @@ namespace Degree_Planner.Models.ViewModels
 
 		public int DegreeID { get; set; }
 
+        public int MinHoursPerSemester { get; set; }
+
 		public int MaxHoursPerSemester { get; set; }
+
+        public int MinSemesters { get; set; }
 
 		public IList<DegreePlanDegreeElementVm> DegreeElements { get; set; }
 

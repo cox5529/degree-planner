@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181119173233_FixManyMany.cs" />
     <Compile Remove="Migrations\20181119173233_FixManyMany.Designer.cs" />
+    <Compile Remove="Migrations\20181128234449_DegreePlanUserLink.cs" />
+    <Compile Remove="Migrations\20181128234449_DegreePlanUserLink.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

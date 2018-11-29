@@ -8,20 +8,20 @@
 <h2>Administration</h2>
 <table>
     <thead>
-        <tr>
-            <th>Username</th>
-            <th>Is admin?</th>
-            <th>Toggle admin</th>
-        </tr>
+    <tr>
+        <th>Username</th>
+        <th>Is admin?</th>
+        <th>Toggle admin</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach(User user in Model) {
-            <tr id="user-@user.UserID">
-                <td>@user.Username</td>
-                <td id="is-admin-@user.UserID">@user.IsAdmin.ToString().ToLower()</td>
-                <td><a href="javascript:toggleAdmin(@user.UserID, @user.IsAdmin.ToString().ToLower())">Toggle</a></td>
-            </tr>
-        }
+    @foreach(User user in Model) {
+        <tr id="user-@user.UserID">
+            <td>@user.Username</td>
+            <td id="is-admin-@user.UserID">@user.IsAdmin.ToString().ToLower()</td>
+            <td><a href="javascript:toggleAdmin(@user.UserID, @user.IsAdmin.ToString().ToLower())">Toggle</a></td>
+        </tr>
+    }
     </tbody>
 </table>
 

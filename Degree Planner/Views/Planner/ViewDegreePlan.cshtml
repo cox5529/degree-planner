@@ -5,5 +5,26 @@
 }
 @model DegreePlan
 
-<h2>ViewDegreePlan</h2>
-
+<h2>View degree plan for @Model.User.Username</h2>
+@foreach (var semester in Model.OrderedSemesters) {
+    <h4>Semester @(semester.Index + 1)</h4>
+    <p>Total hours: @semester.Courses.Sum(c => c.Hours)</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Course name</th>
+            <th>Course department</th>
+            <th>Course catalog number</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var course in semester.Courses) {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Department</td>
+                <td>@course.CatalogNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

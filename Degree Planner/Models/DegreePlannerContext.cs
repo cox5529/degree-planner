@@ -15,7 +15,6 @@ namespace Degree_Planner.Models {
         public DbSet<Degree> Degrees { get; set; }
         public DbSet<DegreeElement> DegreeElements { get; set; }
         public DbSet<CourseGroup> CourseGroups { get; set; }
-        public DbSet<UserDegreeLink> UserDegreeLinks { get; set; }
         public DbSet<PrerequisiteLink> PrerequisiteLinks { get; set; }
         public DbSet<CourseCourseGroupLink> CourseCourseGroupLinks { get; set; }
         public DbSet<SemesterCourseLink> SemesterCourseLinks { get; set; }
@@ -26,6 +25,7 @@ namespace Degree_Planner.Models {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseMySql(ConnectionStrings.PRODUCTION);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -46,7 +46,14 @@ namespace Degree_Planner.Models {
     [Table("degree_plans")]
     public class DegreePlan {
         public int DegreePlanID { get; set; }
+
+        public int UserID { get; set; }
+        
+        public virtual User User { get; set; }
         public virtual ICollection<Semester> Semesters { get; set; }
+
+        [NotMapped]
+        public IEnumerable<Semester> OrderedSemesters => Semesters.OrderBy(s => s.Index).AsEnumerable();
     }
 
     [Table("semesters")]
@@ -70,17 +77,11 @@ namespace Degree_Planner.Models {
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
-        public int? DegreePlanID { get; set; }
-
-        public ICollection<UserDegreeLink> UserDegreeLinks { get; set; }
         public ICollection<CourseUserLink> CourseUserLinks { get; set; }
 
-        [ForeignKey("DegreePlanID")]
         public DegreePlan DegreePlan { get; set; }
         [NotMapped]
         public virtual IEnumerable<Course> Courses => CourseUserLinks.Select(cul => cul.Course);
-        [NotMapped]
-        public virtual IEnumerable<Degree> Degrees => UserDegreeLinks.Select(udl => udl.Degree);
     }
 
     [Table("degrees")]
@@ -88,11 +89,7 @@ namespace Degree_Planner.Models {
         public int DegreeID { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<UserDegreeLink> UserDegreeLinks { get; set; }
         public virtual ICollection<DegreeElement> Requirements { get; set; }
-
-        [NotMapped]
-        public virtual IEnumerable<User> Users => UserDegreeLinks.Select(udl => udl.User);
     }
 
     [Table("degree_elements")]
@@ -155,17 +152,6 @@ namespace Degree_Planner.Models {
     }
 
     #region many-to-many links
-
-    [Table("users_x_degrees")]
-    public class UserDegreeLink {
-        public int UserDegreeLinkID { get; set; }
-        
-        public int DegreeID { get; set; }
-        public int UserID { get; set; }
-        
-        public virtual Degree Degree { get; set; }
-        public virtual User User { get; set; }
-    }
 
     [Table("courses_x_users")]
     public class CourseUserLink {

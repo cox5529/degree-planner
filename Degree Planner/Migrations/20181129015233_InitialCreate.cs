@@ -12,7 +12,8 @@ namespace DegreePlanner.Migrations
                 columns: table => new
                 {
                     CourseGroupID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,6 +26,7 @@ namespace DegreePlanner.Migrations
                 {
                     CourseID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Hours = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Department = table.Column<string>(nullable: true),
                     CatalogNumber = table.Column<string>(nullable: true)
@@ -32,18 +34,6 @@ namespace DegreePlanner.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_courses", x => x.CourseID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "degree_plans",
-                columns: table => new
-                {
-                    DegreePlanID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_degree_plans", x => x.DegreePlanID);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,6 +47,21 @@ namespace DegreePlanner.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_degrees", x => x.DegreeID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Username = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    IsAdmin = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.UserID);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,47 +117,6 @@ namespace DegreePlanner.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "semesters",
-                columns: table => new
-                {
-                    SemesterID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DegreePlanID = table.Column<int>(nullable: false),
-                    Index = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_semesters", x => x.SemesterID);
-                    table.ForeignKey(
-                        name: "FK_semesters_degree_plans_DegreePlanID",
-                        column: x => x.DegreePlanID,
-                        principalTable: "degree_plans",
-                        principalColumn: "DegreePlanID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "users",
-                columns: table => new
-                {
-                    UserID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    DegreePlanID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_users", x => x.UserID);
-                    table.ForeignKey(
-                        name: "FK_users_degree_plans_DegreePlanID",
-                        column: x => x.DegreePlanID,
-                        principalTable: "degree_plans",
-                        principalColumn: "DegreePlanID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "degree_elements",
                 columns: table => new
                 {
@@ -177,32 +141,6 @@ namespace DegreePlanner.Migrations
                         column: x => x.DegreeID,
                         principalTable: "degrees",
                         principalColumn: "DegreeID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "semesters_x_courses",
-                columns: table => new
-                {
-                    SemesterCourseLinkID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    SemesterID = table.Column<int>(nullable: false),
-                    CourseID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_semesters_x_courses", x => x.SemesterCourseLinkID);
-                    table.ForeignKey(
-                        name: "FK_semesters_x_courses_courses_CourseID",
-                        column: x => x.CourseID,
-                        principalTable: "courses",
-                        principalColumn: "CourseID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_semesters_x_courses_semesters_SemesterID",
-                        column: x => x.SemesterID,
-                        principalTable: "semesters",
-                        principalColumn: "SemesterID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -233,28 +171,67 @@ namespace DegreePlanner.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "users_x_degrees",
+                name: "degree_plans",
                 columns: table => new
                 {
-                    UserDegreeLinkID = table.Column<int>(nullable: false)
+                    DegreePlanID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DegreeID = table.Column<int>(nullable: false),
                     UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users_x_degrees", x => x.UserDegreeLinkID);
+                    table.PrimaryKey("PK_degree_plans", x => x.DegreePlanID);
                     table.ForeignKey(
-                        name: "FK_users_x_degrees_degrees_DegreeID",
-                        column: x => x.DegreeID,
-                        principalTable: "degrees",
-                        principalColumn: "DegreeID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_users_x_degrees_users_UserID",
+                        name: "FK_degree_plans_users_UserID",
                         column: x => x.UserID,
                         principalTable: "users",
                         principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "semesters",
+                columns: table => new
+                {
+                    SemesterID = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DegreePlanID = table.Column<int>(nullable: false),
+                    Index = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_semesters", x => x.SemesterID);
+                    table.ForeignKey(
+                        name: "FK_semesters_degree_plans_DegreePlanID",
+                        column: x => x.DegreePlanID,
+                        principalTable: "degree_plans",
+                        principalColumn: "DegreePlanID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "semesters_x_courses",
+                columns: table => new
+                {
+                    SemesterCourseLinkID = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    SemesterID = table.Column<int>(nullable: false),
+                    CourseID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_semesters_x_courses", x => x.SemesterCourseLinkID);
+                    table.ForeignKey(
+                        name: "FK_semesters_x_courses_courses_CourseID",
+                        column: x => x.CourseID,
+                        principalTable: "courses",
+                        principalColumn: "CourseID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_semesters_x_courses_semesters_SemesterID",
+                        column: x => x.SemesterID,
+                        principalTable: "semesters",
+                        principalColumn: "SemesterID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -289,6 +266,12 @@ namespace DegreePlanner.Migrations
                 column: "DegreeID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_degree_plans_UserID",
+                table: "degree_plans",
+                column: "UserID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_prerequisites_CourseID",
                 table: "prerequisites",
                 column: "CourseID");
@@ -312,21 +295,6 @@ namespace DegreePlanner.Migrations
                 name: "IX_semesters_x_courses_SemesterID",
                 table: "semesters_x_courses",
                 column: "SemesterID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_users_DegreePlanID",
-                table: "users",
-                column: "DegreePlanID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_users_x_degrees_DegreeID",
-                table: "users_x_degrees",
-                column: "DegreeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_users_x_degrees_UserID",
-                table: "users_x_degrees",
-                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -347,10 +315,10 @@ namespace DegreePlanner.Migrations
                 name: "semesters_x_courses");
 
             migrationBuilder.DropTable(
-                name: "users_x_degrees");
+                name: "course_groups");
 
             migrationBuilder.DropTable(
-                name: "course_groups");
+                name: "degrees");
 
             migrationBuilder.DropTable(
                 name: "courses");
@@ -359,13 +327,10 @@ namespace DegreePlanner.Migrations
                 name: "semesters");
 
             migrationBuilder.DropTable(
-                name: "degrees");
+                name: "degree_plans");
 
             migrationBuilder.DropTable(
                 name: "users");
-
-            migrationBuilder.DropTable(
-                name: "degree_plans");
         }
     }
 }
