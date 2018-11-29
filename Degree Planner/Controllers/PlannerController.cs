@@ -23,7 +23,7 @@ namespace Degree_Planner.Controllers {
 
 			// Otherwise, display a page
 			var user = GetCurrentlyLoggedInUser();
-			using (var context = new DegreePlannerContext()) {
+			using(var context = new DegreePlannerContext()) {
 				user = context.Users.Include(u => u.DegreePlan).FirstOrDefault(u => u.UserID == user.UserID);
 			}
 			return View(user);
@@ -60,7 +60,7 @@ namespace Degree_Planner.Controllers {
 				return RedirectToAction("Index", "Home");
 			User user = GetCurrentlyLoggedInUser();
 
-			using (var context = new DegreePlannerContext()) {
+			using(var context = new DegreePlannerContext()) {
 				var plan = context.DegreePlans
 					.Include(dp => dp.Semesters)
 					.ThenInclude(s => s.SemesterCourseLinks)
@@ -68,7 +68,7 @@ namespace Degree_Planner.Controllers {
 					.Include(dp => dp.User)
 					.FirstOrDefault(dp => dp.User.UserID == user.UserID);
 
-				if (plan == null) {
+				if(plan == null) {
 					return RedirectToAction("Index", "Planner");
 				}
 
@@ -126,7 +126,11 @@ namespace Degree_Planner.Controllers {
 					foreach(var prereq in coursesToTake[i].Prerequisites) {
 						if(coursesTaken.All(c => c.CourseID != prereq.CourseID) &&
 							coursesToTake.All(c => c.CourseID != prereq.CourseID)) {
-							coursesToTake.Add(prereq);
+							Course fullPrereqData = context.Courses
+								.Include(c => c.PrerequisiteLinks)
+								.ThenInclude(pl => pl.Prerequisite)
+								.FirstOrDefault(p => p.CourseID == prereq.CourseID);
+							coursesToTake.Add(fullPrereqData);
 						}
 					}
 				}
@@ -239,6 +243,10 @@ namespace Degree_Planner.Controllers {
 					// if there aren't enough hours in a semester, add a free slot.
 					plan[i].Add(-1);
 				}
+			}
+
+			while(plan.Count < minSemesters) {
+				plan.Add(new List<int>() { -1 });
 			}
 
 			return plan;
@@ -526,7 +534,6 @@ namespace Degree_Planner.Controllers {
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult GenerateSchedules(GenerateDegreeVm vm) {
 			if(!Authenticate())
 				return Json("");
@@ -606,7 +613,6 @@ namespace Degree_Planner.Controllers {
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult UploadDegree(FileUploadVm vm) {
 			if(!Authenticate())
 				return RedirectToAction("Index", "Home");
@@ -677,7 +683,6 @@ namespace Degree_Planner.Controllers {
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult UploadCourseGroup(FileUploadVm vm) {
 			if(!Authenticate())
 				return RedirectToAction("Index", "Home");
@@ -730,7 +735,6 @@ namespace Degree_Planner.Controllers {
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult UploadCourseList(FileUploadVm vm) {
 			if(!Authenticate())
 				return RedirectToAction("Index", "Home");

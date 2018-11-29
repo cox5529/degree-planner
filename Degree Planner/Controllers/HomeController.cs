@@ -13,11 +13,13 @@ namespace Degree_Planner.Controllers {
 
         public const string USERNAME = "username";
 
-        public IActionResult Index() {
+	    public ISession Session => HttpContext.Session;
+
+	    public IActionResult Index() {
             return View(new UserLoginVm());
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public IActionResult Index(UserLoginVm vm) {
             if(ModelState.IsValid) {
                 vm.Password = GetPasswordHash(vm.Password);
@@ -39,7 +41,7 @@ namespace Degree_Planner.Controllers {
             return View(new CreateAccountVm());
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public IActionResult CreateAccount(CreateAccountVm vm) {
             if(ModelState.IsValid) {
                 User user = new User() {
