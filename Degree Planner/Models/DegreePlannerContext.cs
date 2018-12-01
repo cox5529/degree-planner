@@ -24,7 +24,7 @@ namespace Degree_Planner.Models {
         public DegreePlannerContext(DbContextOptions<DegreePlannerContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseMySql(ConnectionStrings.PRODUCTION);
+            optionsBuilder.UseMySql(ConnectionStrings.LOCAL);
             optionsBuilder.EnableSensitiveDataLogging();
         }
 

@@ -72,6 +72,13 @@ namespace Degree_Planner.Controllers {
 					return RedirectToAction("Index", "Planner");
 				}
 
+				foreach (var semester in plan.Semesters) {
+					semester.SemesterCourseLinks = semester.SemesterCourseLinks
+						.OrderBy(scl => scl.Course.Department)
+						.ThenBy(scl => scl.Course.CatalogNumber)
+						.ToList();
+				}
+
 				return View(plan);
 			}
 		}
@@ -439,7 +446,7 @@ namespace Degree_Planner.Controllers {
 						Course taken = coursesTaken.FirstOrDefault(c =>
 							c.Department == course.Department && c.CatalogNumber == course.CatalogNumber);
 
-						if(taken != null && h <= requirementList.DegreeElement.Hours) {
+						if(taken != null && h < requirementList.DegreeElement.Hours) {
 							requirementList.CoursesTaken.Add(taken.CourseID);
 							coursesTaken.Remove(taken);
 							h += taken.Hours;
@@ -454,7 +461,7 @@ namespace Degree_Planner.Controllers {
 						Course taken = coursesTaken.FirstOrDefault(c =>
 							c.Department == course.Department && c.CatalogNumber == course.CatalogNumber);
 
-						if(taken != null && h <= requirementList.DegreeElement.Hours) {
+						if(taken != null && h < requirementList.DegreeElement.Hours) {
 							requirementList.CoursesTaken.Add(taken.CourseID);
 							coursesTaken.Remove(taken);
 							h += taken.Hours;
@@ -539,8 +546,18 @@ namespace Degree_Planner.Controllers {
 				return Json("");
 			var user = GetCurrentlyLoggedInUser();
 
-			if(ModelState.IsValid)
+			if(ModelState.IsValid) {
 				return RedirectToAction("SelectCourses", "Planner", new { degreeId = vm.DegreeID });
+			}
+			using(var context = new DegreePlannerContext()) {
+				vm.Options = context.Degrees
+					.Select(d => new SelectListItem() {
+						Text = d.Name,
+						Value = d.DegreeID + ""
+					}).ToList();
+				vm.User = user;
+			}
+
 			return View(vm);
 		}
 
