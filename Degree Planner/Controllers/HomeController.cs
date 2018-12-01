@@ -14,7 +14,7 @@ namespace Degree_Planner.Controllers {
         public const string USERNAME = "username";
 
         public IActionResult Index() {
-            return View(new UserLoginVm());
+            return View(new UserLoginVm() {AGREE = true});
         }
 
         [HttpPost, ValidateAntiForgeryToken]

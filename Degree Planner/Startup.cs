@@ -29,13 +29,12 @@ namespace Degree_Planner {
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = false;
+                
             });
-
             services.Configure<CookiePolicyOptions>(options => {
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
             //Register the database model
             services.AddDbContext<DegreePlannerContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -60,6 +59,7 @@ namespace Degree_Planner {
                 }
             }
 
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();

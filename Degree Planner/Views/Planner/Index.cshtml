@@ -18,7 +18,7 @@
     @Html.ActionLink("Administration", "AdministerUsers", "Planner")
 } else {
     <h4>You are a student</h4>
-    @Html.ActionLink("Add courses taken", "UploadCoursesTaken", "Planner")
+    @Html.ActionLink("Add courses taken", "UploadCoursesTaken", "Planner", null, new {@class="badge badge-primary"})
     <br />
     @Html.ActionLink("Generate degree plans", "GenerateSchedules", "Planner")
     if (Model.DegreePlan != null) {

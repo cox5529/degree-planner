@@ -1,28 +1,54 @@
-﻿@using Degree_Planner.Models.ViewModels
+﻿
+@using Degree_Planner.Models.ViewModels
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Degree Planner";
+    ViewData["Title"] = "Frank's Favorite Degree Planner";
 }
 @model UserLoginVm
-<h1>Degree Planner</h1>
-@using(Html.BeginForm(FormMethod.Post)) {
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+
+
+<img class="mb-4" src="./images/fantastic-beasts-2.jpg" alt="Title Card" width="1000" height="500">
+
+<br />
+<br />
+<div class="login">
+
+
+@using(Html.BeginForm(FormMethod.Post, new {@class = "form-signin"})) {
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     @Html.AntiForgeryToken()
+    
     @Html.LabelFor(m => m.Username)
+    
     <br />
-    @Html.TextBoxFor(m => m.Username)
+    
+    @Html.TextBoxFor(m => m.Username, new {@class="form-control"})
+    @Html.ValidationMessageFor(m => m.Username,"", new {@class="text-danger"})
+    
     <br />
-    @Html.ValidationMessageFor(m => m.Username)
-    <br />
-    <br />
+    
     @Html.LabelFor(m => m.Password)
     <br />
-    @Html.PasswordFor(m => m.Password)
+    @Html.PasswordFor(m => m.Password, new {@class="form-control"})
+    @Html.ValidationMessageFor(m => m.Password,"", new {@class="text-danger"})
+    
     <br />
-    @Html.ValidationMessageFor(m => m.Password)
     <br />
-    <input type="submit" value="Login" />
+    <div class="checkbox mb-3">
+    <label>
+        @Html.CheckBoxFor(m => m.AGREE)  I agree the terms of services for Frank's Favorite Degree Planner 
+        <br /> 
+        @Html.ValidationMessageFor(m => m.AGREE, "", new {@class="text-danger"}) 
+    </label>
+    </div>
+    <br />
+    <input type="submit" value = "Submit" />
     @Html.ActionLink("Create account", "CreateAccount")
     @if(!string.IsNullOrEmpty(Model.Message)) {
         <p>@Model.Message</p>
     }
 }
+</div>
