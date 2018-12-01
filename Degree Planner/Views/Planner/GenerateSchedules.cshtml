@@ -13,6 +13,7 @@
     <br />
     @Html.DropDownListFor(m => m.DegreeID, Model.Options, "-- Select one --", new { })
     <br />
+    @Html.ValidationMessageFor(m => m.DegreeID)
     <br />
     <input type="submit" />
 }

@@ -33,6 +33,7 @@
         var courseOptions = @Html.Raw(Json.Serialize(Model));
         var selectionTableData = [];
         var takenTableData = [];
+        var hiddenCourses = [];
         var hourRequirements = [];
 
         $(function() {
@@ -41,6 +42,7 @@
                 var vm = courseOptions[i];
                 selectionTableData.push([]);
                 takenTableData.push([]);
+                hiddenCourses.push([]);
                 hourRequirements.push(vm.degreeElement.hours);
                 vm.idPrefix = i;
 
@@ -58,6 +60,7 @@
         function populateAll(modelId, data, taken) {
             selectionTableData[modelId] = [];
             takenTableData[modelId] = [];
+            hiddenCourses[modelId] = [];
             for (var i = 0; i < data.members.courses.length; i++) {
                 var course = data.members.courses[i];
                 selectionTableData[modelId].push(course);
@@ -76,6 +79,7 @@
                 }
 
                 if (found) {
+                    hideCourse(course.courseID);
                     takenTableData[modelId].push({
                         taken: true,
                         elective: false,
@@ -91,13 +95,19 @@
 
         function populateTakenTable(modelId) {
             var html = "";
+            sortTakenCourses(takenTableData[modelId]);
+
             for (var i = 0; i < takenTableData[modelId].length; i++) {
                 var data = takenTableData[modelId][i];
                 var course = data.course;
                 html += "<tr>";
                 html += "<td>" + course.name + "</td>";
                 html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
-                html += "<td><button onclick='removeCourse(" + modelId + ", " + course.courseID + ")'>Remove</button></td>";
+                html += "<td><button onclick='removeCourse(" +
+                    modelId +
+                    ", " +
+                    course.courseID +
+                    ")'>Remove</button></td>";
                 html += "</tr>";
             }
             $("#" + modelId + "-selected-courses").html(html);
@@ -105,9 +115,10 @@
 
         function populateSelectionTable(modelId) {
             var html = "";
+            sortCourses(selectionTableData[modelId]);
+            
             for (var i = 0; i < selectionTableData[modelId].length; i++) {
                 var course = selectionTableData[modelId][i];
-
                 if (!course.catalogNumber.endsWith("E")) {
                     html += "<tr>";
                     html += "<td>" + course.name + "</td>";
@@ -136,6 +147,70 @@
             $("#" + modelId + "-course-options").html(html);
         }
 
+        function sortCourses(courseList) {
+            courseList.sort(function (a, b) {
+                console.log(a);
+                var x = a.department.toLowerCase();
+                var y = b.department.toLowerCase();
+                if (x < y) { return -1; }
+                if (x > y) { return 1; }
+
+                x = a.catalogNumber.toLowerCase();
+                y = b.catalogNumber.toLowerCase();
+                if (x < y) { return -1; }
+                if (x > y) { return 1; }
+                return 0;
+            });
+        }
+
+        function sortTakenCourses(courseList) {
+            courseList.sort(function (a, b) {
+                console.log(a);
+                var x = a.course.department.toLowerCase();
+                var y = b.course.department.toLowerCase();
+                if (x < y) { return -1; }
+                if (x > y) { return 1; }
+
+                x = a.course.catalogNumber.toLowerCase();
+                y = b.course.catalogNumber.toLowerCase();
+                if (x < y) { return -1; }
+                if (x > y) { return 1; }
+                return 0;
+            });
+        }
+
+        function hideCourse(courseId, exclude) {
+            for (var i = 0; i < selectionTableData.length; i++) {
+                if (i !== exclude) {
+                    var table = selectionTableData[i];
+                    for (var j = 0; j < table.length; j++) {
+                        if (table[j].courseID === courseId) {
+                            hiddenCourses[i].push(table[j]);
+                            table.splice(j, 1);
+
+                            populateSelectionTable(i);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        function unhideCourse(courseId) {
+            for (var i = 0; i < hiddenCourses.length; i++) {
+                var table = hiddenCourses[i];
+                for (var j = 0; j < table.length; j++) {
+                    if (table[j].courseID === courseId) {
+                        selectionTableData[i].push(table[j]);
+                        table.splice(j, 1);
+
+                        populateSelectionTable(i);
+                        break;
+                    }
+                }
+            }
+        }
+
         function addCourse(modelId, courseId, tryRemove = true) {
             if (tryRemove) {
                 for (var i = 0; i < takenTableData.length; i++) {
@@ -156,7 +231,6 @@
                         break;
                     }
                 }
-                console.log(course);
                 if (found !== -1) {
                     selectionTableData[modelId].splice(found, 1);
                     takenTableData[modelId].push({
@@ -165,6 +239,7 @@
                         course: course
                     });
 
+                    hideCourse(course.courseID, modelId);
                     updateHours(modelId);
                     populateTakenTable(modelId);
                     populateSelectionTable(modelId);
@@ -201,6 +276,7 @@
                             });
                             updateHours(modelId);
                         }
+                        hideCourse(data.courseID, modelId);
                         populateTakenTable(modelId);
                         populateSelectionTable(modelId);
                     }
@@ -225,7 +301,7 @@
                 if (!elective) {
                     selectionTableData[modelId].push(course);
                 }
-
+                unhideCourse(courseId);
                 updateHours(modelId);
             }
 
@@ -254,7 +330,7 @@
         function generateSchedules() {
             for (var i = 0; i < hourRequirements.length; i++) {
                 var html = $("#" + i + "-hours-remaining").html();
-                if (html !== "0") return;
+                if (html !== "0") return; //TODO display error
             }
             var courses = [];
             for (var i = 0; i < courseOptions.length; i++) {

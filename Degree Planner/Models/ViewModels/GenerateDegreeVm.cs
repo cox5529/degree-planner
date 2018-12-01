@@ -9,8 +9,8 @@ namespace Degree_Planner.Models.ViewModels {
 
         public IList<SelectListItem> Options { get; set; }
 
-        [Required]
-        public int DegreeID { get; set; }
+        [Required(ErrorMessage = "You must select a degree."), Display(Name = "Degree")]
+        public int? DegreeID { get; set; }
 
     }
 }
