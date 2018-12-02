@@ -819,7 +819,11 @@ namespace Degree_Planner.Controllers {
 					var name = data[1];
 					if(name[0] == '"') {
 						start = 2;
-						course.Name = name.Substring(1, name.Length - 1);
+						while (!name.EndsWith("\"")) {
+							name += data[start];
+							start++;
+						}
+						course.Name = name.Substring(1, name.Length - 2);
 					}
 
 					if(gen)
@@ -857,6 +861,8 @@ namespace Degree_Planner.Controllers {
 					if(save)
 						context.SaveChanges();
 				}
+
+				context.SaveChanges();
 			}
 			return RedirectToAction("Index", "Planner");
 		}
