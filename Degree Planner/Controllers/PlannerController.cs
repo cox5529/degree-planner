@@ -107,6 +107,9 @@ namespace Degree_Planner.Controllers {
 					if(coursesTaken.All(c => c.CourseID != courseData.CourseID) && coursesToTake.All(c => c.CourseID != courseData.CourseID)) {
 						var course = CreateOrFetchCourse(context, courseData.Department, courseData.CatalogNumber,
 							out _, true);
+						if (course.Hours == -1) {
+							course.Hours = courseData.Hours;
+						}
 						coursesToTake.Add(course);
 					}
 				}
@@ -156,12 +159,14 @@ namespace Degree_Planner.Controllers {
 				}
 
 				int[] hours = new int[n];
+				int[] years = new int[n];
 				for(int i = 0; i < n; i++) {
 					hours[i] = coursesToTake[i].Hours;
+					years[i] = int.Parse(coursesToTake[i].CatalogNumber[0] + "");
 				}
 
 				// Use topological sort to show the minimum semester for a course
-				var planData = GeneratePlan(matrix, hours, data.MaxHoursPerSemester, data.MinHoursPerSemester, data.MinSemesters, n);
+				var planData = GeneratePlan(matrix, hours, years, data.MaxHoursPerSemester, data.MinHoursPerSemester, data.MinSemesters, n);
 
 				// convert the graph data to actual courses
 				DegreePlan plan = new DegreePlan() {
@@ -212,7 +217,7 @@ namespace Degree_Planner.Controllers {
 			}
 		}
 
-		private static IList<IList<int>> GeneratePlan(bool[,] matrix, int[] hours, int maxHoursPerSemester, int minHoursPerSemester, int minSemesters, int n) {
+		private static IList<IList<int>> GeneratePlan(bool[,] matrix, int[] hours, int[] years, int maxHoursPerSemester, int minHoursPerSemester, int minSemesters, int n) {
 			int[] levels = BuildLevels(matrix, n);
 			int semesters = levels.Max() + 1;
 
@@ -235,8 +240,11 @@ namespace Degree_Planner.Controllers {
 					int shortest = 100;
 					int shortestIndex = 0;
 					for(int j = 0; j < plan[i].Count; j++) {
-						int len = GetLongestTrail(matrix, n, plan[i][j]);
+						int len = GetLongestTrail(matrix, n, plan[i][j]) + GetLongestPath(matrix, n, plan[i][j]);
 						if(len < shortest) {
+							shortest = len;
+							shortestIndex = j;
+						} else if (len == shortest && years[plan[i][shortestIndex]] > years[plan[i][j]]) {
 							shortest = len;
 							shortestIndex = j;
 						}
@@ -593,6 +601,38 @@ namespace Degree_Planner.Controllers {
 				} else {
 					return Json("false");
 				}
+			}
+
+			return GetCoursesTaken();
+		}
+
+		[HttpPost]
+		public JsonResult RemoveCourseTaken(string department, string catalog) {
+			if(!Authenticate())
+				return Json("");
+			var user = GetCurrentlyLoggedInUser();
+
+			if(string.IsNullOrEmpty(department) || string.IsNullOrEmpty(catalog))
+				return Json("false");
+
+			using(var context = new DegreePlannerContext()) {
+				var hasCourseAlready = context.Users
+					.Include(u => u.CourseUserLinks)
+					.ThenInclude(cul => cul.Course)
+					.FirstOrDefault(u => u.UserID == user.UserID)
+					?.Courses
+					.Any(c => c.Department == department && c.CatalogNumber == catalog);
+
+				if(hasCourseAlready == null || !hasCourseAlready.Value)
+					return GetCoursesTaken();
+
+				context.Users.Include(u => u.CourseUserLinks).ThenInclude(cul => cul.Course)
+					.FirstOrDefault(u => u.UserID == user.UserID)
+					?.CourseUserLinks.Remove(
+						context.CourseUserLinks.FirstOrDefault(c =>
+							c.UserID == user.UserID && c.Course.Department == department &&
+							c.Course.CatalogNumber == catalog));
+				context.SaveChanges();
 			}
 
 			return GetCoursesTaken();

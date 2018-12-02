@@ -26,5 +26,7 @@ namespace Degree_Planner.Models.ViewModels
 		public string Department { get; set; }
 
 		public string CatalogNumber { get; set; }
+
+		public int Hours { get; set; }
 	}
 }

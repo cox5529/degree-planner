@@ -4,26 +4,27 @@
     ViewData["Title"] = "Upload courses taken";
 }
 @model Course
-<br/><br/><br/>
+<br /><br /><br />
 <h2>Upload The Courses You Have Taken</h2>
 <div class="login">
-@using(Html.BeginForm("AddCourseTaken", "Planner", FormMethod.Post, new {  @class="form-upload", id="add-course-form"})) {
-    @Html.LabelFor(m => m.Department)
-    <br />
-    @Html.TextBoxFor(m => m.Department, new {@class="form-control"})
-    <br />
-    @Html.LabelFor(m => m.CatalogNumber, "Catalog Number")
-    <br />
-    @Html.TextBoxFor(m => m.CatalogNumber, new {@class="form-control"})
-    <br />
-    <input type="submit" class="btn btn-lg btn-secondary" value="Submit"/>
-}
+    @using(Html.BeginForm("AddCourseTaken", "Planner", FormMethod.Post, new { @class = "form-upload", id = "add-course-form" })) {
+        @Html.LabelFor(m => m.Department)
+        <br />
+        @Html.TextBoxFor(m => m.Department, new { @class = "form-control", id="form-department" })
+        <br />
+        @Html.LabelFor(m => m.CatalogNumber, "Catalog Number")
+        <br />
+        @Html.TextBoxFor(m => m.CatalogNumber, new { @class = "form-control", id="form-catalog" })
+        <br />
+        <input type="submit" class="btn btn-lg btn-secondary" value="Submit" />
+    }
 </div>
 <table class="table">
     <thead>
         <tr>
             <th>Department </th>
             <th>Catalog number</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody id="course-data"></tbody>
@@ -37,6 +38,8 @@
             $("#add-course-form").submit(function () {
                 var formData = $("#add-course-form").serializeArray();
                 console.log(formData);
+                $("#form-department").val("");
+                $("#form-catalog").val("");
 
                 $.ajax({
                     type: "POST",
@@ -44,7 +47,7 @@
                     url: "@Url.Action("AddCourseTaken", "Planner")",
                     data: { department: formData[0].value, catalog: formData[1].value },
                     success: function (data) {
-                        if (data != "false") {
+                        if (data !== "false") {
                             updateCourseTable(data);
                         }
                     }
@@ -53,6 +56,20 @@
                 return false;
             });
         });
+
+        function removeCourse(department, catalog) {
+            $.ajax({
+                type: "POST",
+                timeout: 10000,
+                url: "@Url.Action("RemoveCourseTaken", "Planner")",
+                data: { department: department, catalog: catalog },
+                success: function(data) {
+                    if (data !== "false") {
+                        updateCourseTable(data);
+                    }
+                }
+            });
+        }
 
         function fetchCourses() {
             $.ajax({
@@ -69,7 +86,7 @@
             var html = "";
             for (var i = 0; i < data.length; i++) {
                 var elem = data[i];
-                html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td></tr>";
+                html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td><td><button type='button' onclick='removeCourse(\"" + elem.department + "\", \"" + elem.catalogNumber + "\");' class='btn btn-sm btn-outline-danger'>Remove</button></td></tr>";
             }
             $("#course-data").html(html);
         }

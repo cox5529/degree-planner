@@ -26,7 +26,7 @@
     @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
     <br />
     @Html.PasswordFor(m => m.ConfirmPassword, new {@class="form-control"})
-    @Html.ValidationMessageFor(m => m.ConfirmPassword,"The Confirm Password field is required. ", new {@class="text-danger"})
+    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class="text-danger"})
     <br />
     <br />
     <input type="submit" value="Create" class="btn btn-lg btn-secondary" />

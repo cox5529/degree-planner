@@ -13,20 +13,37 @@
 <h2>Parameters</h2>
 <label for="max-hours">Maximum hours per semester: </label>
 <br />
-<input type="number" name="max-hours" id="max-hours" />
+<input type="number" class="form-control"  name="max-hours" id="max-hours" />
 <br />
 <br />
 <label for="min-hours">Minimum hours per semester: </label>
 <br />
-<input type="number" name="min-hours" id="min-hours" />
+<input type="number" class="form-control" name="min-hours" id="min-hours" />
 <br />
 <br />
 <label for="max-semesters">Minimum number of semesters to graduate: </label>
 <br />
-<input type="number" name="max-semesters" id="max-semesters" />
+<input type="number" class="form-control"  name="max-semesters" id="max-semesters" />
 <br />
-<br />
+<p id="error" class="text-danger"></p>
 <button id="generate-button" class="btn btn-lg btn-secondary" onclick="generateSchedules()">Generate schedules</button>
+
+<div class="modal fade" id="variable-form-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="variable-form">
+                    <label for="variable-text">How many hours is <span id="variable-course"></span> worth?</label>
+                    <input type="number" class="form-control mb-2" id="variable-text" min="1" max="9" name="variable-text"/>
+                    <input type="hidden" id="variable-modelId" name="modelId" value="0"/>
+                    <input type="hidden" id="variable-courseId" name="courseId" value="0"/>
+                    <input type="hidden" id="variable-course-data" name="courseData" value=""/>
+                    <button type="submit" class="btn btn-sm btn-secondary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script>
@@ -53,6 +70,48 @@
                 if (e.keyCode === 13) {
                     $("#generate-button").click();
                 }
+            });
+
+            $("#variable-form").submit(function(e) {
+                e.preventDefault();
+
+                var data = $(this).serializeArray();
+                var hours = parseInt(data[0].value);
+                var modelId = parseInt(data[1].value);
+                var courseId = parseInt(data[2].value);
+                var courseString = data[3].value;
+                var course;
+                console.log(data);
+
+                var found = -1;
+                var course = null;
+                for (var i = 0; i < selectionTableData[modelId].length; i++) {
+                    if (selectionTableData[modelId][i].courseID === courseId) {
+                        found = i;
+                        course = selectionTableData[modelId][i];
+                    }
+                }
+
+                if (found !== -1) {
+                    selectionTableData[modelId].splice(found, 1);
+                } else {
+                    console.log(courseString);
+                    course = JSON.parse(courseString);
+                }
+                course.hours = hours;
+
+                takenTableData[modelId].push({
+                    taken: false,
+                    elective: found === -1,
+                    course: course
+                });
+
+                $("#variable-form-modal").modal('hide');
+
+                hideCourse(courseId, modelId);
+                updateHours(modelId);
+                populateTakenTable(modelId);
+                populateSelectionTable(modelId);
             });
 
         });
@@ -107,7 +166,7 @@
                     modelId +
                     ", " +
                     course.courseID +
-                    ")'>Remove</button></td>";
+                    ")' class='btn btn-lg btn-secondary'>Remove</button></td>";
                 html += "</tr>";
             }
             $("#" + modelId + "-selected-courses").html(html);
@@ -116,7 +175,7 @@
         function populateSelectionTable(modelId) {
             var html = "";
             sortCourses(selectionTableData[modelId]);
-            
+
             for (var i = 0; i < selectionTableData[modelId].length; i++) {
                 var course = selectionTableData[modelId][i];
                 if (!course.catalogNumber.endsWith("E")) {
@@ -148,33 +207,49 @@
         }
 
         function sortCourses(courseList) {
-            courseList.sort(function (a, b) {
+            courseList.sort(function(a, b) {
                 console.log(a);
                 var x = a.department.toLowerCase();
                 var y = b.department.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
+                if (x < y) {
+                    return -1;
+                }
+                if (x > y) {
+                    return 1;
+                }
 
                 x = a.catalogNumber.toLowerCase();
                 y = b.catalogNumber.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
+                if (x < y) {
+                    return -1;
+                }
+                if (x > y) {
+                    return 1;
+                }
                 return 0;
             });
         }
 
         function sortTakenCourses(courseList) {
-            courseList.sort(function (a, b) {
+            courseList.sort(function(a, b) {
                 console.log(a);
                 var x = a.course.department.toLowerCase();
                 var y = b.course.department.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
+                if (x < y) {
+                    return -1;
+                }
+                if (x > y) {
+                    return 1;
+                }
 
                 x = a.course.catalogNumber.toLowerCase();
                 y = b.course.catalogNumber.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
+                if (x < y) {
+                    return -1;
+                }
+                if (x > y) {
+                    return 1;
+                }
                 return 0;
             });
         }
@@ -232,17 +307,21 @@
                     }
                 }
                 if (found !== -1) {
-                    selectionTableData[modelId].splice(found, 1);
-                    takenTableData[modelId].push({
-                        taken: false,
-                        elective: false,
-                        course: course
-                    });
+                    if (course.catalogNumber.charAt(3) === 'V') {
+                        getVariableHours(modelId, course);
+                    } else {
+                        selectionTableData[modelId].splice(found, 1);
+                        takenTableData[modelId].push({
+                            taken: false,
+                            elective: false,
+                            course: course
+                        });
 
-                    hideCourse(course.courseID, modelId);
-                    updateHours(modelId);
-                    populateTakenTable(modelId);
-                    populateSelectionTable(modelId);
+                        hideCourse(course.courseID, modelId);
+                        updateHours(modelId);
+                        populateTakenTable(modelId);
+                        populateSelectionTable(modelId);
+                    }
                 }
             } else {
                 for (var i = 0; i < takenTableData.length; i++) {
@@ -255,6 +334,8 @@
                         }
                     }
                 }
+                courseId.department = courseId.department.toUpperCase();
+                courseId.catalogNumber = courseId.catalogNumber.toUpperCase();
                 $.ajax({
                     type: "POST",
                     timeout: 10000,
@@ -269,12 +350,18 @@
                         if (data.allow) {
                             courseId.name = data.name;
                             courseId.courseID = data.courseID;
-                            takenTableData[modelId].push({
-                                taken: false,
-                                elective: true,
-                                course: courseId
-                            });
-                            updateHours(modelId);
+
+                            $("#variable-course-data").val(JSON.stringify(courseId));
+                            if (courseId.catalogNumber.charAt(3) === 'V') {
+                                getVariableHours(modelId, courseId);
+                            } else {
+                                takenTableData[modelId].push({
+                                    taken: false,
+                                    elective: true,
+                                    course: courseId
+                                });
+                                updateHours(modelId);
+                            }
                         }
                         hideCourse(data.courseID, modelId);
                         populateTakenTable(modelId);
@@ -310,6 +397,13 @@
             populateSelectionTable(modelId);
         }
 
+        function getVariableHours(modelId, course) {
+            $("#variable-course").html(course.department + " " + course.catalogNumber);
+            $("#variable-modelId").val(modelId + "");
+            $("#variable-courseId").val(course.courseID);
+            $("#variable-form-modal").modal();
+        }
+
         function updateHours(modelId) {
             var hourCount = 0;
             for (var i = 0; i < takenTableData[modelId].length; i++) {
@@ -328,10 +422,19 @@
         }
 
         function generateSchedules() {
+            var incompleteGroups = "";
             for (var i = 0; i < hourRequirements.length; i++) {
                 var html = $("#" + i + "-hours-remaining").html();
-                if (html !== "0") return; //TODO display error
+                if (html !== "0") {
+                    if (incompleteGroups !== "") incompleteGroups += ", ";
+                    incompleteGroups += courseOptions[i].degreeElement.members.name;
+                }
             }
+            if (incompleteGroups !== "") {
+                $("#error").html("The following groups do not meet the hour requirement: " + incompleteGroups);
+                return;
+            }
+
             var courses = [];
             for (var i = 0; i < courseOptions.length; i++) {
                 for (var j = 0; j < takenTableData[i].length; j++) {
@@ -345,8 +448,19 @@
             var minHoursStr = $("#min-hours").val();
             var minSemestersStr = $("#max-semesters").val();
 
+            var missingInfo = "";
             if (minHoursStr === "" || maxHoursStr === "" || minSemestersStr === "") {
-                //TODO display error
+                if (minHoursStr === "") {
+                    missingInfo += "minimum hours per semester, ";
+                }
+                if (maxHoursStr === "") {
+                    missingInfo += "maximum hours per semester, ";
+                }
+                if (minSemestersStr === "") {
+                    missingInfo += "minimum semesters, ";
+                }
+                missingInfo = missingInfo.substring(0, missingInfo.length - 2);
+                $("#error").html("You must enter the following parameters: " + missingInfo);
                 return;
             }
 
@@ -354,8 +468,24 @@
             var minHours = parseInt(minHoursStr);
             var minSemesters = parseInt(minSemestersStr);
 
-            if (maxHours <= 0 || minHours <= 0 || minSemesters < 0 || minHours > maxHours) {
-                return; //TODO display error
+            if (maxHours < 6) {
+                $("#error").html("Maximum hours per semester must be greater than or equal to 6.");
+            }
+
+            if (minHours <= 0) {
+                $("#error").html("Minimum hours per semester must be greater than 0.");
+            }
+
+            if (minSemesters < 0) {
+                $("#error").html("Minimum semesters must be greater than or equal to 0.");
+            }
+
+            if (minHours >= maxHours) {
+                $("#error").html("Minimum hours per semester must not be greater than maximum hours per semester.");
+            }
+
+            if (maxHours < 6 || minHours <= 0 || minSemesters < 0 || minHours > maxHours) {
+                return;
             }
 
             var postData = {

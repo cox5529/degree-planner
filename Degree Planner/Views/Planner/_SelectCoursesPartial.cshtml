@@ -1,7 +1,6 @@
 ﻿@using System.Linq;
 @{
     ViewData["Title"] = "Select courses";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model Degree_Planner.Models.ViewModels.SelectCoursesVm
 
@@ -10,21 +9,19 @@
 
 <div class="input-group mb-3" id="@Model.IdPrefix-div-options">
     <h4>Course options</h4>
-    @if (Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
+    @if(Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
         <table class="table">
             <thead>
-            <tr>
-                <th>Course Name</th>
-                <th>Course Catalog Number</th>
-                <th>Actions</th>
-            </tr>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Catalog Number</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
-            <tbody id="@Model.IdPrefix-course-options">
-
-            </tbody>
+            <tbody id="@Model.IdPrefix-course-options"></tbody>
         </table>
     }
-    @foreach (var elective in Model.DegreeElement.Members.Courses.Where(c => c.CatalogNumber.EndsWith("E"))) {
+    @foreach(var elective in Model.DegreeElement.Members.Courses.Where(c => c.CatalogNumber.EndsWith("E"))) {
         <form id="@Model.IdPrefix-elective-form">
             <label for="@Model.IdPrefix-form-department">Course department</label>
             <br />
@@ -45,22 +42,20 @@
         break;
     }
 </div>
-<br/>
+<br />
 <h4>Selected/Taken courses</h4>
 <table class="table">
     <thead>
-    <tr>
-        <th>Course name</th>
-        <th>Course catalog number</th>
-        <th>Actions</th>
-    </tr>
+        <tr>
+            <th>Course name</th>
+            <th>Course catalog number</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody id="@Model.IdPrefix-selected-courses"></tbody>
 </table>
 <br />
-
-@section Scripts {
-    <script>
+<script>
         $(function() {
             $("#@Model.IdPrefix-elective-form").submit(function(e) {
                 e.preventDefault();
@@ -99,5 +94,4 @@
                 $("#@Model.IdPrefix-form-catalog").val("");
             });
         });
-    </script>
-}
+</script>
