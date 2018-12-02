@@ -687,6 +687,9 @@ namespace Degree_Planner.Controllers {
 			using(var context = new DegreePlannerContext())
 			using(var stream = vm.File.OpenReadStream())
 			using(var reader = new StreamReader(stream)) {
+				context.Degrees.Add(degree);
+				context.SaveChanges();
+
 				string line;
 				while((line = reader.ReadLine()) != null) {
 					var data = line.Split(',');
@@ -719,11 +722,10 @@ namespace Degree_Planner.Controllers {
 						}
 					}
 					element.Members = courseGroup;
-					degree.Requirements.Add(element);
+					element.Degree = degree;
+					context.DegreeElements.Add(element);
+					context.SaveChanges();
 				}
-
-				context.Degrees.Add(degree);
-				context.SaveChanges();
 			}
 
 			return RedirectToAction("Index", "Planner");
@@ -815,9 +817,9 @@ namespace Degree_Planner.Controllers {
 					var course = CreateOrFetchCourse(context, department, catalogNumber, out var gen, true);
 					var start = 1;
 					var name = data[1];
-					if(name.Length < 5 || !char.IsDigit(name[4])) {
+					if(name[0] == '"') {
 						start = 2;
-						course.Name = name;
+						course.Name = name.Substring(1, name.Length - 1);
 					}
 
 					if(gen)
