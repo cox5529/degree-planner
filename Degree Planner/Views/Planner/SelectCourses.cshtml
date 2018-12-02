@@ -1,32 +1,28 @@
 ﻿
 @{
     ViewData["Title"] = "Select courses";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Planner/_StudentLayout.cshtml";
 }
 @model IList<Degree_Planner.Models.ViewModels.SelectCoursesVm>
-<br/><br/><br/>
+<br /><br /><br />
 
 @foreach(var degreeElement in Model) {
     await Html.RenderPartialAsync("_SelectCoursesPartial", degreeElement);
 }
-<br />
-<h2>Parameters</h2>
-<label for="max-hours">Maximum hours per semester: </label>
-<br />
-<input type="number" class="form-control"  name="max-hours" id="max-hours" />
-<br />
-<br />
-<label for="min-hours">Minimum hours per semester: </label>
-<br />
-<input type="number" class="form-control" name="min-hours" id="min-hours" />
-<br />
-<br />
-<label for="max-semesters">Minimum number of semesters to graduate: </label>
-<br />
-<input type="number" class="form-control"  name="max-semesters" id="max-semesters" />
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Parameters</h4>
+        <label for="max-hours">Maximum hours per semester: </label>
+        <input type="number" class="form-control mb-4" name="max-hours" id="max-hours" />
+        <label for="min-hours">Minimum hours per semester: </label>
+        <input type="number" class="form-control mb-4" name="min-hours" id="min-hours" />
+        <label for="max-semesters">Minimum number of semesters to graduate: </label>
+        <input type="number" class="form-control mb-4" name="max-semesters" id="max-semesters" />
+    </div>
+</div>
 <br />
 <p id="error" class="text-danger"></p>
-<button id="generate-button" class="btn btn-lg btn-secondary" onclick="generateSchedules()">Generate schedules</button>
+<button id="generate-button" class="btn btn-lg btn-secondary mb-5" onclick="generateSchedules()">Generate schedules</button>
 
 <div class="modal fade" id="variable-form-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -34,10 +30,10 @@
             <div class="modal-body">
                 <form id="variable-form">
                     <label for="variable-text">How many hours is <span id="variable-course"></span> worth?</label>
-                    <input type="number" class="form-control mb-2" id="variable-text" min="1" max="9" name="variable-text"/>
-                    <input type="hidden" id="variable-modelId" name="modelId" value="0"/>
-                    <input type="hidden" id="variable-courseId" name="courseId" value="0"/>
-                    <input type="hidden" id="variable-course-data" name="courseData" value=""/>
+                    <input type="number" class="form-control mb-2" id="variable-text" min="1" max="9" name="variable-text" />
+                    <input type="hidden" id="variable-modelId" name="modelId" value="0" />
+                    <input type="hidden" id="variable-courseId" name="courseId" value="0" />
+                    <input type="hidden" id="variable-course-data" name="courseData" value="" />
                     <button type="submit" class="btn btn-sm btn-secondary">Submit</button>
                 </form>
             </div>
@@ -45,238 +41,226 @@
     </div>
 </div>
 
-@section scripts {
-    <script>
-        var courseOptions = @Html.Raw(Json.Serialize(Model));
-        var selectionTableData = [];
-        var takenTableData = [];
-        var hiddenCourses = [];
-        var hourRequirements = [];
+<script>
+    var courseOptions = @Html.Raw(Json.Serialize(Model));
+    var selectionTableData = [];
+    var takenTableData = [];
+    var hiddenCourses = [];
+    var hourRequirements = [];
 
-        $(function() {
-            console.log(courseOptions);
-            for (var i = 0; i < courseOptions.length; i++) {
-                var vm = courseOptions[i];
-                selectionTableData.push([]);
-                takenTableData.push([]);
-                hiddenCourses.push([]);
-                hourRequirements.push(vm.degreeElement.hours);
-                vm.idPrefix = i;
+    $(function() {
+        console.log(courseOptions);
+        for (var i = 0; i < courseOptions.length; i++) {
+            var vm = courseOptions[i];
+            selectionTableData.push([]);
+            takenTableData.push([]);
+            hiddenCourses.push([]);
+            hourRequirements.push(vm.degreeElement.hours);
+            vm.idPrefix = i;
 
-                populateAll(vm.idPrefix, vm.degreeElement, vm.coursesTaken);
-            }
-
-            $("input[type=number]").keyup(function(e) {
-                if (e.keyCode === 13) {
-                    $("#generate-button").click();
-                }
-            });
-
-            $("#variable-form").submit(function(e) {
-                e.preventDefault();
-
-                var data = $(this).serializeArray();
-                var hours = parseInt(data[0].value);
-                var modelId = parseInt(data[1].value);
-                var courseId = parseInt(data[2].value);
-                var courseString = data[3].value;
-                var course;
-                console.log(data);
-
-                var found = -1;
-                var course = null;
-                for (var i = 0; i < selectionTableData[modelId].length; i++) {
-                    if (selectionTableData[modelId][i].courseID === courseId) {
-                        found = i;
-                        course = selectionTableData[modelId][i];
-                    }
-                }
-
-                if (found !== -1) {
-                    selectionTableData[modelId].splice(found, 1);
-                } else {
-                    console.log(courseString);
-                    course = JSON.parse(courseString);
-                }
-                course.hours = hours;
-
-                takenTableData[modelId].push({
-                    taken: false,
-                    elective: found === -1,
-                    course: course
-                });
-
-                $("#variable-form-modal").modal('hide');
-
-                hideCourse(courseId, modelId);
-                updateHours(modelId);
-                populateTakenTable(modelId);
-                populateSelectionTable(modelId);
-            });
-
-        });
-
-        function populateAll(modelId, data, taken) {
-            selectionTableData[modelId] = [];
-            takenTableData[modelId] = [];
-            hiddenCourses[modelId] = [];
-            for (var i = 0; i < data.members.courses.length; i++) {
-                var course = data.members.courses[i];
-                selectionTableData[modelId].push(course);
-            }
-
-            for (var i = 0; i < taken.length; i++) {
-                var course = null;
-                var found = false;
-                for (var j = 0; j < selectionTableData[modelId].length; j++) {
-                    course = selectionTableData[modelId][j];
-                    if (course.courseID === taken[i]) {
-                        found = true;
-                        selectionTableData[modelId].splice(j, 1);
-                        break;
-                    }
-                }
-
-                if (found) {
-                    hideCourse(course.courseID);
-                    takenTableData[modelId].push({
-                        taken: true,
-                        elective: false,
-                        course: course
-                    });
-                }
-            }
-
-            updateHours(modelId);
-            populateSelectionTable(modelId);
-            populateTakenTable(modelId);
+            populateAll(vm.idPrefix, vm.degreeElement, vm.coursesTaken);
         }
 
-        function populateTakenTable(modelId) {
-            var html = "";
-            sortTakenCourses(takenTableData[modelId]);
+        $("input[type=number]").keyup(function(e) {
+            if (e.keyCode === 13) {
+                $("#generate-button").click();
+            }
+        });
 
-            for (var i = 0; i < takenTableData[modelId].length; i++) {
-                var data = takenTableData[modelId][i];
-                var course = data.course;
+        $("#variable-form").submit(function(e) {
+            e.preventDefault();
+
+            var data = $(this).serializeArray();
+            var hours = parseInt(data[0].value);
+            var modelId = parseInt(data[1].value);
+            var courseId = parseInt(data[2].value);
+            var courseString = data[3].value;
+            var course;
+            console.log(data);
+
+            var found = -1;
+            var course = null;
+            for (var i = 0; i < selectionTableData[modelId].length; i++) {
+                if (selectionTableData[modelId][i].courseID === courseId) {
+                    found = i;
+                    course = selectionTableData[modelId][i];
+                }
+            }
+
+            if (found !== -1) {
+                selectionTableData[modelId].splice(found, 1);
+            } else {
+                console.log(courseString);
+                course = JSON.parse(courseString);
+            }
+            course.hours = hours;
+
+            takenTableData[modelId].push({
+                taken: false,
+                elective: found === -1,
+                course: course
+            });
+
+            $("#variable-form-modal").modal('hide');
+
+            hideCourse(courseId, modelId);
+            updateHours(modelId);
+            populateTakenTable(modelId);
+            populateSelectionTable(modelId);
+        });
+
+    });
+
+    function populateAll(modelId, data, taken) {
+        selectionTableData[modelId] = [];
+        takenTableData[modelId] = [];
+        hiddenCourses[modelId] = [];
+        for (var i = 0; i < data.members.courses.length; i++) {
+            var course = data.members.courses[i];
+            selectionTableData[modelId].push(course);
+        }
+
+        for (var i = 0; i < taken.length; i++) {
+            var course = null;
+            var found = false;
+            for (var j = 0; j < selectionTableData[modelId].length; j++) {
+                course = selectionTableData[modelId][j];
+                if (course.courseID === taken[i]) {
+                    found = true;
+                    selectionTableData[modelId].splice(j, 1);
+                    break;
+                }
+            }
+
+            if (found) {
+                hideCourse(course.courseID);
+                takenTableData[modelId].push({
+                    taken: true,
+                    elective: false,
+                    course: course
+                });
+            }
+        }
+
+        updateHours(modelId);
+        populateSelectionTable(modelId);
+        populateTakenTable(modelId);
+    }
+
+    function populateTakenTable(modelId) {
+        var html = "";
+        sortTakenCourses(takenTableData[modelId]);
+
+        for (var i = 0; i < takenTableData[modelId].length; i++) {
+            var data = takenTableData[modelId][i];
+            var course = data.course;
+            html += "<tr>";
+            html += "<td>" + course.name + "</td>";
+            html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
+            html += "<td><button onclick='removeCourse(" +
+                modelId +
+                ", " +
+                course.courseID +
+                ")' class='btn btn-sm btn-outline-danger'>Remove</button></td>";
+            html += "</tr>";
+        }
+        $("#" + modelId + "-selected-courses").html(html);
+    }
+
+    function populateSelectionTable(modelId) {
+        var html = "";
+        sortCourses(selectionTableData[modelId]);
+        if (takenTableData[modelId].length > 0) {
+            $("#" + modelId + "-taken").css("display", "block");
+        } else {
+            $("#" + modelId + "-taken").css("display", "none");
+        }
+
+        for (var i = 0; i < selectionTableData[modelId].length; i++) {
+            var course = selectionTableData[modelId][i];
+            if (!course.catalogNumber.endsWith("E")) {
                 html += "<tr>";
                 html += "<td>" + course.name + "</td>";
                 html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
-                html += "<td><button onclick='removeCourse(" +
+                html += "<td><button onclick='addCourse(" +
                     modelId +
                     ", " +
                     course.courseID +
-                    ")' class='btn btn-lg btn-secondary'>Remove</button></td>";
+                    ")' class='btn btn-sm btn-outline-secondary' >Add</button></td>";
                 html += "</tr>";
-            }
-            $("#" + modelId + "-selected-courses").html(html);
-        }
-
-        function populateSelectionTable(modelId) {
-            var html = "";
-            sortCourses(selectionTableData[modelId]);
-
-            for (var i = 0; i < selectionTableData[modelId].length; i++) {
-                var course = selectionTableData[modelId][i];
-                if (!course.catalogNumber.endsWith("E")) {
-                    html += "<tr>";
-                    html += "<td>" + course.name + "</td>";
-                    html += "<td>" + course.department + " " + course.catalogNumber + "</td>";
-                    html += "<td><button onclick='addCourse(" +
-                        modelId +
-                        ", " +
-                        course.courseID +
-                        ")'>Add</button></td>";
-                    html += "</tr>";
+            } else {
+                html += "<tr>";
+                if (course.department === "UARK") {
+                    html += "<td>Any elective</td>";
                 } else {
-                    html += "<tr>";
-                    if (course.department === "UARK") {
-                        html += "<td>Any elective</td>";
-                    } else {
-                        html += "<td>" + course.department + " elective</td>";
-                    }
-                    if (course.catalogNumber === "000E") {
-                        html += "<td></td>";
-                    } else {
-                        html += "<td>numbered greater than " + course.catalogNumber.substring(0, 3) + "0</td>";
-                    }
-                    html += "<td></td></tr>";
+                    html += "<td>" + course.department + " elective</td>";
                 }
-            }
-            $("#" + modelId + "-course-options").html(html);
-        }
-
-        function sortCourses(courseList) {
-            courseList.sort(function(a, b) {
-                console.log(a);
-                var x = a.department.toLowerCase();
-                var y = b.department.toLowerCase();
-                if (x < y) {
-                    return -1;
+                if (course.catalogNumber === "000E") {
+                    html += "<td></td>";
+                } else {
+                    html += "<td>numbered greater than " + course.catalogNumber.substring(0, 3) + "0</td>";
                 }
-                if (x > y) {
-                    return 1;
-                }
-
-                x = a.catalogNumber.toLowerCase();
-                y = b.catalogNumber.toLowerCase();
-                if (x < y) {
-                    return -1;
-                }
-                if (x > y) {
-                    return 1;
-                }
-                return 0;
-            });
-        }
-
-        function sortTakenCourses(courseList) {
-            courseList.sort(function(a, b) {
-                console.log(a);
-                var x = a.course.department.toLowerCase();
-                var y = b.course.department.toLowerCase();
-                if (x < y) {
-                    return -1;
-                }
-                if (x > y) {
-                    return 1;
-                }
-
-                x = a.course.catalogNumber.toLowerCase();
-                y = b.course.catalogNumber.toLowerCase();
-                if (x < y) {
-                    return -1;
-                }
-                if (x > y) {
-                    return 1;
-                }
-                return 0;
-            });
-        }
-
-        function hideCourse(courseId, exclude) {
-            for (var i = 0; i < selectionTableData.length; i++) {
-                if (i !== exclude) {
-                    var table = selectionTableData[i];
-                    for (var j = 0; j < table.length; j++) {
-                        if (table[j].courseID === courseId) {
-                            hiddenCourses[i].push(table[j]);
-                            table.splice(j, 1);
-
-                            populateSelectionTable(i);
-                            break;
-                        }
-                    }
-                }
+                html += "<td></td></tr>";
             }
         }
+        $("#" + modelId + "-course-options").html(html);
+    }
 
-        function unhideCourse(courseId) {
-            for (var i = 0; i < hiddenCourses.length; i++) {
-                var table = hiddenCourses[i];
+    function sortCourses(courseList) {
+        courseList.sort(function(a, b) {
+            console.log(a);
+            var x = a.department.toLowerCase();
+            var y = b.department.toLowerCase();
+            if (x < y) {
+                return -1;
+            }
+            if (x > y) {
+                return 1;
+            }
+
+            x = a.catalogNumber.toLowerCase();
+            y = b.catalogNumber.toLowerCase();
+            if (x < y) {
+                return -1;
+            }
+            if (x > y) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    function sortTakenCourses(courseList) {
+        courseList.sort(function(a, b) {
+            console.log(a);
+            var x = a.course.department.toLowerCase();
+            var y = b.course.department.toLowerCase();
+            if (x < y) {
+                return -1;
+            }
+            if (x > y) {
+                return 1;
+            }
+
+            x = a.course.catalogNumber.toLowerCase();
+            y = b.course.catalogNumber.toLowerCase();
+            if (x < y) {
+                return -1;
+            }
+            if (x > y) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    function hideCourse(courseId, exclude) {
+        for (var i = 0; i < selectionTableData.length; i++) {
+            if (i !== exclude) {
+                var table = selectionTableData[i];
                 for (var j = 0; j < table.length; j++) {
                     if (table[j].courseID === courseId) {
-                        selectionTableData[i].push(table[j]);
+                        hiddenCourses[i].push(table[j]);
                         table.splice(j, 1);
 
                         populateSelectionTable(i);
@@ -285,220 +269,254 @@
                 }
             }
         }
+    }
 
-        function addCourse(modelId, courseId, tryRemove = true) {
-            if (tryRemove) {
-                for (var i = 0; i < takenTableData.length; i++) {
-                    var table = takenTableData[i];
-                    for (var j = 0; j < table.length; j++) {
-                        var element = table[j];
-                        if (element.course.courseID === courseId) {
-                            return;
-                        }
-                    }
-                }
-                var course;
-                var found = -1;
-                for (var i = 0; i < selectionTableData[modelId].length; i++) {
-                    course = selectionTableData[modelId][i];
-                    if (course.courseID === courseId) {
-                        found = i;
-                        break;
-                    }
-                }
-                if (found !== -1) {
-                    if (course.catalogNumber.charAt(3) === 'V') {
-                        getVariableHours(modelId, course);
-                    } else {
-                        selectionTableData[modelId].splice(found, 1);
-                        takenTableData[modelId].push({
-                            taken: false,
-                            elective: false,
-                            course: course
-                        });
+    function unhideCourse(courseId) {
+        for (var i = 0; i < hiddenCourses.length; i++) {
+            var table = hiddenCourses[i];
+            for (var j = 0; j < table.length; j++) {
+                if (table[j].courseID === courseId) {
+                    selectionTableData[i].push(table[j]);
+                    table.splice(j, 1);
 
-                        hideCourse(course.courseID, modelId);
-                        updateHours(modelId);
-                        populateTakenTable(modelId);
-                        populateSelectionTable(modelId);
-                    }
+                    populateSelectionTable(i);
+                    break;
                 }
-            } else {
-                for (var i = 0; i < takenTableData.length; i++) {
-                    var table = takenTableData[i];
-                    for (var j = 0; j < table.length; j++) {
-                        var element = table[j];
-                        if (element.course.department === courseId.department &&
-                            element.course.catalogNumber === courseId.catalogNumber) {
-                            return;
-                        }
-                    }
-                }
-                courseId.department = courseId.department.toUpperCase();
-                courseId.catalogNumber = courseId.catalogNumber.toUpperCase();
-                $.ajax({
-                    type: "POST",
-                    timeout: 10000,
-                    data: {
-                        degreeElementId: courseOptions[modelId].degreeElement.degreeElementID,
-                        department: courseId.department,
-                        catalog: courseId.catalogNumber,
-                        degreeId: @ViewBag.DegreeId
-                    },
-                    url: "@Url.Action("CanAddElective", "Planner")",
-                    success: function(data) {
-                        if (data.allow) {
-                            courseId.name = data.name;
-                            courseId.courseID = data.courseID;
-
-                            $("#variable-course-data").val(JSON.stringify(courseId));
-                            if (courseId.catalogNumber.charAt(3) === 'V') {
-                                getVariableHours(modelId, courseId);
-                            } else {
-                                takenTableData[modelId].push({
-                                    taken: false,
-                                    elective: true,
-                                    course: courseId
-                                });
-                                updateHours(modelId);
-                            }
-                        }
-                        hideCourse(data.courseID, modelId);
-                        populateTakenTable(modelId);
-                        populateSelectionTable(modelId);
-                    }
-                });
             }
         }
+    }
 
-        function removeCourse(modelId, courseId) {
+    function addCourse(modelId, courseId, tryRemove = true) {
+        if (tryRemove) {
+            for (var i = 0; i < takenTableData.length; i++) {
+                var table = takenTableData[i];
+                for (var j = 0; j < table.length; j++) {
+                    var element = table[j];
+                    if (element.course.courseID === courseId) {
+                        return;
+                    }
+                }
+            }
             var course;
-            var elective;
             var found = -1;
-            for (var i = 0; i < takenTableData[modelId].length; i++) {
-                course = takenTableData[modelId][i].course;
-                elective = takenTableData[modelId][i].elective;
+            for (var i = 0; i < selectionTableData[modelId].length; i++) {
+                course = selectionTableData[modelId][i];
                 if (course.courseID === courseId) {
                     found = i;
                     break;
                 }
             }
             if (found !== -1) {
-                takenTableData[modelId].splice(found, 1);
-                if (!elective) {
-                    selectionTableData[modelId].push(course);
-                }
-                unhideCourse(courseId);
-                updateHours(modelId);
-            }
+                if (course.catalogNumber.charAt(3) === 'V') {
+                    getVariableHours(modelId, course);
+                } else {
+                    selectionTableData[modelId].splice(found, 1);
+                    takenTableData[modelId].push({
+                        taken: false,
+                        elective: false,
+                        course: course
+                    });
 
-
-            populateTakenTable(modelId);
-            populateSelectionTable(modelId);
-        }
-
-        function getVariableHours(modelId, course) {
-            $("#variable-course").html(course.department + " " + course.catalogNumber);
-            $("#variable-modelId").val(modelId + "");
-            $("#variable-courseId").val(course.courseID);
-            $("#variable-form-modal").modal();
-        }
-
-        function updateHours(modelId) {
-            var hourCount = 0;
-            for (var i = 0; i < takenTableData[modelId].length; i++) {
-                hourCount += takenTableData[modelId][i].course.hours;
-            }
-            var remainingHours = hourRequirements[modelId] - hourCount;
-            if (remainingHours < 0) remainingHours = 0;
-
-            if (remainingHours === 0) {
-                $("#" + modelId + "-div-options").css("display", "none");
-            } else {
-                $("#" + modelId + "-div-options").css("display", "block");
-            }
-
-            $("#" + modelId + "-hours-remaining").html(remainingHours + "");
-        }
-
-        function generateSchedules() {
-            var incompleteGroups = "";
-            for (var i = 0; i < hourRequirements.length; i++) {
-                var html = $("#" + i + "-hours-remaining").html();
-                if (html !== "0") {
-                    if (incompleteGroups !== "") incompleteGroups += ", ";
-                    incompleteGroups += courseOptions[i].degreeElement.members.name;
+                    hideCourse(course.courseID, modelId);
+                    updateHours(modelId);
+                    populateTakenTable(modelId);
+                    populateSelectionTable(modelId);
                 }
             }
-            if (incompleteGroups !== "") {
-                $("#error").html("The following groups do not meet the hour requirement: " + incompleteGroups);
+        } else {
+            courseId.department = courseId.department.toUpperCase();
+            courseId.catalogNumber = courseId.catalogNumber.toUpperCase();
+            for (var i = 0; i < takenTableData.length; i++) {
+                var table = takenTableData[i];
+                for (var j = 0; j < table.length; j++) {
+                    var element = table[j];
+                    if (element.course.department === courseId.department &&
+                        element.course.catalogNumber === courseId.catalogNumber) {
+                        $("#" + modelId + "-elective-error").html(courseId.department +
+                            " " +
+                            courseId.catalogNumber +
+                            " is already being taken for a requirement in group '" +
+                            courseOptions[i].degreeElement.members.name +
+                            ".'");
+                        return;
+                    }
+                }
+            }
+            if (courseId.catalogNumber.length < 4) {
+                $("#" + modelId + "-elective-error").html("Improperly formatted catalog number. Catalog number must have at least 4 digits.");
                 return;
             }
-
-            var courses = [];
-            for (var i = 0; i < courseOptions.length; i++) {
-                for (var j = 0; j < takenTableData[i].length; j++) {
-                    var course = takenTableData[i][j].course;
-                    course.CourseUserLinks = [];
-                    courses.push(course);
-                }
-            }
-
-            var maxHoursStr = $("#max-hours").val();
-            var minHoursStr = $("#min-hours").val();
-            var minSemestersStr = $("#max-semesters").val();
-
-            var missingInfo = "";
-            if (minHoursStr === "" || maxHoursStr === "" || minSemestersStr === "") {
-                if (minHoursStr === "") {
-                    missingInfo += "minimum hours per semester, ";
-                }
-                if (maxHoursStr === "") {
-                    missingInfo += "maximum hours per semester, ";
-                }
-                if (minSemestersStr === "") {
-                    missingInfo += "minimum semesters, ";
-                }
-                missingInfo = missingInfo.substring(0, missingInfo.length - 2);
-                $("#error").html("You must enter the following parameters: " + missingInfo);
+            if (courseId.department.length !== 4) {
+                $("#" + modelId + "-elective-error").html("Improperly formatted department. Department must contain exactly 4 characters.");
                 return;
             }
+            $.ajax({
+                type: "POST",
+                timeout: 10000,
+                data: {
+                    degreeElementId: courseOptions[modelId].degreeElement.degreeElementID,
+                    department: courseId.department,
+                    catalog: courseId.catalogNumber,
+                    degreeId: @ViewBag.DegreeId
+                },
+                url: "@Url.Action("CanAddElective", "Planner")",
+                success: function(data) {
+                    if (data.allow) {
+                        courseId.name = data.name;
+                        courseId.courseID = data.courseID;
+                        $("#" + modelId + "-elective-error").html("");
+                        $("#variable-course-data").val(JSON.stringify(courseId));
+                        if (courseId.catalogNumber.charAt(3) === 'V') {
+                            getVariableHours(modelId, courseId);
+                        } else {
+                            takenTableData[modelId].push({
+                                taken: false,
+                                elective: true,
+                                course: courseId
+                            });
+                            updateHours(modelId);
+                        }
+                    } else {
+                        $("#" + modelId + "-elective-error").html(courseId.department +
+                            " " +
+                            courseId.catalogNumber +
+                            " is not currently present in the system. Contact an administrator to add this course if it exists.");
+                    }
+                    hideCourse(data.courseID, modelId);
+                    populateTakenTable(modelId);
+                    populateSelectionTable(modelId);
+                }
+            });
+        }
+    }
 
-            var maxHours = parseInt(maxHoursStr);
-            var minHours = parseInt(minHoursStr);
-            var minSemesters = parseInt(minSemestersStr);
-
-            if (maxHours < 6) {
-                $("#error").html("Maximum hours per semester must be greater than or equal to 6.");
+    function removeCourse(modelId, courseId) {
+        var course;
+        var elective;
+        var found = -1;
+        for (var i = 0; i < takenTableData[modelId].length; i++) {
+            course = takenTableData[modelId][i].course;
+            elective = takenTableData[modelId][i].elective;
+            if (course.courseID === courseId) {
+                found = i;
+                break;
             }
-
-            if (minHours <= 0) {
-                $("#error").html("Minimum hours per semester must be greater than 0.");
+        }
+        if (found !== -1) {
+            takenTableData[modelId].splice(found, 1);
+            if (!elective) {
+                selectionTableData[modelId].push(course);
             }
-
-            if (minSemesters < 0) {
-                $("#error").html("Minimum semesters must be greater than or equal to 0.");
-            }
-
-            if (minHours >= maxHours) {
-                $("#error").html("Minimum hours per semester must not be greater than maximum hours per semester.");
-            }
-
-            if (maxHours < 6 || minHours <= 0 || minSemesters < 0 || minHours > maxHours) {
-                return;
-            }
-
-            var postData = {
-                degreeID: @ViewBag.DegreeId,
-                courses: courses,
-                minHoursPerSemester: minHours,
-                maxHoursPerSemester: maxHours,
-                minSemesters: minSemesters
-            };
-
-            console.log(postData);
-            $.redirect("@Url.Action("ViewDegreePlan", "Planner")", postData);
+            unhideCourse(courseId);
+            updateHours(modelId);
         }
 
-    </script>
-}
+
+        populateTakenTable(modelId);
+        populateSelectionTable(modelId);
+    }
+
+    function getVariableHours(modelId, course) {
+        $("#variable-course").html(course.department + " " + course.catalogNumber);
+        $("#variable-modelId").val(modelId + "");
+        $("#variable-courseId").val(course.courseID);
+        $("#variable-form-modal").modal();
+    }
+
+    function updateHours(modelId) {
+        var hourCount = 0;
+        for (var i = 0; i < takenTableData[modelId].length; i++) {
+            hourCount += takenTableData[modelId][i].course.hours;
+        }
+        var remainingHours = hourRequirements[modelId] - hourCount;
+        if (remainingHours < 0) remainingHours = 0;
+
+        if (remainingHours === 0) {
+            $("#" + modelId + "-div-options").css("display", "none");
+        } else {
+            $("#" + modelId + "-div-options").css("display", "block");
+        }
+
+        $("#" + modelId + "-hours-remaining").html(remainingHours + "");
+    }
+
+    function generateSchedules() {
+        var incompleteGroups = "";
+        for (var i = 0; i < hourRequirements.length; i++) {
+            var html = $("#" + i + "-hours-remaining").html();
+            if (html !== "0") {
+                if (incompleteGroups !== "") incompleteGroups += ", ";
+                incompleteGroups += courseOptions[i].degreeElement.members.name;
+            }
+        }
+        if (incompleteGroups !== "") {
+            $("#error").html("The following groups do not meet the hour requirement: " + incompleteGroups);
+            return;
+        }
+
+        var courses = [];
+        for (var i = 0; i < courseOptions.length; i++) {
+            for (var j = 0; j < takenTableData[i].length; j++) {
+                var course = takenTableData[i][j].course;
+                course.CourseUserLinks = [];
+                courses.push(course);
+            }
+        }
+
+        var maxHoursStr = $("#max-hours").val();
+        var minHoursStr = $("#min-hours").val();
+        var minSemestersStr = $("#max-semesters").val();
+
+        var missingInfo = "";
+        if (minHoursStr === "" || maxHoursStr === "" || minSemestersStr === "") {
+            if (minHoursStr === "") {
+                missingInfo += "minimum hours per semester, ";
+            }
+            if (maxHoursStr === "") {
+                missingInfo += "maximum hours per semester, ";
+            }
+            if (minSemestersStr === "") {
+                missingInfo += "minimum semesters, ";
+            }
+            missingInfo = missingInfo.substring(0, missingInfo.length - 2);
+            $("#error").html("You must enter the following parameters: " + missingInfo);
+            return;
+        }
+
+        var maxHours = parseInt(maxHoursStr);
+        var minHours = parseInt(minHoursStr);
+        var minSemesters = parseInt(minSemestersStr);
+
+        if (maxHours < 6) {
+            $("#error").html("Maximum hours per semester must be greater than or equal to 6.");
+        }
+
+        if (minHours <= 0) {
+            $("#error").html("Minimum hours per semester must be greater than 0.");
+        }
+
+        if (minSemesters < 0) {
+            $("#error").html("Minimum semesters must be greater than or equal to 0.");
+        }
+
+        if (minHours >= maxHours) {
+            $("#error").html("Minimum hours per semester must not be greater than maximum hours per semester.");
+        }
+
+        if (maxHours < 6 || minHours <= 0 || minSemesters < 0 || minHours > maxHours) {
+            return;
+        }
+
+        var postData = {
+            degreeID: @ViewBag.DegreeId,
+            courses: courses,
+            minHoursPerSemester: minHours,
+            maxHoursPerSemester: maxHours,
+            minSemesters: minSemesters
+        };
+
+        console.log(postData);
+        $.redirect("@Url.Action("ViewDegreePlan", "Planner")", postData);
+    }
+
+</script>

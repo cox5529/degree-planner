@@ -1,39 +1,44 @@
 ﻿@using Degree_Planner.Models
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Planner/_StudentLayout.cshtml";
     ViewData["Title"] = "ViewDegreePlan";
 }
 @model DegreePlan
 <br/><br/><br/>
-<h2>Degree Plan for @Model.User.Username</h2>
-@foreach (var semester in Model.OrderedSemesters) {
-    <h4>Semester @(semester.Index + 1)</h4>
-    <p>Total hours: @Math.Max(semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours), Model.MinHours)</p>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Course Name</th>
-            <th>Course Department</th>
-            <th>Course Catalog number</th>
-            <th>Hours</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var course in semester.Courses) {
-            <tr>
-                @if (course.Department != "UARK") {
-                    <td>@course.Name</td>
-                    <td>@course.Department</td>
-                    <td>@course.CatalogNumber</td>
-                    <td>@course.Hours</td>
-                } else {
-                    <td>Free elective(s)</td>
-                    <td></td>
-                    <td></td>
-                    <td>@(Model.MinHours - semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours))</td>
-                }
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+<h2 class="mb-4">Degree Plan for @Model.User.Username</h2>
+<div class="row">
+    @foreach (var semester in Model.OrderedSemesters) {
+        <div class="col-sm-12 col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Semester @(semester.Index + 1)</h5>
+                    <h6 class="card-subtitle text-muted mb-2">Total hours: @Math.Max(semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours), Model.MinHours)</h6>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Catalog Number</th>
+                            <th>Hours</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var course in semester.Courses) {
+                            <tr>
+                                @if (course.Department != "UARK") {
+                                    <td>@course.Name</td>
+                                    <td>@(course.Department + " " + @course.CatalogNumber)</td>
+                                    <td>@course.Hours</td>
+                                } else {
+                                    <td>Free elective(s)</td>
+                                    <td></td>
+                                    <td>@(Model.MinHours - semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours))</td>
+                                }
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>

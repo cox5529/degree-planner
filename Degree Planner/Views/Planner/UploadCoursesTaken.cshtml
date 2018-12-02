@@ -1,24 +1,21 @@
 ﻿@using Degree_Planner.Models
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Planner/_StudentLayout.cshtml";
     ViewData["Title"] = "Upload courses taken";
 }
 @model Course
 <br /><br /><br />
-<h2>Upload The Courses You Have Taken</h2>
+<h2>Upload courses you have taken</h2>
 <div class="login">
     @using(Html.BeginForm("AddCourseTaken", "Planner", FormMethod.Post, new { @class = "form-upload", id = "add-course-form" })) {
         @Html.LabelFor(m => m.Department)
-        <br />
-        @Html.TextBoxFor(m => m.Department, new { @class = "form-control", id="form-department" })
-        <br />
+        @Html.TextBoxFor(m => m.Department, new { @class = "form-control mb-4", id = "form-department" })
         @Html.LabelFor(m => m.CatalogNumber, "Catalog Number")
-        <br />
-        @Html.TextBoxFor(m => m.CatalogNumber, new { @class = "form-control", id="form-catalog" })
-        <br />
+        @Html.TextBoxFor(m => m.CatalogNumber, new { @class = "form-control mb-4", id = "form-catalog" })
         <input type="submit" class="btn btn-lg btn-secondary" value="Submit" />
     }
 </div>
+<p id="form-error" class="text-danger"></p>
 <table class="table">
     <thead>
         <tr>
@@ -30,65 +27,76 @@
     <tbody id="course-data"></tbody>
 </table>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            fetchCourses();
+<script>
+    $(document).ready(function () {
+        fetchCourses();
 
-            $("#add-course-form").submit(function () {
-                var formData = $("#add-course-form").serializeArray();
-                console.log(formData);
-                $("#form-department").val("");
-                $("#form-catalog").val("");
+        $("#add-course-form").submit(function () {
+            var formData = $("#add-course-form").serializeArray();
+            console.log(formData);
+            $("#form-department").val("");
+            $("#form-catalog").val("");
+            var department = formData[0].value.toUpperCase();
+            var catalog = formData[1].value.toUpperCase();
 
+            if (department.length !== 4) {
+                $("#form-error").html("Department must contain exactly 4 characters.");
+            } else if (catalog.length < 4) {
+                $("#form-error").html("Catalog number must contain at least 4 characters.");
+            } else {
                 $.ajax({
                     type: "POST",
                     timeout: 10000,
                     url: "@Url.Action("AddCourseTaken", "Planner")",
-                    data: { department: formData[0].value, catalog: formData[1].value },
+                    data: { department: department, catalog: catalog },
                     success: function (data) {
                         if (data !== "false") {
+                            $("#form-error").html("");
                             updateCourseTable(data);
+                        } else {
+                            $("#form-error").html(department +
+                                " " +
+                                catalog +
+                                " does not exist in the system. Contact an administrator to get it added if it exists.");
                         }
                     }
                 });
-
-                return false;
-            });
+            }
+            return false;
         });
+    });
 
-        function removeCourse(department, catalog) {
-            $.ajax({
-                type: "POST",
-                timeout: 10000,
-                url: "@Url.Action("RemoveCourseTaken", "Planner")",
-                data: { department: department, catalog: catalog },
-                success: function(data) {
-                    if (data !== "false") {
-                        updateCourseTable(data);
-                    }
-                }
-            });
-        }
-
-        function fetchCourses() {
-            $.ajax({
-                type: "POST",
-                timeout: 10000,
-                url: "@Url.Action("GetCoursesTaken", "Planner")",
-                success: function (data) {
+    function removeCourse(department, catalog) {
+        $.ajax({
+            type: "POST",
+            timeout: 10000,
+            url: "@Url.Action("RemoveCourseTaken", "Planner")",
+            data: { department: department, catalog: catalog },
+            success: function(data) {
+                if (data !== "false") {
                     updateCourseTable(data);
                 }
-            });
-        }
-
-        function updateCourseTable(data) {
-            var html = "";
-            for (var i = 0; i < data.length; i++) {
-                var elem = data[i];
-                html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td><td><button type='button' onclick='removeCourse(\"" + elem.department + "\", \"" + elem.catalogNumber + "\");' class='btn btn-sm btn-outline-danger'>Remove</button></td></tr>";
             }
-            $("#course-data").html(html);
+        });
+    }
+
+    function fetchCourses() {
+        $.ajax({
+            type: "POST",
+            timeout: 10000,
+            url: "@Url.Action("GetCoursesTaken", "Planner")",
+            success: function (data) {
+                updateCourseTable(data);
+            }
+        });
+    }
+
+    function updateCourseTable(data) {
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+            var elem = data[i];
+            html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td><td><button type='button' onclick='removeCourse(\"" + elem.department + "\", \"" + elem.catalogNumber + "\");' class='btn btn-sm btn-outline-danger'>Remove</button></td></tr>";
         }
-    </script>
-}
+        $("#course-data").html(html);
+    }
+</script>

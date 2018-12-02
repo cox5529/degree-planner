@@ -1,17 +1,12 @@
-﻿using System;
-using Degree_Planner.Models;
+﻿using Degree_Planner.Models;
 using Degree_Planner.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using Microsoft.EntityFrameworkCore.Internal;
-using Newtonsoft.Json;
 
 namespace Degree_Planner.Controllers {
 	public class PlannerController : Controller {
@@ -26,7 +21,12 @@ namespace Degree_Planner.Controllers {
 			using(var context = new DegreePlannerContext()) {
 				user = context.Users.Include(u => u.DegreePlan).FirstOrDefault(u => u.UserID == user.UserID);
 			}
-			return View(user);
+
+			if (user.IsAdmin) {
+				return RedirectToAction("AdministerUsers", "Planner");
+			}
+
+			return RedirectToAction("ViewDegreePlan", "Planner");
 		}
 
 		public IActionResult UploadCoursesTaken() {
@@ -69,7 +69,7 @@ namespace Degree_Planner.Controllers {
 					.FirstOrDefault(dp => dp.User.UserID == user.UserID);
 
 				if(plan == null) {
-					return RedirectToAction("Index", "Planner");
+					return RedirectToAction("GenerateSchedules", "Planner");
 				}
 
 				foreach (var semester in plan.Semesters) {
