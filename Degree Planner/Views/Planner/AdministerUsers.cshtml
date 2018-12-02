@@ -4,13 +4,13 @@
     ViewData["Title"] = "Administration";
 }
 @model IList<User>
-
+<br/><br/><br/>
 <h2>Administration</h2>
-<table>
+<table class="table">
     <thead>
     <tr>
         <th>Username</th>
-        <th>Is admin?</th>
+        <th>Is Admin?</th>
         <th>Toggle admin</th>
     </tr>
     </thead>
@@ -19,7 +19,7 @@
         <tr id="user-@user.UserID">
             <td>@user.Username</td>
             <td id="is-admin-@user.UserID">@user.IsAdmin.ToString().ToLower()</td>
-            <td><a href="javascript:toggleAdmin(@user.UserID, @user.IsAdmin.ToString().ToLower())">Toggle</a></td>
+            <td><a href="javascript:toggleAdmin(@user.UserID, @user.IsAdmin.ToString().ToLower())" class="btn btn-sm btn-secondary">Toggle</a></td>
         </tr>
     }
     </tbody>

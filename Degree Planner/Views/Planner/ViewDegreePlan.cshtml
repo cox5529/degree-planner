@@ -4,17 +4,17 @@
     ViewData["Title"] = "ViewDegreePlan";
 }
 @model DegreePlan
-
-<h2>View degree plan for @Model.User.Username</h2>
+<br/><br/><br/>
+<h2>Degree Plan for @Model.User.Username</h2>
 @foreach (var semester in Model.OrderedSemesters) {
     <h4>Semester @(semester.Index + 1)</h4>
     <p>Total hours: @Math.Max(semester.Courses.Where(c => c.Department != "UARK").Sum(c => c.Hours), Model.MinHours)</p>
-    <table>
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th>Course name</th>
-            <th>Course department</th>
-            <th>Course catalog number</th>
+            <th>Course Name</th>
+            <th>Course Department</th>
+            <th>Course Catalog number</th>
             <th>Hours</th>
         </tr>
         </thead>

@@ -5,17 +5,17 @@
 }
 @model Degree_Planner.Models.ViewModels.SelectCoursesVm
 
-<h2>Select courses for group @Model.DegreeElement.Members.Name</h2>
+<h2>Select Courses for Group: @Model.DegreeElement.Members.Name</h2>
 <p>Hours remaining: <span id="@Model.IdPrefix-hours-remaining">@Model.DegreeElement.Hours</span></p>
 
-<div id="@Model.IdPrefix-div-options">
+<div class="input-group mb-3" id="@Model.IdPrefix-div-options">
     <h4>Course options</h4>
     @if (Model.DegreeElement.Members.Courses.Any(c => !c.CatalogNumber.EndsWith("E"))) {
         <table class="table">
             <thead>
             <tr>
-                <th>Course name</th>
-                <th>Course catalog number</th>
+                <th>Course Name</th>
+                <th>Course Catalog Number</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -35,12 +35,12 @@
             }
             <br />
             <br />
-            <label for="@Model.IdPrefix-form-catalog">Course catalog number</label>
+            <label for="@Model.IdPrefix-form-catalog">Course Catalog Number</label>
             <br />
             <input id="@Model.IdPrefix-form-catalog" name="catalog-number" type="text" required />
             <br />
             <br />
-            <input type="submit" value="Add elective" />
+            <input type="submit" class="btn btn-secondary" value="Add Elective" />
         </form>
         break;
     }

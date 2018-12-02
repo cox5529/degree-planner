@@ -18,7 +18,7 @@
 
 
 @using(Html.BeginForm(FormMethod.Post, new {@class = "form-signin"})) {
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
     @Html.AntiForgeryToken()
     
     @Html.LabelFor(m => m.Username)
@@ -45,7 +45,7 @@
     </label>
     </div>
     <br />
-    <input type="submit" value = "Submit" />
+    <input type="submit" class="btn btn-lg btn-secondary" value = "Submit" />
     @Html.ActionLink("Create account", "CreateAccount")
     @if(!string.IsNullOrEmpty(Model.Message)) {
         <p>@Model.Message</p>

@@ -13,6 +13,12 @@
      padding: 15px;
      margin: auto;
 }
+.form-upload{
+    width: 100%;
+    max-width: 330px;
+    
+   
+}
 .form-signin .form-control {
     position: relative;
     box-sizing: border-box;

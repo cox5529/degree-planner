@@ -5,15 +5,17 @@
     ViewData["Title"] = "Generate Schedules";
 }
 @model GenerateDegreeVm
-
+<br/><br/><br/>
 <h2>Generate Schedules</h2>
+<div class="login">
 @using(Html.BeginForm(FormMethod.Post, new { id = "generate-form" })) {
     @Html.AntiForgeryToken()
     @Html.LabelFor(m => m.DegreeID)
     <br />
-    @Html.DropDownListFor(m => m.DegreeID, Model.Options, "-- Select one --", new { })
+    @Html.DropDownListFor(m => m.DegreeID, Model.Options, "-- Select one --", new {@class="btn btn-lg btn-secondary" })
     <br />
-    @Html.ValidationMessageFor(m => m.DegreeID)
-    <br />
-    <input type="submit" />
+    @Html.ValidationMessageFor(m => m.DegreeID, "", new {@class="text-danger"})
+    <br /><br />
+    <input type="submit" value="Submit" class="btn btn-lg btn-secondary"/>
 }
+</div>

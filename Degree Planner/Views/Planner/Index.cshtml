@@ -4,25 +4,25 @@
     ViewData["Title"] = "Index";
 }
 @model User
-
-<h2>Currently logged in as @Model.Username</h2>
+<br/><br/><br/>
+<h2>Welcome @Model.Username</h2>
 
 @if(Model.IsAdmin) {
-    <h4>You are an admin</h4>
-    @Html.ActionLink("Upload degree csv", "UploadDegree", "Planner")
-    <br />
-    @Html.ActionLink("Upload course group csv", "UploadCourseGroup", "Planner")
-    <br />
-    @Html.ActionLink("Upload prerequisite csv", "UploadCourseList", "Planner")
-    <br />
-    @Html.ActionLink("Administration", "AdministerUsers", "Planner")
+    <h4>Administrator</h4>
+    @Html.ActionLink("Upload Degree CSV", "UploadDegree", "Planner", null, new {@class="btn btn-lg btn-secondary"})
+    <br /><br />
+    @Html.ActionLink("Upload Course Group CSV", "UploadCourseGroup", "Planner", null, new {@class="btn btn-lg btn-secondary"})
+    <br /><br />
+    @Html.ActionLink("Upload Prerequisite CSV", "UploadCourseList", "Planner", null, new {@class="btn btn-lg btn-secondary"})
+    <br /><br />
+    @Html.ActionLink("Administration", "AdministerUsers", "Planner", null, new {@class="btn btn-lg btn-secondary"})
 } else {
-    <h4>You are a student</h4>
-    @Html.ActionLink("Add courses taken", "UploadCoursesTaken", "Planner", null, new {@class="badge badge-primary"})
-    <br />
-    @Html.ActionLink("Generate degree plans", "GenerateSchedules", "Planner")
+    <h4>Student</h4>
+    @Html.ActionLink("Add Courses Taken", "UploadCoursesTaken", "Planner", null, new {@class="btn btn-lg btn-secondary"})
+    <br /><br />
+    @Html.ActionLink("Generate Degree Plans", "GenerateSchedules", "Planner", null, new {@class="btn btn-lg btn-secondary"})
     if (Model.DegreePlan != null) {
-        <br />
-        @Html.ActionLink("View current degree plan", "ViewDegreePlan")
+        <br /><br />
+        @Html.ActionLink("View Current Degree Plan", "ViewDegreePlan", "Planner", null, new {@class="btn btn-lg btn-secondary"})
     }
 }

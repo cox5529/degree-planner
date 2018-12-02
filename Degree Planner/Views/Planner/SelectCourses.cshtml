@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model IList<Degree_Planner.Models.ViewModels.SelectCoursesVm>
+<br/><br/><br/>
 
-<h2>Select courses</h2>
 @foreach(var degreeElement in Model) {
     await Html.RenderPartialAsync("_SelectCoursesPartial", degreeElement);
 }
@@ -26,7 +26,7 @@
 <input type="number" name="max-semesters" id="max-semesters" />
 <br />
 <br />
-<button id="generate-button" onclick="generateSchedules()">Generate schedules</button>
+<button id="generate-button" class="btn btn-lg btn-secondary" onclick="generateSchedules()">Generate schedules</button>
 
 @section scripts {
     <script>
