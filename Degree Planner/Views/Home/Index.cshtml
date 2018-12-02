@@ -38,7 +38,7 @@
                     <br />
                     <div class="checkbox mb-3">
                         <label>
-                            @Html.CheckBoxFor(m => m.AGREE)  I agree the <a href="javascript:$('#terms').modal()">terms and conditions</a> for Frank's Favorite Degree Planner
+                            @Html.CheckBoxFor(m => m.AGREE)  I agree the <a href="#" onclick="$('#terms').modal()">terms and conditions</a> for Frank's Favorite Degree Planner
                             <br />
                             @Html.ValidationMessageFor(m => m.AGREE, "", new { @class = "text-danger" })
                         </label>
@@ -46,8 +46,8 @@
                     <br />
                     <input type="submit" class="btn btn-lg btn-secondary" value="Submit" />
                     @Html.ActionLink("Create account", "CreateAccount")
-                    @if(!string.IsNullOrEmpty(Model.Message)) {
-                        <p>@Model.Message</p>
+                    if(!string.IsNullOrEmpty(Model.Message)) {
+                        <p class="text-danger">@Model.Message</p>
                     }
                 }
             </div>
