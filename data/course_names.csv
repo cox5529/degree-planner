@@ -1,931 +1,933 @@
-AAST2023,"The African American Experience"
-ACCT3533,"Accounting Technology"
-ACCT3723,"Intermediate Accounting I"
-ACCT3753,"Intermediate Accounting II"
-ACCT3843,"Fundamentals of Taxation I"
-ACCT4673,"Product"
-ACCT4963,"Audit and Assurance Services"
-AERO3013,"Air Force Leadership Studies I"
-AERO3023,"Air Force Leadership Studies II"
-AERO4013,"National Security Affairs and Preparation for Active Duty I"
-AERO4023,"National Security Affairs and Preparation for Active Duty II"
-AGEC1103,"Principles of Agricultural Microeconomics"
-AGEC2103,"Principles of Agricultural Macroeconomics"
-ANTH1014,"Introduction to Biological Anthropology (with Lab)"
-ANTH1023,"Introduction to Cultural Anthropology "
-ARAB2013,"Intermediate Arabic II"
-ARAB2016,"Intensive Arabic II"
-ARCH1003,"Basic Course in the Arts:  Architecture Lecture"
-ARCH1013,"Diversity and Design"
-ARHS1003,"Basic Course in the Arts:  Art Lecture "
-ARHS2913,"Art History Survey I "
-ARHS2923,"Art History Survey II "
-ASTR2003,"Survey of the Universe "
-ASTR2004,"Survey of the Universe (with Lab)"
-ASTR301V,"Observational Astronomy"
-ASTR4033,"Astrophysics I: Stars and Planetary Systems"
-ASTR4043,"Astrophysics II: Galaxies and the Large-Scale Universe"
-ASTR4073,"Cosmology"
-ASTR5043,"Astrophysics II: Galaxies and the Large-Scale Universe"
-BENG2632,"Biological Engineering Design Studio"
-BENG2643,"Biological Engineering Methods I"
-BENG3113,"Measurement and Control for Biological Systems"
-BENG3113H,"Honors Measurement and Control for Biological Systems"
-BENG3603,"Metrics for Sustainable Agricultural Systems"
-BENG3653,"Global Bio-Energy Engineering"
-BENG3663,"Biological Engineering Methods II"
-BENG3723,"Unit Operations in Biological Engineering"
-BENG3733,"Transport Phenomena in Biological Systems"
-BENG4123,"Biosensors & Bioinstrumentation"
-BENG450V,"Special Problems"
-BENG451VH,"Honors Thesis"
-BENG452V,"Special Topics in Biological Engineering"
-BENG4663,"Sustainable Biosystems Designs"
-BENG4703,"Biotechnology Engineering"
-BENG4743,"Food and Bio-Product Systems Engineering"
-BENG4753L,"Nanotechnology Laboratory"
-BENG4753M,"Honors Nanotechnology Laboratory"
-BENG4812,"Senior Biological Engineering Design I"
-BENG4823,"Senior Biological Engineering Design II"
-BENG4831,"Biological Engineering Professionalism"
-BENG4933,"Sustainable Watershed Engineering"
-BIOL1524,"Biological Principles"
-BIOL1543,"Principles of Biology "
-BIOL1544,"Principles of Biology (with Lab)"
-BIOL1584,"Biology for Majors"
-BIOL1604,"Principles of Zoology (with Lab)"
-BIOL1614,"Plant Biology (with Lab)"
-BIOL2013,"General Microbiology "
-BIOL2014,"General Microbiology (with Lab)"
-BIOL2213,"Human Physiology "
-BIOL2214,"Human Physiology (with Lab)"
-BIOL2321L,"General Genetics Laboratory"
-BIOL2323,"General Genetics"
-BIOL2444,"Human Anatomy (with Lab)"
-BIOL2533,"Cell Biology"
-BIOL3004,"Principles of Plant Pathology"
-BIOL3011L,"Introduction to Insect Identification Lab"
-BIOL3013,"Introduction to Entomology"
-BIOL3023,"Evolutionary Biology"
-BIOL3123,"Prokaryote Biology"
-BIOL3123H,"Honors Prokaryote Biology"
-BIOL3273,"UAteach Research Methods"
-BIOL3273H,"Honors UAteach Research Methods"
-BIOL3404,"Comparative Vertebrate Morphology"
-BIOL3861L,"General Ecology Laboratory"
-BIOL3863,"General Ecology"
-BIOL3864,"General Ecology (with Lab)"
-BIOL3923H,"Honors Colloquium"
-BIOL4003,"Laboratory in Prokaryote Biology"
-BIOL4013,"Insect Behavior and Chemical Ecology"
-BIOL4024,"Insect Diversity and Taxonomy"
-BIOL4053,"Insect Ecology"
-BIOL4104,"Taxonomy of Flowering Plants"
-BIOL4114,"Dendrology"
-BIOL4122,"Food Microbiology"
-BIOL4133,"Plant Disease Control"
-BIOL4143,"Advanced Methods in Microscopy"
-BIOL4153,"Biology of Global Change"
-BIOL4154H,"Honors Biology of Global Change"
-BIOL4163,"Dynamic Models in Biology"
-BIOL4174,"Conservation Genetics"
-BIOL4213,"Biological Regulation and Subcellular Communication"
-BIOL4233,"Genomics and Bioinformatics"
-BIOL4233H,"Honors Genomics and Bioinformatics"
-BIOL4234,"Comparative Physiology"
-BIOL4252,"Biology of Global Change Seminar"
-BIOL4252H,"Honors Biology of Global Change Seminar"
-BIOL4263,"Cell Physiology"
-BIOL4263H,"Honors Cell Physiology"
-BIOL4273,"Endocrinology"
-BIOL4303,"Plant Physiology"
-BIOL4313,"Molecular Cell Biology"
-BIOL4313H,"Honors Molecular Cell Biology"
-BIOL4323,"Comparative Neurobiology"
-BIOL4333,"Biotechnology in Agriculture"
-BIOL4353,"Ecological Genetics/Genomics"
-BIOL4404,"Comparative Botany"
-BIOL4424,"Mycology"
-BIOL4433,"Principles of Evolution"
-BIOL4463,"Physiological Ecology"
-BIOL4511L,"Population Ecology Laboratory"
-BIOL4513,"Population Ecology"
-BIOL4514,"Population Ecology (with Lab)"
-BIOL4523,"Plant Ecology"
-BIOL4543,"Developmental Biology"
-BIOL4554,"Developmental Biology with Laboratory"
-BIOL4563,"Cancer Biology"
-BIOL4613,"Primate Adaptation and Evolution"
-BIOL4634,"Wetlands Ecology and Management"
-BIOL4693,"Forest Ecology"
-BIOL4703,"Mechanisms of Pathogenesis"
-BIOL4703H,"Honors Mechanisms of Pathogenesis"
-BIOL4711L,"Basic Immunology Laboratory"
-BIOL4713,"Basic Immunology"
-BIOL4713H,"Honors Basic Immunology"
-BIOL4714,"Basic Immunology (with Lab)"
-BIOL4724,"Protistology"
-BIOL4734,"Wildlife Management Techniques"
-BIOL4744,"Fish Biology"
-BIOL4753,"General Virology"
-BIOL4763,"Ornithology"
-BIOL4774,"Biometry"
-BIOL4783,"Mammalogy"
-BIOL4793,"Introduction to Neurobiology"
-BIOL480V,"Special Topics in Biological Sciences"
-BIOL480VH,"Honors Special Topics in Biological Sciences"
-BIOL4814,"Limnology"
-BIOL4833,"Animal Behavior"
-BIOL4844,"Community and Ecosystem Ecology"
-BIOL485V,"Field Ecology"
-BIOL4863,"Analysis of Animal Populations"
-BIOL4873,"Microbial Molecular Genetics and Informatics"
-BIOL4873H,"Honors Microbial Molecular Genetics and Informatics"
-BIOL496V,"Culture and Environment:  Field Studies"
-BIOL496VH,"Honors Culture and Environment:  Field Studies"
-BIOL498V,"Senior Thesis"
-BIOL499V,"Research In Biological Sciences"
-BIOL499VH,"Honors Research in Biological Sciences"
-BMEG2614,"Introduction to Biomedical Engineering"
-BMEG2813,"Biomechanical Engineering"
-BMEG2904,"Biomedical Instrumentation"
-BMEG3124,"Biomedical Signals and Systems"
-BMEG3634,"Biomaterials"
-BMEG3653,"Biomedical Modeling and Numerical Methods"
-BMEG3653H,"Honors Biomedical Modeling and Numerical Methods"
-BMEG3801,"Clinical Observations and Needs Finding"
-BMEG3824,"Biomolecular Engineering"
-BMEG3824H,"Honors Biomolecular Engineering"
-BMEG400E,"Biomedical Engineering Elective (4000+ Level)"
-BMEG4103L,"Nanotechnology Laboratory"
-BMEG4103M,"Honors Nanotechnology Laboratory"
-BMEG4213,"Tissue Mechanics"
-BMEG4243,"Advanced Biomaterials and Biocompatibility"
-BMEG4403,"Biomedical Microscopy"
-BMEG4413,"Tissue Engineering"
-BMEG450VH,"Honors Thesis"
-BMEG4513,"Biomedical Optics and Imaging"
-BMEG4523,"Biomedical Data and Image Analysis"
-BMEG460V,"Individual Study"
-BMEG460VH,"Honors Individual Study"
-BMEG4623,"Biomedical Transport Phenomena"
-BMEG4623H,"Honors Biomedical Transport Phenomena"
-BMEG470V,"Special Topics in Biomedical Engineering"
-BMEG4713,"Cardiovascular Physiology and Devices"
-BMEG4743,"Drug and Gene Delivery"
-BMEG4813,"Biomedical Engineering Design I"
-BMEG4823,"Biomedical Engineering Design II"
-BMEG4873,"Bionanotechnology"
-CHEG2113,"Introduction to Chemical Engineering I"
-CHEG2133,"Fluid Mechanics"
-CHEG2313,"Thermodynamics of Single-Component Systems"
-CHEG3144,"Heat and Mass Transfer"
-CHEG3144H,"Honors Heat and Mass Transfer"
-CHEG3233L,"Chemical Engineering Laboratory I"
-CHEG3253,"Chemical Engineering Computer Methods"
-CHEG3323,"Thermodynamics of Multi-Component Systems"
-CHEG3323H,"Honors Thermodynamics of Multi-Component Systems"
-CHEG3333,"Chemical Engineering Reactor Design"
-CHEG3333H,"Honors Chemical Engineering Reactor Design"
-CHEG3713,"Chemical Engineering Materials Technology"
-CHEG4163,"Separation Processes"
-CHEG4163H,"Honors Separation Processes"
-CHEG4273,"Corrosion Control"
-CHEG4332L,"Chemical Engineering Laboratory II"
-CHEG4413,"Chemical Engineering Design I"
-CHEG4413H,"Honors Chemical Engineering Design I"
-CHEG4423,"Automatic Process Control"
-CHEG4423H,"Honors Automatic Process Control"
-CHEG4443,"Chemical Engineering Design II"
-CHEG4443H,"Honors Chemical Engineering Design II"
-CHEG4813,"Chemical Process Safety"
-CHEG4813H,"Honors Chemical Process Safety"
-CHEG488V,"Special Problems"
-CHEG488V,"Special Problems"
-CHEG5013,"Membrane Separation and System Design"
-CHEG5033,"Technical Administration"
-CHEG5043,"Colloid and Interface Science"
-CHEG5113,"Transport Processes I"
-CHEG5133,"Advanced Reactor Design"
-CHEG5213,"Advanced Chemical Engineering Calculations"
-CHEG5333,"Advanced Thermodynamics"
-CHEG5353,"Advanced Separations"
-CHEG5513,"Biochemical Engineering Fundamentals"
-CHEG5733,"Polymer Theory and Practice"
-CHEG5801,"Graduate Seminar"
-CHEG588V,"Special Problems"
-CHEG600V,"Master's Thesis"
-CHEG6123,"Transport Processes II"
-CHEG6203,"Preparation of Research Proposals"
-CHEG6801,"Graduate Seminar"
-CHEG688V,"Special Topics in Chemical Engineering"
-CHEM1074,"Fundamentals of Chemistry (with Lab)"
-CHEM1103,"University Chemistry I "
-CHEM1104,"University Chemistry I (with Lab)"
-CHEM1123,"University Chemistry II "
-CHEM1124,"University Chemistry II (with Lab)"
-CHEM1203,"Chemistry for Majors I"
-CHEM1204,"Chemistry for Majors I (with Lab)"
-CHEM2261L,"Analytical Chemistry Laboratory"
-CHEM2263,"Analytical Chemistry Lecture"
-CHEM2264,"Analytical Chemistry (with Lab)"
-CHEM2611L,"Organic Physiological Chemistry Laboratory "
-CHEM2613,"Organic Physiological Chemistry "
-CHEM2614,"Organic Physiological Chemistry (with Lab)"
-CHEM3203,"Forensic Chemistry"
-CHEM3273,"UAteach Research Methods"
-CHEM3451L,"Elements of Physical Chemistry Laboratory"
-CHEM3453,"Elements of Physical Chemistry"
-CHEM3454,"Elements of Physical Chemistry (with Lab)"
-CHEM3504,"Physical Chemistry I"
-CHEM3512L,"Physical Chemistry Laboratory"
-CHEM3514,"Physical Chemistry II"
-CHEM3601L,"Organic Chemistry I Laboratory"
-CHEM3603,"Organic Chemistry I"
-CHEM3604,"Organic Chemistry I (with Lab)"
-CHEM3611L,"Organic Chemistry II Laboratory"
-CHEM3613,"Organic Chemistry II"
-CHEM3614,"Organic Chemistry II (with Lab)"
-CHEM3702L,"Organic Chemistry I Lab for Chemistry Majors"
-CHEM3703,"Organic Chemistry I Lecture for Chemistry Majors"
-CHEM3712L,"Organic Chemistry II Lab for Chemistry Majors"
-CHEM3713,"Organic Chemistry II  Lecture for Chemistry Majors"
-CHEM3813,"Elements of Biochemistry"
-CHEM3923H,"Honors Colloquium"
-CHEM400V,"Chemistry Research"
-CHEM4011H,"Honors Seminar"
-CHEM405V,"Special Topics in Chemistry"
-CHEM4123,"Advanced Inorganic Chemistry I"
-CHEM4153L,"Nanotechnology Laboratory"
-CHEM4214,"Instrumental Analysis (with Lab)"
-CHEM4283,"Energy Conversion and Storage"
-CHEM4443,"Physical Chemistry of Materials"
-CHEM4723,"Experimental Methods in Organic Chemistry"
-CHEM4813H,"Honors Biochemistry I"
-CHEM4843H,"Honors Biochemistry II"
-CHEM4853,"Biochemical Techniques"
-CHEM4853,"Biochemical Techniques"
-CHIN2003,"Intermediate Chinese I"
-CHIN2013,"Intermediate Chinese II"
-CLST1003,"Introduction to Classical Studies: Greece"
-CLST1013,"Introduction to Classical Studies: Rome"
-COMM1003,"Basic Course in the Arts: Film Lecture"
-COMM1023,"Communication in a Diverse World"
-COMM1233,"Media"
-COMM1313,"Public Speaking "
-CSCE2004,"Programming Foundations I"
-CSCE2014,"Programming Foundations II"
-CSCE2114,"Digital Design"
-CSCE2214,"Computer Organization"
-CSCE3193,"Programming Paradigms"
-CSCE3193H,"Honors Programming Paradigms"
-CSCE3213,"Cluster Computing"
-CSCE3513,"Software Engineering"
-CSCE3613,"Operating Systems"
-CSCE3613H,"Honors Operating Systems"
-CSCE3953,"System Synthesis and Modeling"
-CSCE400E,"Computer Science/Computer Engineering Elective (4000+ Level)"
-CSCE4013,"Special Topics"
-CSCE4023H,"Honors Special Topics"
-CSCE4043,"RFID Information Systems Security"
-CSCE4114,"Embedded Systems"
-CSCE4123,"Programming Challenges"
-CSCE4133,"Algorithms"
-CSCE4143,"Data Mining"
-CSCE4213,"Computer Architecture"
-CSCE4233,"Low Power Digital Systems"
-CSCE4253,"Concurrent Computing"
-CSCE4263,"Advanced Data Structures"
-CSCE4323,"Formal Languages and Computability"
-CSCE4333,"Introduction to Integrated Circuit Design"
-CSCE4353,"CPLD/FPGA-Based System Design"
-CSCE4423,"Computer Systems Modeling"
-CSCE4433,"Cryptography"
-CSCE4523,"Database Management Systems"
-CSCE4543,"Software Architecture"
-CSCE4561,"Capstone I"
-CSCE4613,"Artificial Intelligence"
-CSCE4623,"Mobile Programming"
-CSCE4643,"Graphics Processing Units Programming"
-CSCE4753,"Computer Networks"
-CSCE4813,"Computer Graphics"
-CSCE4853,"Information Security"
-CSCE490V,"Individual Study"
-CSCE4914,"Advanced Digital Design"
-CSCE491VH,"Honors Thesis"
-CSCE4963,"Capstone II"
-CSES2203,"Soil Science"
-CSES2203,"Soil Science"
-CSES3023,"Crop"
-CSES3112,"Forage Management"
-CSES3214,"Soil Resources and Nutrient Cycles"
-CSES3312,"Cotton Production"
-CSES3322,"Soybean Production"
-CSES3332,"Rice Production"
-CSES3342,"Cereal Grain Production"
-CSES355V,"Soil Profile Description"
-CSES462V,"Internship"
-CSES5214,"Analytical Research Techniques in Agronomy"
-CSES5224,"Soil Physics"
-CSES5264,"Microbial Ecology"
-CSES5453,"Soil Chemistry"
-CVEG2002,"Introduction to Civil Engineering Plans and CADD"
-CVEG2015,"Fundamentals of Mechanics for Civil Engineers"
-CVEG2054,"Surveying Systems (with Lab)"
-CVEG2113,"Structural Materials"
-CVEG2851,"Engineering Professional Practice Issues"
-CVEG3131L,"Soil Mechanics Laboratory"
-CVEG3133,"Soil Mechanics"
-CVEG3134,"Soil Mechanics (with Lab)"
-CVEG3213,"Hydraulics"
-CVEG3223,"Hydrology"
-CVEG3243,"Environmental Engineering"
-CVEG3303,"Structural Analysis"
-CVEG3413,"Transportation Systems Engineering"
-CVEG400E,"Civil Engineering Elective (4000+ Level)"
-CVEG4053,"Land Surveying"
-CVEG4083,"Control Surveys"
-CVEG4143,"Foundation Engineering"
-CVEG4153,"Earth Structures"
-CVEG4203,"Environmental Regulations and Permits"
-CVEG4223,"Groundwater Hydrology"
-CVEG4243,"Environmental Engineering Design"
-CVEG4253,"Small Community Wastewater Systems"
-CVEG4263,"Air Pollution Control"
-CVEG4273,"Open Channel Flow"
-CVEG4303,"Reinforced Concrete Design I"
-CVEG4313,"Structural Steel Design I"
-CVEG4323,"Structural Loadings"
-CVEG4343,"Reinforced Masonry Design"
-CVEG4353,"Timber Design"
-CVEG4393,"Reinforced Concrete Design II"
-CVEG4413,"Pavement Evaluation and Rehabilitation"
-CVEG4423,"Transportation Infrastructure"
-CVEG4433,"Transportation Pavements and Materials"
-CVEG4513,"Construction Management"
-CVEG4812,"Environmental Design Project"
-CVEG4822,"Geotechnical Design Project"
-CVEG4832,"Structural Design Project"
-CVEG4842,"Transportation Design Project"
-CVEG4863,"Sustainability in Civil Engineering"
-CVEG488V,"Special Problems"
-CVEG488VH,"Honors Special Problems"
-CVEG4890,"Fundamentals of Engineering Seminar"
-CVEG491VH,"Honors Studies in Geotechnical Engineering"
-CVEG492VH,"Honors Studies in Environmental Engineering"
-CVEG493VH,"Honors Studies in Structural Engineering"
-CVEG494VH,"Honors Studies in Transportation Engineering"
-CVEG4983H,"Honors Undergraduate Thesis"
-DANC1003,"Basic Course in the Arts: Movement and Dance"
-ECON2013,"Principles of Macroeconomics "
-ECON2023,"Principles of Microeconomics "
-ECON2143,"Basic Economics: Theory and Practice"
-ECON3033,"Microeconomic Theory"
-ECON3133,"Macroeconomic Theory"
-ECON3843,"Economic Development"
-ECON3853,"Emerging Markets"
-ECON3933,"The Japanese Economic System"
-ECON4633,"International Trade"
-ECON4643,"International Macroeconomics and Finance"
-ECON468V,"International Economics and Business Seminar"
-ELEG2104,"Electric Circuits I"
-ELEG2114,"Electric Circuits II"
-ELEG2904,"Digital Design"
-ELEG3124,"System & Signal Analysis"
-ELEG3124H,"Honors System & Signal Analysis"
-ELEG3143,"Probability & Stochastic Processes"
-ELEG3143H,"Honors Probability & Stochastic Processes"
-ELEG3214,"Electronics I"
-ELEG3214H,"Honors Electronics I"
-ELEG3224,"Electronics II"
-ELEG3224H,"Honors Electronics II"
-ELEG3304,"Energy Systems"
-ELEG3304H,"Honors Energy Systems"
-ELEG3704,"Applied Electromagnetics"
-ELEG3704H,"Honors Applied Electromagnetics"
-ELEG387V,"Special Topics in Electrical Engineering"
-ELEG3903,"Electric Circuits and Machines"
-ELEG3924,"Microprocessor Systems Design"
-ELEG3924H,"Honors Microprocessor Systems Design"
-ELEG3933,"Circuits & Electronics"
-ELEG400E,"Electrical Engineering Elective (4000+ Level)"
-ELEG400VH,"Honors Senior Thesis"
-ELEG4063,"Electrical Engineering Design I"
-ELEG4063H,"Honors Electrical Engineering Design I"
-ELEG4071,"Electrical Engineering Design II"
-ELEG4071H,"Honors Electrical Engineering Design II"
-ELEG4203,"Semiconductor Devices"
-ELEG4203H,"Honors Semiconductor Devices"
-ELEG4213,"MEMS and Microsensors"
-ELEG4223,"Design and Fabrication of Solar Cells"
-ELEG4233,"Introduction to Integrated Circuit Design"
-ELEG4233H,"Honors Introduction to Integrated Circuit Design"
-ELEG4243,"Analog Integrated Circuits"
-ELEG4253,"Nanotechnology in Engineering & Medicine"
-ELEG4283,"Mixed Signal Test Engineering I"
-ELEG4293,"Mixed-Signal Modeling & Simulation"
-ELEG4303,"Introduction to Nanomaterials and Devices"
-ELEG4343,"Organic Electronics Technology"
-ELEG4403,"Control Systems"
-ELEG4403H,"Honors Control Systems"
-ELEG4413,"Advanced Control Systems"
-ELEG4423,"Optimal Control"
-ELEG4463L,"Control Systems Laboratory"
-ELEG4473,"Power System Operation and Control"
-ELEG4503,"Design of Advanced Electric Power Distribution Systems"
-ELEG4503H,"Honors Design of Advanced Electric Power Distribution Systems"
-ELEG4513,"Power and Energy Systems Analysis"
-ELEG4523,"Quality of Electric Power"
-ELEG4533,"Power Electronics and Motor Drives"
-ELEG4543,"Introduction to Power Electronics"
-ELEG4553,"Switch Mode Power Conversion"
-ELEG4603,"Deterministic Digital Signal Processing System Design"
-ELEG4623,"Communication Systems"
-ELEG4703,"Introduction to RF and Microwave Design"
-ELEG4703H,"Honors Introduction to RF and Microwave Design"
-ELEG4773,"Electronic Response of Biological Tissues"
-ELEG4783,"Introduction to Antennas"
-ELEG4783H,"Honors Introduction to Antennas"
-ELEG487V,"Special Topics in Electrical Engineering"
-ELEG487VH,"Honors Special Topics in Electrical Engineering"
-ELEG488V,"Special Problems"
-ELEG488VH,"Honors Special Problems"
-ELEG4914,"Advanced Digital Design"
-ELEG4914H,"Honors Advanced Digital Design"
-ELEG4963,"CPLD/FPGA Based System Design"
-ELEG4963H,"Honors CPLD/FPGA Based System Design"
-ELEG4983,"Computer Architecture"
-ENGL1013,"Composition I "
-ENGL1023,"Composition II "
-ENGL1213,"Introduction to Literature"
-ENGL2023,"Creative Writing I "
-ENGL3053,"Technical and Report Writing "
-ENSC1004,"Environmental Science (with Lab)"
-ENSC4023,"Water Quality"
-ENSC4034,"Analysis of Environmental Contaminants"
+AAST2023,The African American Experience
+ACCT3533,Accounting Technology
+ACCT3723,Intermediate Accounting I
+ACCT3753,Intermediate Accounting II
+ACCT3843,Fundamentals of Taxation I
+ACCT4673,Product
+ACCT4963,Audit and Assurance Services
+AERO3013,Air Force Leadership Studies I
+AERO3023,Air Force Leadership Studies II
+AERO4013,National Security Affairs and Preparation for Active Duty I
+AERO4023,National Security Affairs and Preparation for Active Duty II
+AGEC1103,Principles of Agricultural Microeconomics
+AGEC2103,Principles of Agricultural Macroeconomics
+ANTH1014,Introduction to Biological Anthropology (with Lab)
+ANTH1023,Introduction to Cultural Anthropology 
+ARAB2003,Intermediate Arabic I
+ARAB2013,Intermediate Arabic II
+ARAB2016,Intensive Arabic II
+ARCH1003,Basic Course in the Arts:  Architecture Lecture
+ARCH1013,Diversity and Design
+ARHS1003,Basic Course in the Arts:  Art Lecture 
+ARHS2913,Art History Survey I 
+ARHS2923,Art History Survey II 
+ASTR2003,Survey of the Universe 
+ASTR2004,Survey of the Universe (with Lab)
+ASTR301V,Observational Astronomy
+ASTR4033,Astrophysics I: Stars and Planetary Systems
+ASTR4043,Astrophysics II: Galaxies and the Large-Scale Universe
+ASTR4073,Cosmology
+ASTR5043,Astrophysics II: Galaxies and the Large-Scale Universe
+BENG2632,Biological Engineering Design Studio
+BENG2643,Biological Engineering Methods I
+BENG3113,Measurement and Control for Biological Systems
+BENG3113H,Honors Measurement and Control for Biological Systems
+BENG3603,Metrics for Sustainable Agricultural Systems
+BENG3653,Global Bio-Energy Engineering
+BENG3663,Biological Engineering Methods II
+BENG3723,Unit Operations in Biological Engineering
+BENG3733,Transport Phenomena in Biological Systems
+BENG4123,Biosensors & Bioinstrumentation
+BENG450V,Special Problems
+BENG451VH,Honors Thesis
+BENG452V,Special Topics in Biological Engineering
+BENG4663,Sustainable Biosystems Designs
+BENG4703,Biotechnology Engineering
+BENG4743,Food and Bio-Product Systems Engineering
+BENG4753L,Nanotechnology Laboratory
+BENG4753M,Honors Nanotechnology Laboratory
+BENG4812,Senior Biological Engineering Design I
+BENG4823,Senior Biological Engineering Design II
+BENG4831,Biological Engineering Professionalism
+BENG4933,Sustainable Watershed Engineering
+BIOL1524,Biological Principles
+BIOL1543,Principles of Biology 
+BIOL1544,Principles of Biology (with Lab)
+BIOL1584,Biology for Majors
+BIOL1604,Principles of Zoology (with Lab)
+BIOL1614,Plant Biology (with Lab)
+BIOL2013,General Microbiology 
+BIOL2014,General Microbiology (with Lab)
+BIOL2213,Human Physiology 
+BIOL2214,Human Physiology (with Lab)
+BIOL2321L,General Genetics Laboratory
+BIOL2323,General Genetics
+BIOL2444,Human Anatomy (with Lab)
+BIOL2533,Cell Biology
+BIOL3004,Principles of Plant Pathology
+BIOL3011L,Introduction to Insect Identification Lab
+BIOL3013,Introduction to Entomology
+BIOL3023,Evolutionary Biology
+BIOL3123,Prokaryote Biology
+BIOL3123H,Honors Prokaryote Biology
+BIOL3273,UAteach Research Methods
+BIOL3273H,Honors UAteach Research Methods
+BIOL3404,Comparative Vertebrate Morphology
+BIOL3861L,General Ecology Laboratory
+BIOL3863,General Ecology
+BIOL3864,General Ecology (with Lab)
+BIOL3923H,Honors Colloquium
+BIOL4003,Laboratory in Prokaryote Biology
+BIOL4013,Insect Behavior and Chemical Ecology
+BIOL4024,Insect Diversity and Taxonomy
+BIOL4053,Insect Ecology
+BIOL4104,Taxonomy of Flowering Plants
+BIOL4114,Dendrology
+BIOL4122,Food Microbiology
+BIOL4133,Plant Disease Control
+BIOL4143,Advanced Methods in Microscopy
+BIOL4153,Biology of Global Change
+BIOL4154H,Honors Biology of Global Change
+BIOL4163,Dynamic Models in Biology
+BIOL4174,Conservation Genetics
+BIOL4213,Biological Regulation and Subcellular Communication
+BIOL4233,Genomics and Bioinformatics
+BIOL4233H,Honors Genomics and Bioinformatics
+BIOL4234,Comparative Physiology
+BIOL4252,Biology of Global Change Seminar
+BIOL4252H,Honors Biology of Global Change Seminar
+BIOL4263,Cell Physiology
+BIOL4263H,Honors Cell Physiology
+BIOL4273,Endocrinology
+BIOL4303,Plant Physiology
+BIOL4313,Molecular Cell Biology
+BIOL4313H,Honors Molecular Cell Biology
+BIOL4323,Comparative Neurobiology
+BIOL4333,Biotechnology in Agriculture
+BIOL4353,Ecological Genetics/Genomics
+BIOL4404,Comparative Botany
+BIOL4424,Mycology
+BIOL4433,Principles of Evolution
+BIOL4463,Physiological Ecology
+BIOL4511L,Population Ecology Laboratory
+BIOL4513,Population Ecology
+BIOL4514,Population Ecology (with Lab)
+BIOL4523,Plant Ecology
+BIOL4543,Developmental Biology
+BIOL4554,Developmental Biology with Laboratory
+BIOL4563,Cancer Biology
+BIOL4613,Primate Adaptation and Evolution
+BIOL4634,Wetlands Ecology and Management
+BIOL4693,Forest Ecology
+BIOL4703,Mechanisms of Pathogenesis
+BIOL4703H,Honors Mechanisms of Pathogenesis
+BIOL4711L,Basic Immunology Laboratory
+BIOL4713,Basic Immunology
+BIOL4713H,Honors Basic Immunology
+BIOL4714,Basic Immunology (with Lab)
+BIOL4724,Protistology
+BIOL4734,Wildlife Management Techniques
+BIOL4744,Fish Biology
+BIOL4753,General Virology
+BIOL4763,Ornithology
+BIOL4774,Biometry
+BIOL4783,Mammalogy
+BIOL4793,Introduction to Neurobiology
+BIOL480V,Special Topics in Biological Sciences
+BIOL480VH,Honors Special Topics in Biological Sciences
+BIOL4814,Limnology
+BIOL4833,Animal Behavior
+BIOL4844,Community and Ecosystem Ecology
+BIOL485V,Field Ecology
+BIOL4863,Analysis of Animal Populations
+BIOL4873,Microbial Molecular Genetics and Informatics
+BIOL4873H,Honors Microbial Molecular Genetics and Informatics
+BIOL496V,Culture and Environment:  Field Studies
+BIOL496VH,Honors Culture and Environment:  Field Studies
+BIOL498V,Senior Thesis
+BIOL499V,Research In Biological Sciences
+BIOL499VH,Honors Research in Biological Sciences
+BMEG2614,Introduction to Biomedical Engineering
+BMEG2813,Biomechanical Engineering
+BMEG2904,Biomedical Instrumentation
+BMEG3124,Biomedical Signals and Systems
+BMEG3634,Biomaterials
+BMEG3653,Biomedical Modeling and Numerical Methods
+BMEG3653H,Honors Biomedical Modeling and Numerical Methods
+BMEG3801,Clinical Observations and Needs Finding
+BMEG3824,Biomolecular Engineering
+BMEG3824H,Honors Biomolecular Engineering
+BMEG400E,Biomedical Engineering Elective (4000+ Level)
+BMEG4103L,Nanotechnology Laboratory
+BMEG4103M,Honors Nanotechnology Laboratory
+BMEG4213,Tissue Mechanics
+BMEG4243,Advanced Biomaterials and Biocompatibility
+BMEG4403,Biomedical Microscopy
+BMEG4413,Tissue Engineering
+BMEG450VH,Honors Thesis
+BMEG4513,Biomedical Optics and Imaging
+BMEG4523,Biomedical Data and Image Analysis
+BMEG460V,Individual Study
+BMEG460VH,Honors Individual Study
+BMEG4623,Biomedical Transport Phenomena
+BMEG4623H,Honors Biomedical Transport Phenomena
+BMEG470V,Special Topics in Biomedical Engineering
+BMEG4713,Cardiovascular Physiology and Devices
+BMEG4743,Drug and Gene Delivery
+BMEG4813,Biomedical Engineering Design I
+BMEG4823,Biomedical Engineering Design II
+BMEG4873,Bionanotechnology
+CHEG2113,Introduction to Chemical Engineering I
+CHEG2133,Fluid Mechanics
+CHEG2313,Thermodynamics of Single-Component Systems
+CHEG3144,Heat and Mass Transfer
+CHEG3144H,Honors Heat and Mass Transfer
+CHEG3233L,Chemical Engineering Laboratory I
+CHEG3253,Chemical Engineering Computer Methods
+CHEG3323,Thermodynamics of Multi-Component Systems
+CHEG3323H,Honors Thermodynamics of Multi-Component Systems
+CHEG3333,Chemical Engineering Reactor Design
+CHEG3333H,Honors Chemical Engineering Reactor Design
+CHEG3713,Chemical Engineering Materials Technology
+CHEG4163,Separation Processes
+CHEG4163H,Honors Separation Processes
+CHEG4273,Corrosion Control
+CHEG4332L,Chemical Engineering Laboratory II
+CHEG4413,Chemical Engineering Design I
+CHEG4413H,Honors Chemical Engineering Design I
+CHEG4423,Automatic Process Control
+CHEG4423H,Honors Automatic Process Control
+CHEG4443,Chemical Engineering Design II
+CHEG4443H,Honors Chemical Engineering Design II
+CHEG4813,Chemical Process Safety
+CHEG4813H,Honors Chemical Process Safety
+CHEG488V,Special Problems
+CHEG488V,Special Problems
+CHEG5013,Membrane Separation and System Design
+CHEG5033,Technical Administration
+CHEG5043,Colloid and Interface Science
+CHEG5113,Transport Processes I
+CHEG5133,Advanced Reactor Design
+CHEG5213,Advanced Chemical Engineering Calculations
+CHEG5333,Advanced Thermodynamics
+CHEG5353,Advanced Separations
+CHEG5513,Biochemical Engineering Fundamentals
+CHEG5733,Polymer Theory and Practice
+CHEG5801,Graduate Seminar
+CHEG588V,Special Problems
+CHEG600V,Master's Thesis
+CHEG6123,Transport Processes II
+CHEG6203,Preparation of Research Proposals
+CHEG6801,Graduate Seminar
+CHEG688V,Special Topics in Chemical Engineering
+CHEM1074,Fundamentals of Chemistry (with Lab)
+CHEM1103,University Chemistry I 
+CHEM1104,University Chemistry I (with Lab)
+CHEM1123,University Chemistry II 
+CHEM1124,University Chemistry II (with Lab)
+CHEM1203,Chemistry for Majors I
+CHEM1204,Chemistry for Majors I (with Lab)
+CHEM2261L,Analytical Chemistry Laboratory
+CHEM2263,Analytical Chemistry Lecture
+CHEM2264,Analytical Chemistry (with Lab)
+CHEM2611L,Organic Physiological Chemistry Laboratory 
+CHEM2613,Organic Physiological Chemistry 
+CHEM2614,Organic Physiological Chemistry (with Lab)
+CHEM3203,Forensic Chemistry
+CHEM3273,UAteach Research Methods
+CHEM3451L,Elements of Physical Chemistry Laboratory
+CHEM3453,Elements of Physical Chemistry
+CHEM3454,Elements of Physical Chemistry (with Lab)
+CHEM3504,Physical Chemistry I
+CHEM3512L,Physical Chemistry Laboratory
+CHEM3514,Physical Chemistry II
+CHEM3601L,Organic Chemistry I Laboratory
+CHEM3603,Organic Chemistry I
+CHEM3604,Organic Chemistry I (with Lab)
+CHEM3611L,Organic Chemistry II Laboratory
+CHEM3613,Organic Chemistry II
+CHEM3614,Organic Chemistry II (with Lab)
+CHEM3702L,Organic Chemistry I Lab for Chemistry Majors
+CHEM3703,Organic Chemistry I Lecture for Chemistry Majors
+CHEM3712L,Organic Chemistry II Lab for Chemistry Majors
+CHEM3713,Organic Chemistry II  Lecture for Chemistry Majors
+CHEM3813,Elements of Biochemistry
+CHEM3923H,Honors Colloquium
+CHEM400V,Chemistry Research
+CHEM4011H,Honors Seminar
+CHEM405V,Special Topics in Chemistry
+CHEM4123,Advanced Inorganic Chemistry I
+CHEM4153L,Nanotechnology Laboratory
+CHEM4214,Instrumental Analysis (with Lab)
+CHEM4283,Energy Conversion and Storage
+CHEM4443,Physical Chemistry of Materials
+CHEM4723,Experimental Methods in Organic Chemistry
+CHEM4813H,Honors Biochemistry I
+CHEM4843H,Honors Biochemistry II
+CHEM4853,Biochemical Techniques
+CHEM4853,Biochemical Techniques
+CHIN2003,Intermediate Chinese I
+CHIN2013,Intermediate Chinese II
+CLST1003,Introduction to Classical Studies: Greece
+CLST1013,Introduction to Classical Studies: Rome
+COMM1003,Basic Course in the Arts: Film Lecture
+COMM1023,Communication in a Diverse World
+COMM1233,Media
+COMM1313,Public Speaking 
+CSCE2004,Programming Foundations I
+CSCE2014,Programming Foundations II
+CSCE2114,Digital Design
+CSCE2214,Computer Organization
+CSCE3193,Programming Paradigms
+CSCE3193H,Honors Programming Paradigms
+CSCE3213,Cluster Computing
+CSCE3513,Software Engineering
+CSCE3613,Operating Systems
+CSCE3613H,Honors Operating Systems
+CSCE3953,System Synthesis and Modeling
+CSCE400E,Computer Science/Computer Engineering Elective (4000+ Level)
+CSCE4013,Special Topics
+CSCE4023H,Honors Special Topics
+CSCE4043,RFID Information Systems Security
+CSCE4114,Embedded Systems
+CSCE4123,Programming Challenges
+CSCE4133,Algorithms
+CSCE4143,Data Mining
+CSCE4213,Computer Architecture
+CSCE4233,Low Power Digital Systems
+CSCE4253,Concurrent Computing
+CSCE4263,Advanced Data Structures
+CSCE4323,Formal Languages and Computability
+CSCE4333,Introduction to Integrated Circuit Design
+CSCE4353,CPLD/FPGA-Based System Design
+CSCE4423,Computer Systems Modeling
+CSCE4433,Cryptography
+CSCE4523,Database Management Systems
+CSCE4543,Software Architecture
+CSCE4561,Capstone I
+CSCE4613,Artificial Intelligence
+CSCE4623,Mobile Programming
+CSCE4643,Graphics Processing Units Programming
+CSCE4753,Computer Networks
+CSCE4813,Computer Graphics
+CSCE4853,Information Security
+CSCE490V,Individual Study
+CSCE4914,Advanced Digital Design
+CSCE491VH,Honors Thesis
+CSCE4963,Capstone II
+CSES2203,Soil Science
+CSES2203,Soil Science
+CSES3023,Crop
+CSES3112,Forage Management
+CSES3214,Soil Resources and Nutrient Cycles
+CSES3312,Cotton Production
+CSES3322,Soybean Production
+CSES3332,Rice Production
+CSES3342,Cereal Grain Production
+CSES355V,Soil Profile Description
+CSES462V,Internship
+CSES5214,Analytical Research Techniques in Agronomy
+CSES5224,Soil Physics
+CSES5264,Microbial Ecology
+CSES5453,Soil Chemistry
+CVEG2002,Introduction to Civil Engineering Plans and CADD
+CVEG2015,Fundamentals of Mechanics for Civil Engineers
+CVEG2054,Surveying Systems (with Lab)
+CVEG2113,Structural Materials
+CVEG2851,Engineering Professional Practice Issues
+CVEG3131L,Soil Mechanics Laboratory
+CVEG3133,Soil Mechanics
+CVEG3134,Soil Mechanics (with Lab)
+CVEG3213,Hydraulics
+CVEG3223,Hydrology
+CVEG3243,Environmental Engineering
+CVEG3303,Structural Analysis
+CVEG3413,Transportation Systems Engineering
+CVEG400E,Civil Engineering Elective (4000+ Level)
+CVEG4053,Land Surveying
+CVEG4083,Control Surveys
+CVEG4143,Foundation Engineering
+CVEG4153,Earth Structures
+CVEG4203,Environmental Regulations and Permits
+CVEG4223,Groundwater Hydrology
+CVEG4243,Environmental Engineering Design
+CVEG4253,Small Community Wastewater Systems
+CVEG4263,Air Pollution Control
+CVEG4273,Open Channel Flow
+CVEG4303,Reinforced Concrete Design I
+CVEG4313,Structural Steel Design I
+CVEG4323,Structural Loadings
+CVEG4343,Reinforced Masonry Design
+CVEG4353,Timber Design
+CVEG4393,Reinforced Concrete Design II
+CVEG4413,Pavement Evaluation and Rehabilitation
+CVEG4423,Transportation Infrastructure
+CVEG4433,Transportation Pavements and Materials
+CVEG4513,Construction Management
+CVEG4812,Environmental Design Project
+CVEG4822,Geotechnical Design Project
+CVEG4832,Structural Design Project
+CVEG4842,Transportation Design Project
+CVEG4863,Sustainability in Civil Engineering
+CVEG488V,Special Problems
+CVEG488VH,Honors Special Problems
+CVEG4890,Fundamentals of Engineering Seminar
+CVEG491VH,Honors Studies in Geotechnical Engineering
+CVEG492VH,Honors Studies in Environmental Engineering
+CVEG493VH,Honors Studies in Structural Engineering
+CVEG494VH,Honors Studies in Transportation Engineering
+CVEG4983H,Honors Undergraduate Thesis
+DANC1003,Basic Course in the Arts: Movement and Dance
+ECON2013,Principles of Macroeconomics 
+ECON2023,Principles of Microeconomics 
+ECON2143,Basic Economics: Theory and Practice
+ECON3033,Microeconomic Theory
+ECON3133,Macroeconomic Theory
+ECON3843,Economic Development
+ECON3853,Emerging Markets
+ECON3933,The Japanese Economic System
+ECON4633,International Trade
+ECON4643,International Macroeconomics and Finance
+ECON468V,International Economics and Business Seminar
+ELEG2104,Electric Circuits I
+ELEG2114,Electric Circuits II
+ELEG2904,Digital Design
+ELEG3124,System & Signal Analysis
+ELEG3124H,Honors System & Signal Analysis
+ELEG3143,Probability & Stochastic Processes
+ELEG3143H,Honors Probability & Stochastic Processes
+ELEG3214,Electronics I
+ELEG3214H,Honors Electronics I
+ELEG3224,Electronics II
+ELEG3224H,Honors Electronics II
+ELEG3304,Energy Systems
+ELEG3304H,Honors Energy Systems
+ELEG3704,Applied Electromagnetics
+ELEG3704H,Honors Applied Electromagnetics
+ELEG387V,Special Topics in Electrical Engineering
+ELEG3903,Electric Circuits and Machines
+ELEG3924,Microprocessor Systems Design
+ELEG3924H,Honors Microprocessor Systems Design
+ELEG3933,Circuits & Electronics
+ELEG400E,Electrical Engineering Elective (4000+ Level)
+ELEG400VH,Honors Senior Thesis
+ELEG4063,Electrical Engineering Design I
+ELEG4063H,Honors Electrical Engineering Design I
+ELEG4071,Electrical Engineering Design II
+ELEG4071H,Honors Electrical Engineering Design II
+ELEG4203,Semiconductor Devices
+ELEG4203H,Honors Semiconductor Devices
+ELEG4213,MEMS and Microsensors
+ELEG4223,Design and Fabrication of Solar Cells
+ELEG4233,Introduction to Integrated Circuit Design
+ELEG4233H,Honors Introduction to Integrated Circuit Design
+ELEG4243,Analog Integrated Circuits
+ELEG4253,Nanotechnology in Engineering & Medicine
+ELEG4283,Mixed Signal Test Engineering I
+ELEG4293,Mixed-Signal Modeling & Simulation
+ELEG4303,Introduction to Nanomaterials and Devices
+ELEG4343,Organic Electronics Technology
+ELEG4403,Control Systems
+ELEG4403H,Honors Control Systems
+ELEG4413,Advanced Control Systems
+ELEG4423,Optimal Control
+ELEG4463L,Control Systems Laboratory
+ELEG4473,Power System Operation and Control
+ELEG4503,Design of Advanced Electric Power Distribution Systems
+ELEG4503H,Honors Design of Advanced Electric Power Distribution Systems
+ELEG4513,Power and Energy Systems Analysis
+ELEG4523,Quality of Electric Power
+ELEG4533,Power Electronics and Motor Drives
+ELEG4543,Introduction to Power Electronics
+ELEG4553,Switch Mode Power Conversion
+ELEG4603,Deterministic Digital Signal Processing System Design
+ELEG4623,Communication Systems
+ELEG4703,Introduction to RF and Microwave Design
+ELEG4703H,Honors Introduction to RF and Microwave Design
+ELEG4773,Electronic Response of Biological Tissues
+ELEG4783,Introduction to Antennas
+ELEG4783H,Honors Introduction to Antennas
+ELEG487V,Special Topics in Electrical Engineering
+ELEG487VH,Honors Special Topics in Electrical Engineering
+ELEG488V,Special Problems
+ELEG488VH,Honors Special Problems
+ELEG4914,Advanced Digital Design
+ELEG4914H,Honors Advanced Digital Design
+ELEG4963,CPLD/FPGA Based System Design
+ELEG4963H,Honors CPLD/FPGA Based System Design
+ELEG4983,Computer Architecture
+ENGL1013,Composition I 
+ENGL1023,Composition II 
+ENGL1213,Introduction to Literature
+ENGL2023,Creative Writing I 
+ENGL3053,Technical and Report Writing 
+ENSC1004,Environmental Science (with Lab)
+ENSC4023,Water Quality
+ENSC4034,Analysis of Environmental Contaminants
 ENTO1024,"Insects, Science, and Society (with Lab)"
-ENTO3014,"Introduction to Entomology (with Lab)"
-ENTO400V,"Special Problems"
-ENTO4013,"Insect Behavior and Chemical Ecology"
-ENTO4024,"Insect Diversity and Taxonomy"
-ENTO4043,"Apiculture"
-ENTO4053,"Insect Ecology"
-ENTO410V,"Special Topics"
-ENTO4123,"Insect Pest Management"
-ENTO4133,"Advanced Applied Entomology"
-ENTO462V,"Internship"
-EXSC3153,"Exercise Physiology"
-EXSC3353,"Mechanics of Human Movement"
-FDSC3103,"Principles of Food Processing"
-FDSC3202,"Introduction to Food Law"
-FDSC3923H,"Honors Molecular Gastronomy"
-FDSC400V,"Special Problems"
-FDSC4114,"Food Analysis (with Lab)"
-FDSC4123,"Food Microbiology (with Lab)"
-FDSC4304,"Food Chemistry"
-FDSC431V,"Internship in Food Science"
-FDSC4333,"Molecular Biology Techniques Applied to Nutrition and Food Science"
-FDSC4413,"Sensory Evaluation of Food"
-FDSC4563,"Experiencing the Food Industry"
-FDSC4713,"Product Innovation for the Food Scientist"
-FDSC472V,"Special Topics in Food Science"
-FDSC4754,"Engineering Principles of Food Processing"
-FDSC4823,"Principles of Food Microbiology"
-FINN3043,"Principles of Finance"
-FINN3703,"International Finance"
-FREN2003,"Intermediate French I "
-FREN2013,"Intermediate French II "
-GEOS1113,"General Geology  "
-GEOS1114,"General Geology (with Lab)"
-GEOS1123,"Human Geography "
-GEOS1134,"Earth Science (with Lab)"
-GEOS2003,"World Regional Geography "
-GEOS3013,"Foundations of Geospatial Data Analysis"
-GEOS3023,"Introduction to Cartography"
-GEOS3033,"Building Materials Field Studies"
-GEOS3043H,"Honors Sustaining Earth"
-GEOS3052,"Geology for Engineers"
-GEOS3062,"Geology of Arkansas"
-GEOS3103,"Geospatial Technologies Computational Toolkit"
-GEOS3114,"Invertebrate Paleontology"
-GEOS3313,"Igneous and Metamorphic Rocks"
-GEOS3333,"Oceanography"
-GEOS3383,"Principles of Landscape Evolution"
-GEOS3413,"Sedimentary Rocks & Fossils"
-GEOS3514,"Structural Geology"
-GEOS3543,"Geospatial Applications and Information Science"
-GEOS3553,"Spatial Analysis Using ArcGIS"
-GEOS3563,"Geospatial Data Mining"
-GEOS3593,"Introduction to Geodatabases"
-GEOS360V,"Undergraduate Special Problems"
-GEOS3901,"Junior Honors Course"
-GEOS3911,"Junior Honors Course"
-GEOS3923H,"Honors Colloquium"
-GEOS4033,"Hydrogeology"
-GEOS4043,"Geography of the Middle East"
-GEOS4043H,"Honors Geography of the Middle East"
-GEOS4053,"Geomorphology"
-GEOS4063,"Principles of Geochemistry"
-GEOS4073,"Urban Geography"
-GEOS4083,"Economic Geology"
-GEOS4093,"History and Philosophy of Geography"
-GEOS410V,"Special Problems in Geosciences"
-GEOS410VH,"Honors Special Problems in Geosciences"
-GEOS4133,"Radar Remote Sensing"
-GEOS4153,"Karst Hydrogeology"
-GEOS4223,"Stratigraphy and Sedimentation"
-GEOS4233,"Geography of Religion & Sacrality"
-GEOS4243,"Political Geography"
-GEOS4253,"Petroleum Geology"
-GEOS430V,"Internship in Physical Geography"
-GEOS4353,"Meteorology"
-GEOS4363,"Climatology"
-GEOS437V,"Geology Field Trip"
-GEOS4383,"Hazard & Disaster Assessment"
-GEOS4383H,"Honors Hazard & Disaster Assessment"
-GEOS4393,"American Public Lands & Policy"
-GEOS4393H,"Honors American Public Lands & Policy"
-GEOS440V,"Internship in GIS & Cartography"
-GEOS4413,"Principles of Remote Sensing"
-GEOS4433,"Geophysics"
-GEOS4443,"The Solid Earth: Structure"
-GEOS4463,"3D Seismic Exploration"
-GEOS4473,"Applied Climatology"
-GEOS4473H,"Honors Applied Climatology"
-GEOS4483,"Severe Weather"
-GEOS4503,"Advanced Cartographic Techniques & Production"
-GEOS4513,"Introduction to GIS Programming"
-GEOS4523,"Cartographic Design and Production"
-GEOS4533,"Introduction to Petroleum Geophysics"
-GEOS4553,"Introduction to Raster GIS"
-GEOS4563,"Geology of Our National Parks"
-GEOS4563H,"Honors Geology of Our National Parks"
-GEOS4583,"Vector GIS"
-GEOS4593,"Introduction to Global Positioning Systems and Global Navigation Satellite Systems"
-GEOS4643,"Introduction to Internet GIS"
-GEOS4653,"GIS Analysis and Modeling"
-GEOS4653H,"Honors GIS Analysis and Modeling"
-GEOS4663,"Low-Temperature Geochemistry of Natural Waters"
-GEOS4673,"Volcanology"
-GEOS4686,"Geology Field Camp"
-GEOS4693,"Environmental Justice"
-GEOS4783,"Geography of Europe"
-GEOS4793,"Geospatial Unmanned Aircraft Systems"
-GEOS4793H,"Honors Geospatial Unmanned Aircraft Systems"
-GEOS481V,"Cooperative Education Program"
-GEOS4863,"Quantitative Techniques in Geosciences"
-GEOS4873,"Geological Data Analysis"
-GEOS4924,"Earth System History "
-GEOS4933,"Ancient Forest Science and Sustainability"
-GEOS4972H,"Senior Honors Course I"
-GEOS4982H,"Senior Honors Course II"
-GERM2003,"Intermediate German I "
-GERM2013,"Intermediate German II "
-GNEG1111,"Introduction to Engineering I"
-GNEG1121,"Introduction to Engineering II"
-GNEG3103,"Globalization and Innovation"
-GNEG3103H,"Honors Globalization and Innovation"
-GNEG3113,"Special Topics-Study Abroad"
-GNEG3801,"Parallel Cooperative Education"
-GNEG3811,"Alternating Cooperative Education"
-GNEG390V,"Special Topics"
-GNEG390VH,"Honors Special Topics"
-GNEG4103,"Globalization and Innovation"
-GNEG4103H,"Honors Globalization and Innovation"
-GNEG490V,"Special Topics"
-GNEG490VH,"Honors Special Topics"
-GNST2003,"Introduction to Gender Studies"
-GREK2003,"Intermediate Ancient Greek I"
-GREK2203,"Intermediate Modern Greek I"
-GREK2213,"Intermediate Modern Greek II"
-HDFS1403,"Life Span Development"
-HDFS2413,"Family Relations"
-HDFS2603,"Rural Families and Communities"
-HIST1113,"Institutions and Ideas of World Civilizations I "
-HIST1123,"Institutions and Ideas of World Civilizations II "
-HIST2003,"History of the American People to 1877 "
-HIST2013,"History of the American People"
-HORT3103,"Woody Landscape Plants"
-HORT3113,"Herbaceous and Indoor Plant Materials"
-HORT3123,"International Horticulture"
-HORT3203,"Sustainable Landscape Practices"
-HORT3303,"Vegetable Crops"
-HORT3403,"Turfgrass Management"
-HORT3503,"Sustainable and Organic Horticulture"
-HORT3901,"Horticultural Career Development"
-HORT400V,"Special Problems"
-HORT401V,"Special Topics in Horticulture"
-HORT402V,"Horticulture Judging and Competition Activity"
-HORT4033,"Professional Landscape Installation and Construction"
-HORT4043,"Professional Landscape Management"
-HORT4103,"Fruit Production Science and Technology"
-HORT4403,"Plant Propagation"
-HORT4413,"Horticulture Physiology"
-HORT4503,"Sustainable Nursery Production"
-HORT4603,"Practical Landscape Planning"
-HORT462V,"Horticulture"
-HORT4704,"Greenhouse Management and Controlled Environment Horticulture (with Lab)"
-HORT4804,"Greenhouse Crops Production (with Lab)"
-HORT4903,"Golf and Sports Turf Management"
-HORT4913,"Rootzone Management for Golf and Sports Turf"
-HORT4921,"Golf Course Operations"
-HORT4932,"Turf Best Management Practices"
-HUMN1124H,"Honors Equilibrium of Cultures 500-1600"
-HUMN2114H,"Honors Birth of Modern Culture 1600-1900"
-HUMN2124H,"Honors Twentieth Century Global Culture"
-INEG2001,"Industrial Engineering Seminar"
-INEG2103,"Introduction to Industrial Engineering"
-INEG2313,"Applied Probability and Statistics for Engineers I"
-INEG2333,"Applied Probability and Statistics for Engineers II"
-INEG2403,"Industrial Cost Analysis"
-INEG2413,"Engineering Economic Analysis"
-INEG2812H,"Honors Industrial Engineering Research Experience I"
-INEG3513,"Manufacturing Processes"
-INEG3613,"Introduction to Operations Research"
-INEG3623,"Simulation"
-INEG3623H,"Honors Simulation"
-INEG3714,"Work Methods and Ergonomics"
-INEG3812H,"Honors Industrial Engineering Research Experience II"
-INEG400E,"Industrial Engineering Elective (4000+ Level)"
-INEG400VH,"Honors Thesis"
-INEG410V,"Special Topics in Industrial Engineering"
-INEG410VH,"Honors Special Topics in Industrial Engineering"
-INEG4223,"Occupational Safety and Health Standards"
-INEG4223H,"Honors Occupational Safety and Health Standards"
-INEG4253,"Leadership Principles and Practices"
-INEG4253H,"Honors Leadership Principles and Practices"
-INEG4323,"Quality Engineering and Management"
-INEG4343,"Cognitive Ergonomics"
-INEG4383,"Risk Analysis for Transportation and Logistics Systems"
-INEG4423,"Advanced Engineering Economy"
-INEG4423H,"Honors Advanced Engineering Economy"
-INEG4433,"Systems Engineering and Management"
-INEG4433H,"Honors Systems Engineering and Management"
-INEG4443,"Project Management"
-INEG4443H,"Honors Project Management"
-INEG4453,"Productivity Improvement"
-INEG4533,"Application of Machine Vision"
-INEG4543,"Facility Logistics"
-INEG4553,"Production Planning and Control"
-INEG4563,"Industrial Robotics"
-INEG4583,"Renewable Energy: Green Power Sources"
-INEG4593,"Manufacturing Systems"
-INEG4633,"Transportation Logistics"
-INEG4683,"Decision Support in Industrial Engineering"
-INEG4733,"Industrial Ergonomics"
-INEG4812H,"Honors Industrial Engineering Research Experience III"
-INEG4833,"Introduction to Database Concepts for Industrial Engineers"
-INEG4911,"Industrial Engineering Capstone Experience I"
-INEG4923,"Industrial Engineering Capstone Experience II"
-INEG5123,"Industrial Engineering in the Service Sector"
-INEG514V,"Special Topics in Industrial Engineering"
-INEG5243,"Automated Manufacturing"
-INEG5253,"Leadership Principles and Practices"
-INEG5313,"Engineering Applications of Probability Theory"
-INEG5323,"Engineering Applications of Stochastic Processes"
-INEG5333,"Design of Industrial Experiments"
-INEG5343,"Advanced Quality Control Methods"
-INEG5373,"Repairable Systems Modeling"
-INEG5383,"Risk Analysis for Transportation and Logistics Systems"
-INEG5393,"Applied Regression Analysis for Engineers"
-INEG5433,"Cost Estimation Models"
-INEG5443,"Decision Models"
-INEG5523,"Topics in Automated Systems"
-INEG5533,"Network Optimization in Transportation Logistics"
-INEG5543,"Distribution Center Design & Operations"
-INEG5563,"Industrial Robotics"
-INEG5613,"Introduction to Optimization Theory"
-INEG5623,"Analysis of Inventory Systems"
-INEG5643,"Optimization Theory II"
-INEG5653,"Modeling and Analysis of Semiconductor Manufacturing"
-INEG5663,"Analysis of Queuing Systems"
-INEG5683,"Nonlinear Programming"
-INEG5693,"Heuristic Optimization"
-INEG5803,"Simulation"
-INEG5823,"Systems Simulation I"
-INEG5843,"Scheduling and Sequencing I"
-INEG6363,"Generalized Linear Models"
-ISYS3293,"Systems Analysis and Design"
-ISYS3393,"Business Application Development Fundamentals"
-ISYS4213,"ERP Fundamentals"
-ISYS4223,"ERP Configuration and Implementation"
-ISYS4233,"Seminar in ERP Development"
-ISYS4293,"Business Intelligence"
-ISYS4453,"Introduction to Enterprise Servers"
-ISYS4463,"Enterprise Transaction Systems"
-ITAL2003,"Intermediate Italian I"
-ITAL2013,"Intermediate Italian II"
-JAPN2003,"Intermediate Japanese I"
-JAPN2013,"Intermediate Japanese II"
-JAPN2116,"Intensive Intermediate Japanese"
-LARC1003,"Basic Course in the Arts:  The American Landscape"
-LATN2003,"Petronius' Satyricon"
-LATN2013,"Catullus"
-MATH2554,"Calculus I "
-MATH2564,"Calculus II "
-MATH2574,"Calculus III "
-MATH2584,"Elementary Differential Equations"
-MATH2603,"Discrete Mathematics"
-MATH2803,"Transition to Advanced Mathematics"
-MATH3013,"Introduction to Probability"
-MATH3083,"Linear Algebra"
-MATH3093,"Abstract Linear Algebra"
-MATH3103,"Combinatorial and Discrete Mathematics"
-MATH3113,"Introduction to Abstract Algebra I"
-MATH3133,"History of Mathematics"
-MATH3203,"Number Theory"
-MATH3513,"Elementary Analysis"
-MATH3773,"Foundations of Geometry I"
-MATH3923H,"Honors Colloquium"
-MATH399VH,"Honors Mathematics Course"
-MATH400V,"Directed Readings"
-MATH404V,"Classroom Practices in Mathematics"
-MATH4103,"Advanced Linear Algebra"
-MATH4113,"Introduction to Abstract Algebra II"
-MATH4153,"Mathematical Modeling"
-MATH4163,"Dynamic Models in Biology"
-MATH4253,"Symbolic Logic I"
-MATH4303,"Ordinary Differential Equations"
-MATH4353,"Numerical Linear Algebra"
-MATH4363,"Numerical Analysis"
-MATH4423,"Introduction to Partial Differential Equations"
-MATH4443,"Complex Variables"
-MATH4503,"Differential Geometry"
-MATH4513,"Advanced Calculus I"
-MATH4523,"Advanced Calculus II"
-MATH4703,"Introduction to Point-Set Topology"
-MATH4933,"Mathematics Major Seminar"
-MATH498V,"Senior Thesis"
-MATH499V,"Research Topics in Mathematics"
-MATH499VH,"Honors Research Topics in Mathematics"
-MEEG2003,"Statics"
-MEEG2013,"Dynamics"
-MEEG2100,"Computer-aided Design Competency"
-MEEG2103,"Introduction to Machine Analysis"
-MEEG2303,"Introduction to Materials"
-MEEG2403,"Thermodynamics"
-MEEG2703,"Computer Methods in Mechanical Engineering"
-MEEG3013,"Mechanics of Materials"
-MEEG3113,"Machine Dynamics and Control"
-MEEG3202L,"Mechanical Engineering Laboratory I"
-MEEG3212L,"Mechanical Engineering Laboratory II"
-MEEG3503,"Mechanics of Fluids"
-MEEG4003,"Intermediate Dynamics"
-MEEG4023,"Composite Materials:  Analysis and Design"
-MEEG4104,"Machine Element Design"
-MEEG4104H,"Honors Machine Element Design"
-MEEG4123,"Finite Element Methods I"
-MEEG4132,"Professional Engineering Practices"
-MEEG4143,"Design for Safety"
-MEEG4153,"Fundamentals of Mechanical Design"
-MEEG4182,"Creative Project Design I"
-MEEG4192,"Creative Project Design II"
-MEEG4202L,"Mechanical Engineering Laboratory III"
-MEEG4213,"Control of Mechanical Systems"
-MEEG4233,"Microprocessors in Mechanical Engineering I: Electromechanical Systems"
-MEEG4253,"Introduction to Robotics"
-MEEG4303,"Materials Laboratory"
-MEEG4303H,"Honors Materials Laboratory"
-MEEG4313,"Introduction to Tribology"
-MEEG4323L,"Nanotechnology Laboratory"
-MEEG4323M,"Honors Nanotechnology Laboratory"
-MEEG4413,"Heat Transfer"
-MEEG4423,"Power Generation"
-MEEG4433,"Aerospace Propulsion"
-MEEG4453,"Industrial Waste and Energy Management"
-MEEG4473,"Indoor Environmental Control"
-MEEG4483,"Thermal Systems Analysis and Design"
-MEEG4483H,"Honors Thermal Systems Analysis and Design"
-MEEG4493,"Internal Combustion Engines"
-MEEG4503,"Introduction to Flight"
-MEEG4503H,"Honors Introduction to Flight"
-MEEG4523,"Astronautics"
-MEEG4633,"Additive Manufacturing"
-MEEG4703,"Mathematical Methods in Engineering"
-MEEG4903H,"Honors Mechanical Engineering Research"
-MEEG491V,"Special Topics in Mechanical Engineering"
-MEEG491VH,"Honors Special Topics in Mechanical Engineering"
-MEEG492V,"Individual Study in Mechanical Engineering"
-MEEG492VH,"Honors Individual Study in Mechanical Engineering"
-MGMT4243,"Ethics and Corporate Responsibility"
-MGMT4583,"International Management"
-MILS3004,"Applied Leadership I"
-MILS3014,"Applied Leadership II"
-MILS4001,"Advanced Military Issues"
-MILS4004,"Advanced Leadership I"
-MILS4011,"Advanced Military Correspondence"
-MILS4014,"Advanced Leadership II"
-MKTG3433,"Introduction to Marketing"
-MKTG3553,"Consumer Behavior"
-MKTG3633,"Marketing Research"
-MKTG4233,"Integrated Marketing Communications"
-MKTG4343,"Selling and Sales Management"
-MKTG4433,"Retail Strategy"
-MKTG4443,"Retail Buying and Merchandise"
-MKTG4633,"Global Marketing"
-MLIT1003,"Experiencing Music "
-MLIT1013,"Music and Society"
-MLIT1333,"Popular Music"
-MRST2013,"Introduction to Medieval and Renaissance Studies"
-MUSY2003,"Music in World Cultures"
-OMGT4313,"Law and Ethics"
-OMGT4323,"Industrial Cost Analysis"
-OMGT4333,"Applied Statistics"
-OMGT4853,"Introduction to Decision Support Tools in Operations Management"
-OMGT5403,"Industrial Safety and Health Administration"
-OMGT5613,"Lean Production and Inventory Control"
-OMGT5623,"Strategic Management"
-OMGT5673,"Principles of Operations Research"
-OMGT5783,"Project Management for Operations Managers"
-PHIL2003,"Introduction to Philosophy "
-PHIL2103,"Introduction to Ethics "
-PHIL2203,"Logic "
-PHIL3103,"Ethics and the Professions"
-PHYS1024,"Physics and Human Affairs (with Lab)"
-PHYS1034,"Physics for Elementary Education Majors"
-PHYS1044,"Physics for Architects I"
-PHYS1054,"Physics for Architects II"
-PHYS2014,"College Physics I (with Lab)"
-PHYS2034,"College Physics II (with Lab)"
-PHYS2054,"University Physics I "
-PHYS2074,"University Physics II "
-PHYS2094,"University Physics III"
-PHYS306V,"Projects"
-PHYS3113,"Analytical Mechanics"
-PHYS3213,"Electronics in Experimental Physics"
-PHYS3273,"UAteach Research Methods"
-PHYS3273H,"Honors UAteach Research Methods"
-PHYS3453,"Electromagnetic Theory I"
-PHYS3463,"Electromagnetic Theory II"
-PHYS3544,"Optics"
-PHYS3603,"Introduction to Modern Physics"
-PHYS360VL,"Modern Physics Laboratory"
-PHYS3613,"Modern Physics"
-PHYS3923H,"Honors Colloquium"
-PHYS399VH,"Honors"
-PHYS400V,"Laboratory and Classroom Practices in Physics"
-PHYS4073,"Introduction to Quantum Mechanics"
-PHYS4083,"Advanced Quantum Mechanics"
-PHYS4103,"Physics in Perspective"
-PHYS4113,"Physics in Perspective"
-PHYS4203,"Physics of Devices"
-PHYS4213,"Physics of Devices"
-PHYS4333,"Thermal Physics"
-PHYS4613,"Introduction to Biophysics and Biophysical Techniques"
-PHYS462VL,"Modern Physics Laboratory"
-PHYS462VL,"Modern Physics Laboratory"
-PHYS4653,"Subatomic Physics"
-PHYS4713,"Solid State Physics"
-PHYS4734,"Introduction to Laser Physics"
-PHYS4734,"Introduction to Laser Physics"
-PHYS4773,"Introduction to Optical Properties of Materials"
-PHYS4793L,"Nanotechnology Laboratory"
-PHYS4793M,"Honors Nanotechnology Laboratory"
-PHYS4803,"Mathematical Physics"
-PHYS498V,"Senior Thesis"
-PHYS4991,"Physics Senior Seminar"
-PLPA3004,"Principles of Plant Pathology"
-PLPA400V,"Research"
-PLPA4223,"Plant Disease Control"
-PLPA4304,"Applied Plant Disease Management"
-PLPA4333,"Biotechnology in Agriculture"
-PLPA462V,"Internship"
-PLSC2003,"American National Government "
-PLSC2013,"Introduction to Comparative Politics"
-PLSC2203,"State and Local Government "
-PORT2003,"Intermediate Portuguese I"
-PORT2013,"Intermediate Portuguese II"
-PSYC2003,"General Psychology "
-RESM2853,"Leisure and Society"
-RUSS2003,"Intermediate Russian I"
-RUSS2013,"Intermediate Russian II"
-SCMT3443,"Transportation and Distribution Management"
-SCMT3613,"Supply Management"
-SCMT3643,"International Transportation and Logistics"
-SOCI2013,"General Sociology "
-SOCI2033,"Social Problems "
-SPAN2003,"Intermediate Spanish I "
-SPAN2013,"Intermediate Spanish II "
-STAT2023,"Biostatistics"
-STAT2303,"Principles of Statistics "
-STAT3013,"Introduction to Probability"
-STAT3113,"Introduction to Mathematical Statistics"
-STAT4003,"Statistical Methods"
-STAT4004,"Statistical Methods (with Lab)"
-STAT4033,"Nonparametric Statistical Methods"
-STAT4043,"Sampling Techniques"
-STAT405V,"Internship in Professional Practice"
-STAT4101L,"Introduction to R"
-STAT4333,"Analysis of Categorical Responses"
-STAT4373,"Experimental Design"
-STAT5113,"Statistical Inference"
-SUST4103,"Capstone Experience in Sustainability"
-SWAH2003,"Intermediate Swahili I"
-SWAH2013,"Intermediate Swahili II"
-SWAH2116,"Intensive Swahili II"
-THTR1003,"Basic Course in the Arts: Theatre Appreciation "
-THTR1013,"Musical Theatre Appreciation"
-UARK000E,"Free Elective"
-UARK300E,"Free Elective (3000+ Level)"
-WLIT1113,"World Literature I "
-WLIT1123,"World Literature II "
+ENTO3014,Introduction to Entomology (with Lab)
+ENTO400V,Special Problems
+ENTO4013,Insect Behavior and Chemical Ecology
+ENTO4024,Insect Diversity and Taxonomy
+ENTO4043,Apiculture
+ENTO4053,Insect Ecology
+ENTO410V,Special Topics
+ENTO4123,Insect Pest Management
+ENTO4133,Advanced Applied Entomology
+ENTO462V,Internship
+EXSC3153,Exercise Physiology
+EXSC3353,Mechanics of Human Movement
+FDSC3103,Principles of Food Processing
+FDSC3202,Introduction to Food Law
+FDSC3923H,Honors Molecular Gastronomy
+FDSC400V,Special Problems
+FDSC4114,Food Analysis (with Lab)
+FDSC4123,Food Microbiology (with Lab)
+FDSC4304,Food Chemistry
+FDSC431V,Internship in Food Science
+FDSC4333,Molecular Biology Techniques Applied to Nutrition and Food Science
+FDSC4413,Sensory Evaluation of Food
+FDSC4563,Experiencing the Food Industry
+FDSC4713,Product Innovation for the Food Scientist
+FDSC472V,Special Topics in Food Science
+FDSC4754,Engineering Principles of Food Processing
+FDSC4823,Principles of Food Microbiology
+FINN3043,Principles of Finance
+FINN3703,International Finance
+FREN2003,Intermediate French I 
+FREN2013,Intermediate French II 
+GEOS1113,General Geology  
+GEOS1114,General Geology (with Lab)
+GEOS1123,Human Geography 
+GEOS1134,Earth Science (with Lab)
+GEOS2003,World Regional Geography 
+GEOS3013,Foundations of Geospatial Data Analysis
+GEOS3023,Introduction to Cartography
+GEOS3033,Building Materials Field Studies
+GEOS3043H,Honors Sustaining Earth
+GEOS3052,Geology for Engineers
+GEOS3062,Geology of Arkansas
+GEOS3103,Geospatial Technologies Computational Toolkit
+GEOS3114,Invertebrate Paleontology
+GEOS3313,Igneous and Metamorphic Rocks
+GEOS3333,Oceanography
+GEOS3383,Principles of Landscape Evolution
+GEOS3413,Sedimentary Rocks & Fossils
+GEOS3514,Structural Geology
+GEOS3543,Geospatial Applications and Information Science
+GEOS3553,Spatial Analysis Using ArcGIS
+GEOS3563,Geospatial Data Mining
+GEOS3593,Introduction to Geodatabases
+GEOS360V,Undergraduate Special Problems
+GEOS3901,Junior Honors Course
+GEOS3911,Junior Honors Course
+GEOS3923H,Honors Colloquium
+GEOS4033,Hydrogeology
+GEOS4043,Geography of the Middle East
+GEOS4043H,Honors Geography of the Middle East
+GEOS4053,Geomorphology
+GEOS4063,Principles of Geochemistry
+GEOS4073,Urban Geography
+GEOS4083,Economic Geology
+GEOS4093,History and Philosophy of Geography
+GEOS410V,Special Problems in Geosciences
+GEOS410VH,Honors Special Problems in Geosciences
+GEOS4133,Radar Remote Sensing
+GEOS4153,Karst Hydrogeology
+GEOS4223,Stratigraphy and Sedimentation
+GEOS4233,Geography of Religion & Sacrality
+GEOS4243,Political Geography
+GEOS4253,Petroleum Geology
+GEOS430V,Internship in Physical Geography
+GEOS4353,Meteorology
+GEOS4363,Climatology
+GEOS437V,Geology Field Trip
+GEOS4383,Hazard & Disaster Assessment
+GEOS4383H,Honors Hazard & Disaster Assessment
+GEOS4393,American Public Lands & Policy
+GEOS4393H,Honors American Public Lands & Policy
+GEOS440V,Internship in GIS & Cartography
+GEOS4413,Principles of Remote Sensing
+GEOS4433,Geophysics
+GEOS4443,The Solid Earth: Structure
+GEOS4463,3D Seismic Exploration
+GEOS4473,Applied Climatology
+GEOS4473H,Honors Applied Climatology
+GEOS4483,Severe Weather
+GEOS4503,Advanced Cartographic Techniques & Production
+GEOS4513,Introduction to GIS Programming
+GEOS4523,Cartographic Design and Production
+GEOS4533,Introduction to Petroleum Geophysics
+GEOS4553,Introduction to Raster GIS
+GEOS4563,Geology of Our National Parks
+GEOS4563H,Honors Geology of Our National Parks
+GEOS4583,Vector GIS
+GEOS4593,Introduction to Global Positioning Systems and Global Navigation Satellite Systems
+GEOS4643,Introduction to Internet GIS
+GEOS4653,GIS Analysis and Modeling
+GEOS4653H,Honors GIS Analysis and Modeling
+GEOS4663,Low-Temperature Geochemistry of Natural Waters
+GEOS4673,Volcanology
+GEOS4686,Geology Field Camp
+GEOS4693,Environmental Justice
+GEOS4783,Geography of Europe
+GEOS4793,Geospatial Unmanned Aircraft Systems
+GEOS4793H,Honors Geospatial Unmanned Aircraft Systems
+GEOS481V,Cooperative Education Program
+GEOS4863,Quantitative Techniques in Geosciences
+GEOS4873,Geological Data Analysis
+GEOS4924,Earth System History 
+GEOS4933,Ancient Forest Science and Sustainability
+GEOS4972H,Senior Honors Course I
+GEOS4982H,Senior Honors Course II
+GERM2003,Intermediate German I 
+GERM2013,Intermediate German II 
+GNEG1111,Introduction to Engineering I
+GNEG1121,Introduction to Engineering II
+GNEG3103,Globalization and Innovation
+GNEG3103H,Honors Globalization and Innovation
+GNEG3113,Special Topics-Study Abroad
+GNEG3801,Parallel Cooperative Education
+GNEG3811,Alternating Cooperative Education
+GNEG390V,Special Topics
+GNEG390VH,Honors Special Topics
+GNEG4103,Globalization and Innovation
+GNEG4103H,Honors Globalization and Innovation
+GNEG490V,Special Topics
+GNEG490VH,Honors Special Topics
+GNST2003,Introduction to Gender Studies
+GREK2003,Intermediate Ancient Greek I
+GREK2203,Intermediate Modern Greek I
+GREK2213,Intermediate Modern Greek II
+HDFS1403,Life Span Development
+HDFS2413,Family Relations
+HDFS2603,Rural Families and Communities
+HIST1113,Institutions and Ideas of World Civilizations I 
+HIST1123,Institutions and Ideas of World Civilizations II 
+HIST2003,History of the American People to 1877 
+HIST2013,History of the American People
+HORT3103,Woody Landscape Plants
+HORT3113,Herbaceous and Indoor Plant Materials
+HORT3123,International Horticulture
+HORT3203,Sustainable Landscape Practices
+HORT3303,Vegetable Crops
+HORT3403,Turfgrass Management
+HORT3503,Sustainable and Organic Horticulture
+HORT3901,Horticultural Career Development
+HORT400V,Special Problems
+HORT401V,Special Topics in Horticulture
+HORT402V,Horticulture Judging and Competition Activity
+HORT4033,Professional Landscape Installation and Construction
+HORT4043,Professional Landscape Management
+HORT4103,Fruit Production Science and Technology
+HORT4403,Plant Propagation
+HORT4413,Horticulture Physiology
+HORT4503,Sustainable Nursery Production
+HORT4603,Practical Landscape Planning
+HORT462V,Horticulture
+HORT4704,Greenhouse Management and Controlled Environment Horticulture (with Lab)
+HORT4804,Greenhouse Crops Production (with Lab)
+HORT4903,Golf and Sports Turf Management
+HORT4913,Rootzone Management for Golf and Sports Turf
+HORT4921,Golf Course Operations
+HORT4932,Turf Best Management Practices
+HUMN1124H,Honors Equilibrium of Cultures 500-1600
+HUMN2114H,Honors Birth of Modern Culture 1600-1900
+HUMN2124H,Honors Twentieth Century Global Culture
+INEG2001,Industrial Engineering Seminar
+INEG2103,Introduction to Industrial Engineering
+INEG2313,Applied Probability and Statistics for Engineers I
+INEG2333,Applied Probability and Statistics for Engineers II
+INEG2403,Industrial Cost Analysis
+INEG2413,Engineering Economic Analysis
+INEG2812H,Honors Industrial Engineering Research Experience I
+INEG3513,Manufacturing Processes
+INEG3613,Introduction to Operations Research
+INEG3623,Simulation
+INEG3623H,Honors Simulation
+INEG3714,Work Methods and Ergonomics
+INEG3812H,Honors Industrial Engineering Research Experience II
+INEG400E,Industrial Engineering Elective (4000+ Level)
+INEG400VH,Honors Thesis
+INEG410V,Special Topics in Industrial Engineering
+INEG410VH,Honors Special Topics in Industrial Engineering
+INEG4223,Occupational Safety and Health Standards
+INEG4223H,Honors Occupational Safety and Health Standards
+INEG4253,Leadership Principles and Practices
+INEG4253H,Honors Leadership Principles and Practices
+INEG4323,Quality Engineering and Management
+INEG4343,Cognitive Ergonomics
+INEG4383,Risk Analysis for Transportation and Logistics Systems
+INEG4423,Advanced Engineering Economy
+INEG4423H,Honors Advanced Engineering Economy
+INEG4433,Systems Engineering and Management
+INEG4433H,Honors Systems Engineering and Management
+INEG4443,Project Management
+INEG4443H,Honors Project Management
+INEG4453,Productivity Improvement
+INEG4533,Application of Machine Vision
+INEG4543,Facility Logistics
+INEG4553,Production Planning and Control
+INEG4563,Industrial Robotics
+INEG4583,Renewable Energy: Green Power Sources
+INEG4593,Manufacturing Systems
+INEG4633,Transportation Logistics
+INEG4683,Decision Support in Industrial Engineering
+INEG4733,Industrial Ergonomics
+INEG4812H,Honors Industrial Engineering Research Experience III
+INEG4833,Introduction to Database Concepts for Industrial Engineers
+INEG4911,Industrial Engineering Capstone Experience I
+INEG4923,Industrial Engineering Capstone Experience II
+INEG5123,Industrial Engineering in the Service Sector
+INEG514V,Special Topics in Industrial Engineering
+INEG5243,Automated Manufacturing
+INEG5253,Leadership Principles and Practices
+INEG5313,Engineering Applications of Probability Theory
+INEG5323,Engineering Applications of Stochastic Processes
+INEG5333,Design of Industrial Experiments
+INEG5343,Advanced Quality Control Methods
+INEG5373,Repairable Systems Modeling
+INEG5383,Risk Analysis for Transportation and Logistics Systems
+INEG5393,Applied Regression Analysis for Engineers
+INEG5433,Cost Estimation Models
+INEG5443,Decision Models
+INEG5523,Topics in Automated Systems
+INEG5533,Network Optimization in Transportation Logistics
+INEG5543,Distribution Center Design & Operations
+INEG5563,Industrial Robotics
+INEG5613,Introduction to Optimization Theory
+INEG5623,Analysis of Inventory Systems
+INEG5643,Optimization Theory II
+INEG5653,Modeling and Analysis of Semiconductor Manufacturing
+INEG5663,Analysis of Queuing Systems
+INEG5683,Nonlinear Programming
+INEG5693,Heuristic Optimization
+INEG5803,Simulation
+INEG5823,Systems Simulation I
+INEG5843,Scheduling and Sequencing I
+INEG6363,Generalized Linear Models
+ISYS3293,Systems Analysis and Design
+ISYS3393,Business Application Development Fundamentals
+ISYS4213,ERP Fundamentals
+ISYS4223,ERP Configuration and Implementation
+ISYS4233,Seminar in ERP Development
+ISYS4293,Business Intelligence
+ISYS4453,Introduction to Enterprise Servers
+ISYS4463,Enterprise Transaction Systems
+ITAL2003,Intermediate Italian I
+ITAL2013,Intermediate Italian II
+JAPN2003,Intermediate Japanese I
+JAPN2013,Intermediate Japanese II
+JAPN2116,Intensive Intermediate Japanese
+LARC1003,Basic Course in the Arts:  The American Landscape
+LATN2003,Petronius' Satyricon
+LATN2013,Catullus
+MATH2554,Calculus I 
+MATH2564,Calculus II 
+MATH2574,Calculus III 
+MATH2584,Elementary Differential Equations
+MATH2603,Discrete Mathematics
+MATH2803,Transition to Advanced Mathematics
+MATH3013,Introduction to Probability
+MATH3083,Linear Algebra
+MATH3093,Abstract Linear Algebra
+MATH3103,Combinatorial and Discrete Mathematics
+MATH3113,Introduction to Abstract Algebra I
+MATH3133,History of Mathematics
+MATH3203,Number Theory
+MATH3513,Elementary Analysis
+MATH3773,Foundations of Geometry I
+MATH3923H,Honors Colloquium
+MATH399VH,Honors Mathematics Course
+MATH400V,Directed Readings
+MATH404V,Classroom Practices in Mathematics
+MATH4103,Advanced Linear Algebra
+MATH4113,Introduction to Abstract Algebra II
+MATH4153,Mathematical Modeling
+MATH4163,Dynamic Models in Biology
+MATH4173,Mathematical CAM Design
+MATH4253,Symbolic Logic I
+MATH4303,Ordinary Differential Equations
+MATH4353,Numerical Linear Algebra
+MATH4363,Numerical Analysis
+MATH4423,Introduction to Partial Differential Equations
+MATH4443,Complex Variables
+MATH4503,Differential Geometry
+MATH4513,Advanced Calculus I
+MATH4523,Advanced Calculus II
+MATH4703,Introduction to Point-Set Topology
+MATH4933,Mathematics Major Seminar
+MATH498V,Senior Thesis
+MATH499V,Research Topics in Mathematics
+MATH499VH,Honors Research Topics in Mathematics
+MEEG2003,Statics
+MEEG2013,Dynamics
+MEEG2100,Computer-aided Design Competency
+MEEG2103,Introduction to Machine Analysis
+MEEG2303,Introduction to Materials
+MEEG2403,Thermodynamics
+MEEG2703,Computer Methods in Mechanical Engineering
+MEEG3013,Mechanics of Materials
+MEEG3113,Machine Dynamics and Control
+MEEG3202L,Mechanical Engineering Laboratory I
+MEEG3212L,Mechanical Engineering Laboratory II
+MEEG3503,Mechanics of Fluids
+MEEG4003,Intermediate Dynamics
+MEEG4023,Composite Materials:  Analysis and Design
+MEEG4104,Machine Element Design
+MEEG4104H,Honors Machine Element Design
+MEEG4123,Finite Element Methods I
+MEEG4132,Professional Engineering Practices
+MEEG4143,Design for Safety
+MEEG4153,Fundamentals of Mechanical Design
+MEEG4182,Creative Project Design I
+MEEG4192,Creative Project Design II
+MEEG4202L,Mechanical Engineering Laboratory III
+MEEG4213,Control of Mechanical Systems
+MEEG4233,Microprocessors in Mechanical Engineering I: Electromechanical Systems
+MEEG4253,Introduction to Robotics
+MEEG4303,Materials Laboratory
+MEEG4303H,Honors Materials Laboratory
+MEEG4313,Introduction to Tribology
+MEEG4323L,Nanotechnology Laboratory
+MEEG4323M,Honors Nanotechnology Laboratory
+MEEG4413,Heat Transfer
+MEEG4423,Power Generation
+MEEG4433,Aerospace Propulsion
+MEEG4453,Industrial Waste and Energy Management
+MEEG4473,Indoor Environmental Control
+MEEG4483,Thermal Systems Analysis and Design
+MEEG4483H,Honors Thermal Systems Analysis and Design
+MEEG4493,Internal Combustion Engines
+MEEG4503,Introduction to Flight
+MEEG4503H,Honors Introduction to Flight
+MEEG4523,Astronautics
+MEEG4633,Additive Manufacturing
+MEEG4703,Mathematical Methods in Engineering
+MEEG4903H,Honors Mechanical Engineering Research
+MEEG491V,Special Topics in Mechanical Engineering
+MEEG491VH,Honors Special Topics in Mechanical Engineering
+MEEG492V,Individual Study in Mechanical Engineering
+MEEG492VH,Honors Individual Study in Mechanical Engineering
+MGMT4243,Ethics and Corporate Responsibility
+MGMT4583,International Management
+MILS3004,Applied Leadership I
+MILS3014,Applied Leadership II
+MILS4001,Advanced Military Issues
+MILS4004,Advanced Leadership I
+MILS4011,Advanced Military Correspondence
+MILS4014,Advanced Leadership II
+MKTG3433,Introduction to Marketing
+MKTG3553,Consumer Behavior
+MKTG3633,Marketing Research
+MKTG4233,Integrated Marketing Communications
+MKTG4343,Selling and Sales Management
+MKTG4433,Retail Strategy
+MKTG4443,Retail Buying and Merchandise
+MKTG4633,Global Marketing
+MLIT1003,Experiencing Music 
+MLIT1013,Music and Society
+MLIT1333,Popular Music
+MRST2013,Introduction to Medieval and Renaissance Studies
+MUSY2003,Music in World Cultures
+OMGT4313,Law and Ethics
+OMGT4323,Industrial Cost Analysis
+OMGT4333,Applied Statistics
+OMGT4853,Introduction to Decision Support Tools in Operations Management
+OMGT5403,Industrial Safety and Health Administration
+OMGT5613,Lean Production and Inventory Control
+OMGT5623,Strategic Management
+OMGT5673,Principles of Operations Research
+OMGT5783,Project Management for Operations Managers
+PHIL2003,Introduction to Philosophy 
+PHIL2103,Introduction to Ethics 
+PHIL2203,Logic 
+PHIL3103,Ethics and the Professions
+PHYS1024,Physics and Human Affairs (with Lab)
+PHYS1034,Physics for Elementary Education Majors
+PHYS1044,Physics for Architects I
+PHYS1054,Physics for Architects II
+PHYS2014,College Physics I (with Lab)
+PHYS2034,College Physics II (with Lab)
+PHYS2054,University Physics I 
+PHYS2074,University Physics II 
+PHYS2094,University Physics III
+PHYS306V,Projects
+PHYS3113,Analytical Mechanics
+PHYS3213,Electronics in Experimental Physics
+PHYS3273,UAteach Research Methods
+PHYS3273H,Honors UAteach Research Methods
+PHYS3453,Electromagnetic Theory I
+PHYS3463,Electromagnetic Theory II
+PHYS3544,Optics
+PHYS3603,Introduction to Modern Physics
+PHYS360VL,Modern Physics Laboratory
+PHYS3613,Modern Physics
+PHYS3923H,Honors Colloquium
+PHYS399VH,Honors
+PHYS400V,Laboratory and Classroom Practices in Physics
+PHYS4073,Introduction to Quantum Mechanics
+PHYS4083,Advanced Quantum Mechanics
+PHYS4103,Physics in Perspective
+PHYS4113,Physics in Perspective
+PHYS4203,Physics of Devices
+PHYS4213,Physics of Devices
+PHYS4333,Thermal Physics
+PHYS4613,Introduction to Biophysics and Biophysical Techniques
+PHYS462VL,Modern Physics Laboratory
+PHYS462VL,Modern Physics Laboratory
+PHYS4653,Subatomic Physics
+PHYS4713,Solid State Physics
+PHYS4734,Introduction to Laser Physics
+PHYS4734,Introduction to Laser Physics
+PHYS4773,Introduction to Optical Properties of Materials
+PHYS4793L,Nanotechnology Laboratory
+PHYS4793M,Honors Nanotechnology Laboratory
+PHYS4803,Mathematical Physics
+PHYS498V,Senior Thesis
+PHYS4991,Physics Senior Seminar
+PLPA3004,Principles of Plant Pathology
+PLPA400V,Research
+PLPA4223,Plant Disease Control
+PLPA4304,Applied Plant Disease Management
+PLPA4333,Biotechnology in Agriculture
+PLPA462V,Internship
+PLSC2003,American National Government 
+PLSC2013,Introduction to Comparative Politics
+PLSC2203,State and Local Government 
+PORT2003,Intermediate Portuguese I
+PORT2013,Intermediate Portuguese II
+PSYC2003,General Psychology 
+RESM2853,Leisure and Society
+RUSS2003,Intermediate Russian I
+RUSS2013,Intermediate Russian II
+SCMT3443,Transportation and Distribution Management
+SCMT3613,Supply Management
+SCMT3643,International Transportation and Logistics
+SOCI2013,General Sociology 
+SOCI2033,Social Problems 
+SPAN2003,Intermediate Spanish I 
+SPAN2013,Intermediate Spanish II 
+STAT2023,Biostatistics
+STAT2303,Principles of Statistics 
+STAT3013,Introduction to Probability
+STAT3113,Introduction to Mathematical Statistics
+STAT4003,Statistical Methods
+STAT4004,Statistical Methods (with Lab)
+STAT4033,Nonparametric Statistical Methods
+STAT4043,Sampling Techniques
+STAT405V,Internship in Professional Practice
+STAT4101L,Introduction to R
+STAT4333,Analysis of Categorical Responses
+STAT4373,Experimental Design
+STAT5113,Statistical Inference
+SUST4103,Capstone Experience in Sustainability
+SWAH2003,Intermediate Swahili I
+SWAH2013,Intermediate Swahili II
+SWAH2116,Intensive Swahili II
+THTR1003,Basic Course in the Arts: Theatre Appreciation 
+THTR1013,Musical Theatre Appreciation
+UARK000E,Free Elective
+UARK300E,Free Elective (3000+ Level)
+WLIT1113,World Literature I 
+WLIT1123,World Literature II 
