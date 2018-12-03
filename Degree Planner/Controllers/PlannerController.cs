@@ -264,7 +264,7 @@ namespace Degree_Planner.Controllers {
 					}
 				}
 				foreach (int course in toMove) {
-					MoveTrailBack(plan, matrix, n, i, plan[i][course]);
+					MoveTrailBack(plan, matrix, n, i, course);
 				}
 				if(count < minHoursPerSemester) {
 					// if there aren't enough hours in a semester, add a free slot.
