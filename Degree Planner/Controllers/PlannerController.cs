@@ -254,7 +254,7 @@ namespace Degree_Planner.Controllers {
 					}
 					toMove.Add(plan[i][shortestIndex]);
 
-					count -= hours[shortestIndex];
+					count -= hours[plan[i][shortestIndex]];
 				}
 				if (toMove.Count > 0 && count < maxHoursPerSemester) {
 					for (int j = 0; j < toMove.Count; j++) {
