@@ -19,7 +19,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Department </th>
+            <th>Name</th>
             <th>Catalog number</th>
             <th>Actions</th>
         </tr>
@@ -95,7 +95,7 @@
         var html = "";
         for (var i = 0; i < data.length; i++) {
             var elem = data[i];
-            html += "<tr><td>" + elem.department + "</td><td>" + elem.catalogNumber + "</td><td><button type='button' onclick='removeCourse(\"" + elem.department + "\", \"" + elem.catalogNumber + "\");' class='btn btn-sm btn-outline-danger'>Remove</button></td></tr>";
+            html += "<tr><td>" + elem.name + "</td><td>" + elem.department + " " + elem.catalogNumber + "</td><td><button type='button' onclick='removeCourse(\"" + elem.department + "\", \"" + elem.catalogNumber + "\");' class='btn btn-sm btn-outline-danger'>Remove</button></td></tr>";
         }
         $("#course-data").html(html);
     }

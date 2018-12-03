@@ -246,7 +246,7 @@ namespace Degree_Planner.Controllers {
 							if(len < shortest) {
 								shortest = len;
 								shortestIndex = j;
-							} else if(len == shortest && years[plan[i][shortestIndex]] > years[plan[i][j]]) {
+							} else if(len == shortest && years[plan[i][shortestIndex]] < years[plan[i][j]]) {
 								shortest = len;
 								shortestIndex = j;
 							}
@@ -666,7 +666,7 @@ namespace Degree_Planner.Controllers {
 					 .Courses
 					 .OrderBy(c => c.Department)
 					 .ThenBy(c => c.CatalogNumber)
-					 .Select(c => new { c.Department, c.CatalogNumber })
+					 .Select(c => new { c.Name, c.Department, c.CatalogNumber })
 					 .ToList();
 
 				return Json(courses);
