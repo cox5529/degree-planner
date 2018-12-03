@@ -250,7 +250,7 @@ namespace Degree_Planner.Controllers {
 							shortestIndex = j;
 						}
 					}
-					toMove.Add(shortestIndex);
+					toMove.Add(plan[i][shortestIndex]);
 
 					count -= hours[shortestIndex];
 				}
