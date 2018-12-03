@@ -241,13 +241,15 @@ namespace Degree_Planner.Controllers {
 					int shortest = 100;
 					int shortestIndex = 0;
 					for(int j = 0; j < plan[i].Count; j++) {
-						int len = GetLongestTrail(matrix, n, plan[i][j]) + GetLongestPath(matrix, n, plan[i][j]);
-						if(len < shortest) {
-							shortest = len;
-							shortestIndex = j;
-						} else if (len == shortest && years[plan[i][shortestIndex]] > years[plan[i][j]]) {
-							shortest = len;
-							shortestIndex = j;
+						if (!toMove.Contains(plan[i][shortestIndex])) {
+							int len = GetLongestTrail(matrix, n, plan[i][j]) + GetLongestPath(matrix, n, plan[i][j]);
+							if(len < shortest) {
+								shortest = len;
+								shortestIndex = j;
+							} else if(len == shortest && years[plan[i][shortestIndex]] > years[plan[i][j]]) {
+								shortest = len;
+								shortestIndex = j;
+							}
 						}
 					}
 					toMove.Add(plan[i][shortestIndex]);
