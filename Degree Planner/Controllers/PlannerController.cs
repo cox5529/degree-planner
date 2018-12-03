@@ -241,7 +241,7 @@ namespace Degree_Planner.Controllers {
 					int shortest = 100;
 					int shortestIndex = 0;
 					for(int j = 0; j < plan[i].Count; j++) {
-						if (!toMove.Contains(plan[i][shortestIndex])) {
+						if (!toMove.Contains(plan[i][j])) {
 							int len = GetLongestTrail(matrix, n, plan[i][j]) + GetLongestPath(matrix, n, plan[i][j]);
 							if(len < shortest) {
 								shortest = len;
