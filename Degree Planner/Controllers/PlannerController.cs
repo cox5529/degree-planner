@@ -690,13 +690,14 @@ namespace Degree_Planner.Controllers {
                     courses = courses.Where(c => c.CatalogNumber[0] >= catalogNumber[0]);
                 }
 
-                int start = page * 25;
-                courses = courses.OrderBy(c => c.Department)
-                    .ThenBy(c => c.CatalogNumber)
-                    .Skip(start)
-                    .Take(25);
+                int start = page * 15;
+	            courses = courses.OrderBy(c => c.Department)
+		            .ThenBy(c => c.CatalogNumber);
+	            bool more = courses.Count() >= start + 15;
+				courses = courses.Skip(start)
+					.Take(15);
 
-                return Json(courses.ToList());
+				return Json(new { list = courses.ToList(), more });
             }
         }
 

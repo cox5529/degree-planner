@@ -44,11 +44,16 @@
 <div class="modal fade" id="elective-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="elective-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
                 <p id="elective-current-index" style="display: none"></p>
-                <p id="elective-department"></p>
-                <p id="elective-catalog"></p>
-                <h5 id="elective-title"></h5>
+                <p id="elective-department" style="display: none"></p>
+                <p id="elective-catalog" style="display: none"></p>
                 <table class="table mb-3">
                     <thead>
                     <tr>
@@ -61,7 +66,7 @@
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="#" id="elective-prev">Previous</a></li>
                     <li class="page-item"><a class="page-link" href="#" id="elective-prev-num">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="elective-current-num">2</a></li>
+                    <li class="page-item active"><a class="page-link" href="#" id="elective-current-num">2</a></li>
                     <li class="page-item"><a class="page-link" href="#" id="elective-next-num">3</a></li>
                     <li class="page-item"><a class="page-link" href="#" id="elective-next">Next</a></li>
                 </ul>
@@ -318,7 +323,7 @@
         var department = $("#elective-department").html();
         var catalogNumber = $("#elective-catalog").html();
         $("#elective-current-index").html("" + page);
-        if (page === 0) {
+        if (page === 1) {
             $("#elective-prev").css("display", "none");
             $("#elective-prev-num").css("display", "none");
         } else {
@@ -335,14 +340,21 @@
             data: { department: department, catalogNumber: catalogNumber, page: page - 1 },
             success: function (data) {
                 var html = "";
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.list.length; i++) {
                     html += "<tr><td>" +
-                        data[i].name +
+                        data.list[i].name +
                         "</td><td>" +
-                        data[i].department +
+                        data.list[i].department +
                         " " +
-                        data[i].catalogNumber +
+                        data.list[i].catalogNumber +
                         "</td></tr>";
+                }
+                if (!data.more) {
+                    $("#elective-next-num").css("display", "none");
+                    $("#elective-next").css("display", "none");
+                } else {
+                    $("#elective-next-num").css("display", "block");
+                    $("#elective-next").css("display", "block");
                 }
                 $("#elective-course-table").html(html);
             }
