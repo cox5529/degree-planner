@@ -252,11 +252,12 @@ namespace Degree_Planner.Controllers {
 					}
 					toMove.Add(shortestIndex);
 
-					count = CountHours(plan[i], hours);
+					count -= hours[shortestIndex];
 				}
 				if (toMove.Count > 0 && count < maxHoursPerSemester) {
 					for (int j = 0; j < toMove.Count; j++) {
 						if (hours[toMove[j]] + count <= maxHoursPerSemester) {
+							count += hours[toMove[j]];
 							toMove.RemoveAt(j);
 							j--;
 						}
