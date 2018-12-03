@@ -235,6 +235,7 @@ namespace Degree_Planner.Controllers {
 			// You will never be able to move anything to an earlier semester.
 			for(int i = 0; i < plan.Count; i++) {
 				int count = CountHours(plan[i], hours);
+				List<int> toMove = new List<int>();
 				while(count > maxHoursPerSemester) {
 					// pick a course to move. prefer the one with the shortest postreq chain
 					int shortest = 100;
@@ -249,10 +250,20 @@ namespace Degree_Planner.Controllers {
 							shortestIndex = j;
 						}
 					}
-
-					MoveTrailBack(plan, matrix, n, i, plan[i][shortestIndex]);
+					toMove.Add(shortestIndex);
 
 					count = CountHours(plan[i], hours);
+				}
+				if (toMove.Count > 0 && count < maxHoursPerSemester) {
+					for (int j = 0; j < toMove.Count; j++) {
+						if (hours[toMove[j]] + count <= maxHoursPerSemester) {
+							toMove.RemoveAt(j);
+							j--;
+						}
+					}
+				}
+				foreach (int course in toMove) {
+					MoveTrailBack(plan, matrix, n, i, plan[i][course]);
 				}
 				if(count < minHoursPerSemester) {
 					// if there aren't enough hours in a semester, add a free slot.
