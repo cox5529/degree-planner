@@ -41,6 +41,35 @@
     </div>
 </div>
 
+<div class="modal fade" id="elective-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="elective-current-index" style="display: none"></p>
+                <p id="elective-department"></p>
+                <p id="elective-catalog"></p>
+                <h5 id="elective-title"></h5>
+                <table class="table mb-3">
+                    <thead>
+                    <tr>
+                        <th>Course name</th>
+                        <th>Course catalog number</th>
+                    </tr>
+                    </thead>
+                    <tbody id="elective-course-table"></tbody>
+                </table>
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#" id="elective-prev">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#" id="elective-prev-num">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#" id="elective-current-num">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#" id="elective-next-num">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#" id="elective-next">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var courseOptions = @Html.Raw(Json.Serialize(Model));
     var selectionTableData = [];
@@ -65,6 +94,16 @@
             if (e.keyCode === 13) {
                 $("#generate-button").click();
             }
+        });
+
+        $("#elective-prev-num, #elective-prev").click(function () {
+            var page = parseInt($("#elective-prev-num").html());
+            populateElectiveTable(page);
+        });
+
+        $("#elective-next-num, #elective-next").click(function () {
+            var page = parseInt($("#elective-next-num").html());
+            populateElectiveTable(page);
         });
 
         $("#variable-form").submit(function(e) {
@@ -254,6 +293,62 @@
         });
     }
 
+    function showElectiveTable(department, catalogNumber) {
+        $("#elective-department").html(department);
+        $("#elective-catalog").html(catalogNumber);
+        populateElectiveTable(1);
+        var level = catalogNumber.charAt(0) + "000";
+        if (department === "UARK") {
+            if (level === "0000") {
+                $("#elective-title").html("Free electives");
+            } else {
+                $("#elective-title").html("Free electives at the " + level + " level or higher");
+            }
+        } else {
+            if (level === "0000") {
+                $("#elective-title").html(department + " electives");
+            } else {
+                $("#elective-title").html(department + " electives at the " + level + " level or higher");
+            }
+        }
+        $("#elective-course-modal").modal();
+    }
+
+    function populateElectiveTable(page) {
+        var department = $("#elective-department").html();
+        var catalogNumber = $("#elective-catalog").html();
+        $("#elective-current-index").html("" + page);
+        if (page === 0) {
+            $("#elective-prev").css("display", "none");
+            $("#elective-prev-num").css("display", "none");
+        } else {
+            $("#elective-prev").css("display", "block");
+            $("#elective-prev-num").css("display", "block");
+        }
+        $("#elective-prev-num").html("" + (page - 1));
+        $("#elective-current-num").html("" + page);
+        $("#elective-next-num").html("" + (page + 1));
+        $.ajax({
+            type: "POST",
+            timeout: 10000,
+            url: "@Url.Action("GetElectiveCourses", "Planner")",
+            data: { department: department, catalogNumber: catalogNumber, page: page - 1 },
+            success: function (data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr><td>" +
+                        data[i].name +
+                        "</td><td>" +
+                        data[i].department +
+                        " " +
+                        data[i].catalogNumber +
+                        "</td></tr>";
+                }
+                $("#elective-course-table").html(html);
+            }
+        });
+    }
+
     function hideCourse(courseId, exclude) {
         for (var i = 0; i < selectionTableData.length; i++) {
             if (i !== exclude) {
@@ -377,10 +472,23 @@
                             updateHours(modelId);
                         }
                     } else {
-                        $("#" + modelId + "-elective-error").html(courseId.department +
-                            " " +
-                            courseId.catalogNumber +
-                            " is not currently present in the system. Contact an administrator to add this course if it exists.");
+                        if (data.taken) {
+                            $("#" + modelId + "-elective-error").html("Course " +
+                                courseId.department +
+                                " " +
+                                courseId.catalogNumber +
+                                " is already being taken to satisfy another requirement.");
+                        } else if (!data.requirements) {
+                            $("#" + modelId + "-elective-error").html(courseId.department +
+                                " " +
+                                courseId.catalogNumber +
+                                " does not meet the requirements for this elective slot.");
+                        } else {
+                            $("#" + modelId + "-elective-error").html(courseId.department +
+                                " " +
+                                courseId.catalogNumber +
+                                " is not currently present in the system. Contact an administrator to add this course if it exists.");
+                        }
                     }
                     hideCourse(data.courseID, modelId);
                     populateTakenTable(modelId);

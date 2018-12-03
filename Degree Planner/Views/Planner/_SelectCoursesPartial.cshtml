@@ -40,6 +40,7 @@
                     <input id="@Model.IdPrefix-form-catalog" class="form-control form-control-sm mr-4" name="catalog-number" type="text" required />
                     <input type="submit" class="btn btn-sm btn-outline-secondary" value="Add Elective" />
                 </form>
+                <a href="#" onclick="showElectiveTable('@elective.Department', '@elective.CatalogNumber')">Show available electives</a>
                 <p id="@Model.IdPrefix-elective-error"class="text-danger"></p>
                 break;
             }
