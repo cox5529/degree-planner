@@ -282,16 +282,18 @@ namespace Degree_Planner.Controllers {
         }
 
         private static void MoveTrailBack(IList<IList<int>> plan, bool[,] matrix, int n, int semester, int course) {
-            plan[semester].Remove(course);
-            if(plan.Count <= semester + 1) {
-                plan.Add(new List<int>());
-            }
-            plan[semester + 1].Add(course);
+            if (plan[semester].Contains(course)) {
+                plan[semester].Remove(course);
+                if(plan.Count <= semester + 1) {
+                    plan.Add(new List<int>());
+                }
+                plan[semester + 1].Add(course);
 
-            // move all of the postrequisites of course back as well
-            for(int i = 0; i < n; i++) {
-                if(matrix[i, course]) {
-                    MoveTrailBack(plan, matrix, n, semester + 1, i);
+                // move all of the postrequisites of course back as well
+                for(int i = 0; i < n; i++) {
+                    if(matrix[i, course]) {
+                        MoveTrailBack(plan, matrix, n, semester + 1, i);
+                    }
                 }
             }
         }
